@@ -1,4 +1,4 @@
 package PACKAGE_NAME;
 
-public class RighPanel {
+public class DownPanel {
 }
