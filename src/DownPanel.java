@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class DownPanel {
 
-    private JPanel downPanel=new JPanel();
+    private static JPanel downPanel=new JPanel();
 
     public DownPanel() {
 
@@ -20,4 +20,12 @@ public class DownPanel {
     public JPanel getDownPanel() {
         return downPanel;
     }
+
+    public static void addPlayingSongInfo(JPanel jPanel) {
+
+        downPanel.add(jPanel, BorderLayout.WEST);
+        downPanel.revalidate();
+        downPanel.repaint();
+    }
+
 }

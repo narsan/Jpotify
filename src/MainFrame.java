@@ -18,7 +18,6 @@ public class MainFrame {
 
         LeftPanel leftPanel = new LeftPanel();
         frame.add(leftPanel.getjScrollPane(),BorderLayout.WEST);
-        System.out.println();
         ShowSongs showSongs=new ShowSongs();
         leftPanel.add(showSongs);
         try{
