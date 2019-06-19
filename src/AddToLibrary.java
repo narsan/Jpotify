@@ -25,7 +25,6 @@ public class AddToLibrary extends Library {
         songAdder.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                //TODO
                 try {
                     out = new ObjectOutputStream(new FileOutputStream("src\\savedSongs.bin"));
                     if (Library.getSongs().size()!=0)
@@ -47,20 +46,22 @@ public class AddToLibrary extends Library {
                 if (res == JFileChooser.APPROVE_OPTION) {
                     String path = jFileChooser.getSelectedFile().getAbsolutePath();
                     music = jFileChooser.getSelectedFile();
-                    System.out.println("writing");
-                    try {
-                        out.writeObject(music);
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                    System.out.println("done");
-                    try {
-                        out.close();
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
+                    if (!Library.getSongs().contains(music)) {
+                        System.out.println("writing");
+                        try {
+                            out.writeObject(music);
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                        System.out.println("done");
+                        try {
+                            out.close();
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                        addSong(music);
                     }
                 }
-                addSong(music);
             }
         });
 

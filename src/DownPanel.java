@@ -4,18 +4,23 @@ import java.awt.*;
 public class DownPanel {
 
      static JPanel downPanel=new JPanel();
+     JPanel volume=new JPanel();
+
 
     public DownPanel() {
 
         downPanel.setVisible(true);
         downPanel.setLayout(new BorderLayout());
         downPanel.setBackground(Color.DARK_GRAY);
+        volume.setBackground(Color.ORANGE);
+        volume.setPreferredSize(new Dimension(210,0));
         downPanel.setPreferredSize(new Dimension(300,65));
         JSlider jSlider = new JSlider();
         jSlider.setPreferredSize(new Dimension(700,10));
         jSlider.setBackground(Color.darkGray);
 
        // downPanel.add(jSlider);
+        downPanel.add(volume,BorderLayout.EAST);
 
     }
 

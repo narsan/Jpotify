@@ -57,6 +57,7 @@ public class PlayMusic {
             playIcons.add(nextSong1);
 
             downCenterPanel.setLayout(new BorderLayout());
+            downCenterPanel.setBackground(Color.DARK_GRAY);
             downCenterPanel.add(playIcons,BorderLayout.NORTH);
 
             try {

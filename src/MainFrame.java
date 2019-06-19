@@ -1,3 +1,6 @@
+import com.mpatric.mp3agic.InvalidDataException;
+import com.mpatric.mp3agic.UnsupportedTagException;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -48,7 +51,15 @@ public class MainFrame {
             public void actionPerformed(ActionEvent e) {
                 if (songsPanel!=null)
                     frame.remove(songsPanel);
-                songsPanel=showSongs.CreatButtonFromSongs();
+                try {
+                    songsPanel=showSongs.CreatButtonFromSongs();
+                } catch (InvalidDataException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                } catch (UnsupportedTagException ex) {
+                    ex.printStackTrace();
+                }
                 refresh(songsPanel);
 
 
