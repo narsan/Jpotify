@@ -45,6 +45,19 @@ public class MainFrame {
             }
         });
 
+        ShowAlbum showAlbums=new ShowAlbum();
+        showAlbums.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                System.out.println("here");
+
+                JPanel AlbumsPanel=showAlbums.getAlbums();
+                refresh(AlbumsPanel);
+            }
+        });
+        leftPanel.add(showAlbums);
+
 
         RightPanel rightPanel = new RightPanel();
         frame.add(rightPanel.getJScrollPane(),BorderLayout.EAST);
