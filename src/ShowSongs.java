@@ -3,8 +3,11 @@ import com.mpatric.mp3agic.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 
 public class ShowSongs extends JButton {
@@ -34,6 +37,7 @@ public class ShowSongs extends JButton {
 
             try {
                 Mp3File mp3File = new Mp3File(Library.getSongs().get(i));
+                File temp=Library.getSongs().get(i);
                 System.out.println(Library.getSongs().size());
                 if (mp3File.hasId3v1Tag()) {
                     ID3v1 id3v1 = mp3File.getId3v1Tag();
@@ -56,6 +60,40 @@ public class ShowSongs extends JButton {
                     songImage = new JButton();
                     songImage.setBorder(null);
                     songImage.setVisible(true);
+
+
+
+                    songImage.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            JPanel showPlayingSong=new JPanel();
+                            showPlayingSong.setLayout(new BorderLayout());
+                            byte[] imageData = id3v2.getAlbumImage();
+                            BufferedImage img = null;
+                            try {
+                                img = ImageIO.read(new ByteArrayInputStream(imageData));
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+
+                            ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(60, 60, Image.SCALE_DEFAULT));
+
+                            showPlayingSong.add(new JLabel(imageIcon),BorderLayout.WEST);
+                            JLabel Artist=new JLabel(id3v2.getArtist());
+                            Artist.setForeground(Color.WHITE);
+                            showPlayingSong.add(Artist,BorderLayout.CENTER);
+                            JLabel Title=new JLabel(id3v2.getTitle());
+                            Title.setForeground(Color.WHITE);
+                            showPlayingSong.add(Title,BorderLayout.PAGE_END);
+                            JLabel album=new JLabel(id3v2.getAlbum());
+                            album.setForeground(Color.WHITE);
+                            showPlayingSong.add(album,BorderLayout.NORTH);
+                            DownPanel.addPlayingSongInfo(showPlayingSong);
+                            showPlayingSong.setBackground(Color.BLACK);
+                            PlayMusic playMusic=new PlayMusic(temp);
+                            playMusic.playThread.start();
+                        }
+                    });
 
                     byte[] imageData = id3v2.getAlbumImage();
                     BufferedImage img = ImageIO.read(new ByteArrayInputStream(imageData));
