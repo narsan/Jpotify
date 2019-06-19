@@ -1,15 +1,22 @@
-import java.io.File;
+import com.mpatric.mp3agic.Mp3File;
+
+import java.io.*;
 import java.util.ArrayList;
 
 public class Library {
-    private ArrayList<File> songs=new ArrayList<>();
+    private static ArrayList<File> songs=new ArrayList<>();
 
-    public void addSong(File file){
+
+
+    public static void addSong(File file){
         songs.add(file);
+
+
+
 
     }
 
-    public ArrayList<File> getSongs() {
+    public static ArrayList<File> getSongs() {
         return songs;
     }
 }

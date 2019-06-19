@@ -20,7 +20,7 @@ public class RightPanel {
         rightPanel.setBackground(Color.blue);
 
         JTextField textField = new JTextField();
-        textField.setText("Friend activity");
+        textField.setText("Friends activity");
         textField.setEditable(false);
         textField.setFont(new Font("Courier New", Font.BOLD, 12));
         textField.setBackground(Color.black);

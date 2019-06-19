@@ -1,21 +1,24 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 
-public class LeftPanel {
-    private JPanel leftpanel = new JPanel();
+public class LeftPanel extends JPanel {
+
     private JScrollPane jScrollPane ;
+    private AddToLibrary addToLibrary;
+    public LeftPanel() throws IOException {
 
-    public LeftPanel() {
-
-        jScrollPane = new JScrollPane(leftpanel);
+        jScrollPane = new JScrollPane(this);
         jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         jScrollPane.setBounds(50, 30, 300, 50);
         jScrollPane.setBorder(null);
 
 
-        leftpanel.setLayout(new BoxLayout(leftpanel,BoxLayout.Y_AXIS));
-        leftpanel.setPreferredSize(new Dimension(300,40));
+        this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+        this.setPreferredSize(new Dimension(300,40));
 
         JButton home = new JButton();
         home.setText("Home");
@@ -30,22 +33,13 @@ public class LeftPanel {
         yourLibrary.setFont(new Font("Arial",Font.PLAIN,20));
         yourLibrary.setForeground(Color.white);
 
-        JButton songs = new JButton();
-        songs.setFont(new Font("Arial",Font.PLAIN,20));
-        songs.setText("Songs");
-        songs.setBackground(Color.BLACK);
-        songs.setForeground(Color.white);
-        songs.setBorder(null);
+        addToLibrary = new AddToLibrary();
+        this.add(home);
+        this.add(yourLibrary);
+        this.add(addToLibrary.getSongAdder());
+        this.setBackground(Color.black);
+        this.setVisible(true);
 
-        AddToLibrary addToLibrary = new AddToLibrary();
-        leftpanel.add(home);
-        leftpanel.add(yourLibrary);
-        leftpanel.add(addToLibrary.getSongAdder());
-        leftpanel.add(songs);
-        leftpanel.setBackground(Color.CYAN);
-        leftpanel.setVisible(true);
-
-      //  songs.addActionListener();
 
 
 
@@ -56,6 +50,10 @@ public class LeftPanel {
     }
 
     public JPanel getLeftpanel() {
-        return leftpanel;
+        return this;
+    }
+
+    public AddToLibrary getAddToLibrary() {
+        return addToLibrary;
     }
 }
