@@ -7,6 +7,16 @@ import java.io.*;
 public class MainFrame {
         JFrame frame = new JFrame();
     private JPanel songsPanel=null;
+
+    public void setCurrentPanel(JPanel currentPanel) {
+        this.currentPanel = currentPanel;
+    }
+
+    public JPanel getCurrentPanel() {
+        return currentPanel;
+    }
+
+    private JPanel currentPanel;
     public MainFrame() throws IOException {
         frame.setLocation(100,100);
         frame.setSize(500,500);
@@ -25,7 +35,7 @@ public class MainFrame {
             while (true)
             {
                 Library.addSong((File) objectInputStream.readObject());
-                System.out.println("here");
+
             }
         }
         catch (EOFException e)
@@ -45,19 +55,19 @@ public class MainFrame {
             }
         });
 
-        ShowAlbum showAlbums=new ShowAlbum();
-        showAlbums.addActionListener(new ActionListener() {
+        CreatePlayList createPlayList=new CreatePlayList();
+        leftPanel.add(createPlayList.getNewPlayList());
+        /*createPlayList.getNewPlayList().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                System.out.println("here");
+                System.out.println("there");
 
-                JPanel AlbumsPanel=showAlbums.getAlbums();
-                refresh(AlbumsPanel);
+                ShowSongsToCreatePlayList showSongsToCreatePlayList=new ShowSongsToCreatePlayList();
+                refresh(ShowSongsToCreatePlayList.showSongs);
+
             }
-        });
-        leftPanel.add(showAlbums);
-
+        });*/
 
         RightPanel rightPanel = new RightPanel();
         frame.add(rightPanel.getJScrollPane(),BorderLayout.EAST);
@@ -72,10 +82,16 @@ public class MainFrame {
     public void refresh(JPanel jPanel){
 
         this.frame.add(jPanel,BorderLayout.CENTER);
-        this.frame.revalidate();
+
         this.frame.repaint();
 
+        this.frame.revalidate();
+
+
     }
+
+
+
 
     public static void main(String[] args) throws IOException {
 
