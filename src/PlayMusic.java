@@ -1,3 +1,6 @@
+import com.mpatric.mp3agic.InvalidDataException;
+import com.mpatric.mp3agic.Mp3File;
+import com.mpatric.mp3agic.UnsupportedTagException;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 
@@ -10,6 +13,8 @@ import java.io.*;
 public class PlayMusic {
 
         JPanel playIcons = new JPanel();
+        JPanel downCenterPanel=new JPanel();
+
         private File musicToPlay;
         Thread playThread;
         private Thread resumeThread;
@@ -51,8 +56,26 @@ public class PlayMusic {
             playIcons.add(pause);
             playIcons.add(nextSong1);
 
-;
-            DownPanel.addPauseAndResume(playIcons);
+            downCenterPanel.setLayout(new BorderLayout());
+            downCenterPanel.add(playIcons,BorderLayout.NORTH);
+
+            try {
+                Mp3File mp3File=new Mp3File(file);
+            UpdateWorker updateWorker=new UpdateWorker((int) mp3File.getLengthInSeconds());
+            downCenterPanel.add(UpdateWorker.getSlider(),BorderLayout.PAGE_END);
+            updateWorker.execute();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (UnsupportedTagException e) {
+                e.printStackTrace();
+            } catch (InvalidDataException e) {
+                e.printStackTrace();
+            }
+
+            DownPanel.addPauseAndResume(downCenterPanel);
+
+
+
 
 
             musicToPlay = file;
