@@ -67,6 +67,6 @@ public class MainFrame {
     public static void main(String[] args) throws IOException {
 
         new MainFrame();
-
+        System.out.println(" ");
     }
 }
