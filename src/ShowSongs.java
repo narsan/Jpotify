@@ -25,10 +25,10 @@ public class ShowSongs extends JButton {
     public JPanel CreatButtonFromSongs() {
         JPanel songsPanel = new JPanel();
         songsPanel.setVisible(true);
-        songsPanel.setLayout(new GridLayout(Library.getSongs().size(),0));
+        songsPanel.setLayout(new GridLayout(3,3));
 
        // songsPanel.setLayout(new FlowLayout());
-        songsPanel.setBackground(Color.black);
+        songsPanel.setBackground(Color.DARK_GRAY);
         JLabel Title=null;
         JButton songImage=null;
 
@@ -48,7 +48,7 @@ public class ShowSongs extends JButton {
                     System.out.println(id3v1.getTitle());
 
 
-                    Title.setFont(new Font("Arial", Font.PLAIN, 10));
+                    Title.setFont(new Font("Arial", Font.PLAIN, 13));
                     Title.setForeground(Color.white);
                 }
 
@@ -68,6 +68,7 @@ public class ShowSongs extends JButton {
                         public void actionPerformed(ActionEvent e) {
                             JPanel showPlayingSong=new JPanel();
                             showPlayingSong.setLayout(new BorderLayout());
+                            showPlayingSong.setBackground(Color.gray);
                             byte[] imageData = id3v2.getAlbumImage();
                             BufferedImage img = null;
                             try {
@@ -88,9 +89,9 @@ public class ShowSongs extends JButton {
                             JLabel album=new JLabel(id3v2.getAlbum());
                             album.setForeground(Color.WHITE);
                             showPlayingSong.add(album,BorderLayout.NORTH);
-                            DownPanel.addPlayingSongInfo(showPlayingSong);
-                            showPlayingSong.setBackground(Color.BLACK);
+                            showPlayingSong.setBackground(Color.DARK_GRAY);
                             PlayMusic playMusic=new PlayMusic(temp);
+                            DownPanel.addPlayingSongInfo(showPlayingSong);
                             playMusic.playThread.start();
                         }
                     });
