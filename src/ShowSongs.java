@@ -1,4 +1,5 @@
 import com.mpatric.mp3agic.*;
+import javazoom.jl.decoder.JavaLayerException;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -7,9 +8,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class ShowSongs extends JButton {
@@ -22,12 +22,14 @@ public class ShowSongs extends JButton {
         this.setBackground(Color.BLACK);
         this.setForeground(Color.white);
         this.setBorder(null);
+
     }
 
     public JPanel CreatButtonFromSongs() throws InvalidDataException, IOException, UnsupportedTagException {
         JPanel songsPanel = new JPanel();
         songsPanel.setVisible(true);
-        songsPanel.setLayout(new GridLayout(3, 3));
+        songsPanel.setLayout(new GridLayout(Library.getSongs().size(), Library.getSongs().size()));
+        ArrayList<PausablePlayer> playedSongs=new ArrayList<PausablePlayer>();
 
         // songsPanel.setLayout(new FlowLayout());
         songsPanel.setBackground(Color.DARK_GRAY);
@@ -74,7 +76,7 @@ public class ShowSongs extends JButton {
                     public void actionPerformed(ActionEvent e) {
                         JPanel showPlayingSong = new JPanel();
                         showPlayingSong.setLayout(new BorderLayout());
-                        showPlayingSong.setBackground(Color.gray);
+                        showPlayingSong.setBackground(Color.black);
                         byte[] imageData = id3v2.getAlbumImage();
                         BufferedImage img = null;
                         try {
@@ -96,9 +98,33 @@ public class ShowSongs extends JButton {
                         album.setForeground(Color.WHITE);
                         showPlayingSong.add(album, BorderLayout.NORTH);
                         showPlayingSong.setBackground(Color.DARK_GRAY);
-                        PlayMusic playMusic = new PlayMusic(temp);
+                        FileInputStream in= null;
+                        try {
+                            in = new FileInputStream(temp);
+                        } catch (FileNotFoundException e1) {
+                            e1.printStackTrace();
+                        }
+
+                        PausablePlayer player= null;
+                        try {
+                            player = new PausablePlayer(in);
+                        } catch (JavaLayerException e1) {
+                            e1.printStackTrace();
+                        }
+                        try {
+                            if (playedSongs.size()!=0){
+                                playedSongs.get(playedSongs.size()-1).close();
+                            }
+                            player.play();
+                            playedSongs.add(player);
+                        } catch (JavaLayerException e1) {
+                            e1.printStackTrace();
+                        }
+                        PlayMusic playMusic = new PlayMusic(temp,player);
                         DownPanel.addPlayingSongInfo(showPlayingSong);
-                        playMusic.playThread.start();
+                        // playMusic.playThread.start();
+
+
                     }
                 });
 

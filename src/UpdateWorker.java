@@ -14,6 +14,17 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
 
         private int duration;
 
+    public boolean isIspaused() {
+        return ispaused;
+    }
+
+    public void setIspaused(boolean ispaused) {
+        this.ispaused = ispaused;
+    }
+
+    private boolean ispaused=false;
+
+
         public UpdateWorker(int duration) {
             this.duration = duration;
             slider.setBackground(Color.DARK_GRAY);
@@ -26,7 +37,18 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
         protected Void doInBackground() throws Exception {
             for (int i = 1; i <= duration; i++) {
                 Thread.sleep(1000);
-                publish(i);
+
+                if (ispaused==false){
+                publish(i);}
+                if (ispaused==true){
+
+                    while (ispaused){
+                        Thread.sleep(50);
+                        continue;
+                    }
+                }
+
+
             }
             return null;
         }
