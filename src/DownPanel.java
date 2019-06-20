@@ -20,6 +20,7 @@ public class DownPanel {
         jSlider.setBackground(Color.black);
 
        // downPanel.add(jSlider);
+
         downPanel.add(volume,BorderLayout.EAST);
 
     }

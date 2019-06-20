@@ -33,12 +33,15 @@ public class LeftPanel extends JPanel {
         yourLibrary.setFont(new Font("Arial",Font.PLAIN,20));
         yourLibrary.setForeground(Color.white);
 
+
         addToLibrary = new AddToLibrary();
+
         this.add(home);
         this.add(yourLibrary);
         this.add(addToLibrary.getSongAdder());
         this.setBackground(Color.black);
         this.setVisible(true);
+
 
 
 
