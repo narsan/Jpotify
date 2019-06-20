@@ -44,10 +44,6 @@ public class ShowSongs extends JButton {
             File temp = Library.getSongs().get(i);
             Mp3File mp3File = new Mp3File(temp);
 
-
-//TODO
-
-
             System.out.println(Library.getSongs().size());
             if (mp3File.hasId3v1Tag()) {
                 ID3v1 id3v1 = mp3File.getId3v1Tag();
@@ -85,7 +81,7 @@ public class ShowSongs extends JButton {
                             e1.printStackTrace();
                         }
 
-                        ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(60, 60, Image.SCALE_DEFAULT));
+                        ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(80, 80, Image.SCALE_DEFAULT));
 
                         showPlayingSong.add(new JLabel(imageIcon), BorderLayout.WEST);
                         JLabel Artist = new JLabel(id3v2.getArtist());
@@ -93,11 +89,12 @@ public class ShowSongs extends JButton {
                         showPlayingSong.add(Artist, BorderLayout.CENTER);
                         JLabel Title = new JLabel(id3v2.getTitle());
                         Title.setForeground(Color.WHITE);
-                        showPlayingSong.add(Title, BorderLayout.PAGE_END);
+                        showPlayingSong.add(Title, BorderLayout.CENTER);
                         JLabel album = new JLabel(id3v2.getAlbum());
                         album.setForeground(Color.WHITE);
                         showPlayingSong.add(album, BorderLayout.NORTH);
                         showPlayingSong.setBackground(Color.DARK_GRAY);
+                        showPlayingSong.setPreferredSize(new Dimension(318,0));
                         FileInputStream in= null;
                         try {
                             in = new FileInputStream(temp);

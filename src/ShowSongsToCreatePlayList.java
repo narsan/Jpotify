@@ -19,7 +19,7 @@ public class ShowSongsToCreatePlayList {
     public JPanel songsName() {
 
         showSongs.setLayout(new BoxLayout(showSongs, BoxLayout.Y_AXIS));
-        showSongs.setBackground(Color.BLACK);//TODO
+        showSongs.setBackground(Color.BLACK);
 //        Iterator iterator = Library.getSongs().iterator();
         for (int i = 0; i < Library.getSongs().size(); i++) {
 

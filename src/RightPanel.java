@@ -10,7 +10,7 @@ public class RightPanel {
 
         jScrollPane = new JScrollPane(rightPanel);
         jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         jScrollPane.setBounds(50, 30, 300, 50);
         jScrollPane.setBorder(null);
 

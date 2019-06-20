@@ -11,12 +11,12 @@ public class DownPanel {
 
         downPanel.setVisible(true);
         downPanel.setLayout(new BorderLayout());
-        downPanel.setBackground(Color.black);
+        downPanel.setBackground(Color.DARK_GRAY);
         volume.setBackground(Color.ORANGE);
-        volume.setPreferredSize(new Dimension(210,0));
+        volume.setPreferredSize(new Dimension(225,0));
         downPanel.setPreferredSize(new Dimension(300,65));
         JSlider jSlider = new JSlider();
-        jSlider.setPreferredSize(new Dimension(700,10));
+       // jSlider.setPreferredSize(new Dimension(700,10));
         jSlider.setBackground(Color.black);
 
        // downPanel.add(jSlider);
