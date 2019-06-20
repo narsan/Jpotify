@@ -84,61 +84,6 @@ public class PlayMusic {
 
 
 
-            /*try {
-
-                playThread = new Thread(new Runnable() {
-
-
-                    @Override
-                    public void run() {
-
-
-
-
-                        try {
-                            try {
-                                fileInputStream=new FileInputStream(musicToPlay);
-                                try {
-                                    totalLength=fileInputStream.available();
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            } catch (FileNotFoundException e) {
-                                e.printStackTrace();
-                            }
-                            bufferedInputStream = new BufferedInputStream(fileInputStream);
-                            player = new Player(bufferedInputStream);
-                            if (oldAdvancedPlayer==null){
-
-                                newAdvancedPlayer=new AdvancedPlayer(bufferedInputStream);
-                                newAdvancedPlayer.play();
-                                oldAdvancedPlayer=newAdvancedPlayer;
-
-                            }
-
-                            else {
-
-                                oldAdvancedPlayer.close();
-
-                                newAdvancedPlayer=new AdvancedPlayer(bufferedInputStream);
-                                oldAdvancedPlayer=newAdvancedPlayer;
-
-                            }
-
-                            //player.play();
-
-                        } catch (JavaLayerException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-
-
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
-            }*/
-
         pause.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -150,41 +95,6 @@ public class PlayMusic {
 
         });
 
-        resumeThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-
-                try {
-                    fileInputStream = new FileInputStream(musicToPlay);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-                bufferedInputStream = new BufferedInputStream(fileInputStream);
-                try {
-                    fileInputStream.skip(totalLength - pause1);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    player.play();
-
-                } catch (JavaLayerException e) {
-                    e.printStackTrace();
-                }
-
-                try {
-
-
-                    player.play();
-                } catch (JavaLayerException e) {
-                    e.printStackTrace();
-                }
-
-
-            }
-        });
 
         resume.addActionListener(new ActionListener() {
             @Override
