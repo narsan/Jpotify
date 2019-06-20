@@ -77,8 +77,16 @@ public class MainFrame {
                 //createPlayList.setPlayList(showSongsToCreatePlayList.getSongsInPlaylist());
                 refresh(showSongsToCreatePlayList.songsName());
                 PlayList playList=new PlayList("cool..");
+                Library.addNewPlayList(playList);
                 playList.setPlayListSongs(showSongsToCreatePlayList.getSongsInPlaylist());
                 leftPanel.add(playList.getPlayList());
+                playList.getPlayList().addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+
+                        refresh(playList.showSongsInPlayList());
+                    }
+                });
 
 
             }
