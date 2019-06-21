@@ -30,10 +30,6 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
             slider.setBackground(Color.DARK_GRAY);
             slider.setMinimum(0);
             slider.setMaximum(duration);
-            slider.setMajorTickSpacing(duration);
-            slider.setMinorTickSpacing(5);
-            slider.setPaintLabels(true);
-            slider.setPaintTicks(true);
             slider.setValue(0);
         }
 

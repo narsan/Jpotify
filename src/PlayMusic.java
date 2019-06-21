@@ -40,7 +40,7 @@ public class PlayMusic {
         ImageIcon previous1 = new ImageIcon(new ImageIcon("src\\icons\\previousSong.png").getImage().getScaledInstance(40,40,Image.SCALE_DEFAULT));
         playIcons.setLayout(new GridLayout(1,2));
         //playIcons.setLayout(new GridBagLayout());
-        playIcons.setBackground(Color.DARK_GRAY);
+        playIcons.setBackground(new Color(58,58,58));
         nextSong1.setIcon(nextSong);
         pause.setIcon(pause_Icon);
         pause.setText("pause");
@@ -49,13 +49,13 @@ public class PlayMusic {
         resume.setText("resume");
         resume.setIcon(play);
         pause.setBorder(null);
-        pause.setBackground(Color.DARK_GRAY);
+        pause.setBackground(new Color(58,58,58));
         resume.setBorder(null);
-        resume.setBackground(Color.DARK_GRAY);
+        resume.setBackground(new Color(58,58,58));
         previousSong.setBorder(null);
-        previousSong.setBackground(Color.DARK_GRAY);
+        previousSong.setBackground(new Color(58,58,58));
         nextSong1.setBorder(null);
-        nextSong1.setBackground(Color.DARK_GRAY);
+        nextSong1.setBackground(new Color(58,58,58));
 
         previousSong.setIcon(previous1);
         playIcons.add(previousSong);
@@ -64,7 +64,7 @@ public class PlayMusic {
         playIcons.add(nextSong1);
 
         downCenterPanel.setLayout(new BorderLayout());
-        downCenterPanel.setBackground(Color.DARK_GRAY);
+        downCenterPanel.setBackground(new Color(58,58,58));
         downCenterPanel.add(playIcons,BorderLayout.NORTH);
 
         try {

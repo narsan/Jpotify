@@ -32,7 +32,7 @@ public class ShowSongs extends JButton {
         ArrayList<PausablePlayer> playedSongs=new ArrayList<PausablePlayer>();
 
         // songsPanel.setLayout(new FlowLayout());
-        songsPanel.setBackground(Color.DARK_GRAY);
+        songsPanel.setBackground(new Color(58,58,58));
         JLabel Title = null;
         JButton songImage = null;
 
@@ -93,7 +93,7 @@ public class ShowSongs extends JButton {
                         JLabel album = new JLabel(id3v2.getAlbum());
                         album.setForeground(Color.WHITE);
                         showPlayingSong.add(album, BorderLayout.NORTH);
-                        showPlayingSong.setBackground(Color.DARK_GRAY);
+                        showPlayingSong.setBackground(new Color(58,58,58));
                         showPlayingSong.setPreferredSize(new Dimension(318,0));
                         FileInputStream in= null;
                         try {

@@ -11,7 +11,7 @@ public class DownPanel {
 
         downPanel.setVisible(true);
         downPanel.setLayout(new BorderLayout());
-        downPanel.setBackground(Color.DARK_GRAY);
+        downPanel.setBackground(new Color(58,58,58));
         volume.setBackground(Color.ORANGE);
         volume.setPreferredSize(new Dimension(225,0));
         downPanel.setPreferredSize(new Dimension(300,65));
