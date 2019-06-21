@@ -16,12 +16,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
-public class ShowSongsToCreatePlayList {
+public class ShowSongsToCreatePlayList  implements ItemListener{
 
     static JPanel showSongs = new JPanel();
 
-    private static   HashSet<File> songsInPlaylist = new HashSet<>();
-    private ArrayList<JCheckBox> checkBoxes = new ArrayList<>();
+    private static   HashSet<File> songsInPlaylist;
+    private ArrayList<JCheckBox> checkBoxes;
     PlayList playList;
 
     public PlayList getPlayList() {
@@ -36,16 +36,9 @@ public class ShowSongsToCreatePlayList {
 
         HashSet<Mp3File> songsInPlaylist1 = new HashSet<Mp3File>();
         ArrayList<File> songs = new ArrayList<>();
-        ArrayList<JCheckBox> checkBoxes=new ArrayList<>();
-        JButton ok=new JButton("Ok");
-        showSongs.add(ok);
-
-
+        checkBoxes=new ArrayList<>();
         showSongs.setBackground(Color.black);
         showSongs.setVisible(true);
-        JFrame setName = new JFrame();
-        String name1 = JOptionPane.showInputDialog(setName, "Enter your playList name");
-        playList=new PlayList(name1);
         //TODO
 
         for (int i = 0; i < Library.getSongs().size(); i++) {
@@ -64,6 +57,9 @@ public class ShowSongsToCreatePlayList {
 
         }
 
+        JFrame setName = new JFrame();
+        String name1 = JOptionPane.showInputDialog(setName, "Enter your playList name");
+        playList=new PlayList(name1);
 
         for (int i = 0; i < songs.size(); i++) {
 
@@ -75,6 +71,10 @@ public class ShowSongsToCreatePlayList {
             try {
                 Mp3File mp3File=new Mp3File(songs.get(i));
                 checkBox.setText(mp3File.getId3v2Tag().getTitle());
+                checkBox.addItemListener(this);
+                int finalI1 = i;
+
+
                 checkBoxes.add(checkBox);
 
 
@@ -86,26 +86,9 @@ public class ShowSongsToCreatePlayList {
                 e.printStackTrace();
             }
 
+
             showSongs.add(checkBox);
-            int finalI = i;
 
-            playList.addSongToPlayList(songs.get(finalI));
-
-            /*checkBox.addItemListener(new ItemListener() {
-                @Override
-                public void itemStateChanged(ItemEvent e) {
-
-
-                        playList.addSongToPlayList(songs.get(finalI));
-
-
-
-
-
-
-                }
-            });
-*/
 
 
 
@@ -117,6 +100,22 @@ public class ShowSongsToCreatePlayList {
         return showSongs;
     }
 
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+
+        for (int i = 0; i <checkBoxes.size() ; i++) {
+
+            if (checkBoxes.get(i).isSelected()){
+
+               // System.out.println("selected");
+
+                playList.addSongToPlayList(Library.getSongs().get(i));
+            }
+
+        }
+
+        System.out.println(playList.getPlayListSongs().size());
+    }
 
     public  HashSet<File> getSongsInPlaylist() {
         return songsInPlaylist;

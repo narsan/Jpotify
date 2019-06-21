@@ -13,49 +13,44 @@ import java.io.*;
 public class PlayMusic {
 
     JPanel playIcons = new JPanel();
-    JPanel downCenterPanel=new JPanel();
+    JPanel downCenterPanel = new JPanel();
 
     private File musicToPlay;
-    Thread playThread;
-    private Thread resumeThread;
-    private JButton pause=new JButton();
-    private JButton resume=new JButton();
-    private JButton nextSong1=new JButton();
-    private JButton previousSong =new JButton();
+    private JButton pause = new JButton();
+    private JButton resume = new JButton();
+    private JButton nextSong1 = new JButton();
+    private JButton previousSong = new JButton();
     private BufferedInputStream bufferedInputStream;
     FileInputStream fileInputStream;
-    private long totalLength;
     Player player;
-    private long pause1;
     private UpdateWorker updateWorker;
     private PausablePlayer pausablePlayer;
 
 
+    public PlayMusic(File file, PausablePlayer pausablePlayer) {
+        JButton pause = new JButton();
+        JButton nextSong1 = new JButton();
+        JButton previousSong = new JButton();
 
-    public PlayMusic(File file,PausablePlayer pausablePlayer) {
-        this.pausablePlayer=pausablePlayer;
-        ImageIcon pause_Icon = new ImageIcon(new ImageIcon("src\\icons\\pause.png").getImage().getScaledInstance(40,40,Image.SCALE_DEFAULT));
-        ImageIcon nextSong = new ImageIcon(new ImageIcon("src\\icons\\nextSong.png").getImage().getScaledInstance(40,40,Image.SCALE_DEFAULT));
-        ImageIcon play = new ImageIcon(new ImageIcon("src\\icons\\play.png").getImage().getScaledInstance(40,40,Image.SCALE_DEFAULT));
-        ImageIcon previous1 = new ImageIcon(new ImageIcon("src\\icons\\previousSong.png").getImage().getScaledInstance(40,40,Image.SCALE_DEFAULT));
-        playIcons.setLayout(new GridLayout(1,2));
+        this.pausablePlayer = pausablePlayer;
+        ImageIcon pause_Icon = new ImageIcon(new ImageIcon("src\\icons\\pause.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+        ImageIcon nextSong = new ImageIcon(new ImageIcon("src\\icons\\nextSong.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+        ImageIcon play = new ImageIcon(new ImageIcon("src\\icons\\play.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+        ImageIcon previous1 = new ImageIcon(new ImageIcon("src\\icons\\previousSong.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+        playIcons.setLayout(new GridLayout(1, 2));
         //playIcons.setLayout(new GridBagLayout());
-        playIcons.setBackground(new Color(58,58,58));
+        playIcons.setBackground(new Color(58, 58, 58));
         nextSong1.setIcon(nextSong);
         pause.setIcon(pause_Icon);
-        pause.setText("pause");
-        pause.setForeground(Color.ORANGE);
-        resume.setForeground(Color.ORANGE);
-        resume.setText("resume");
         resume.setIcon(play);
         pause.setBorder(null);
-        pause.setBackground(new Color(58,58,58));
+        pause.setBackground(new Color(58, 58, 58));
         resume.setBorder(null);
-        resume.setBackground(new Color(58,58,58));
+        resume.setBackground(new Color(58, 58, 58));
         previousSong.setBorder(null);
-        previousSong.setBackground(new Color(58,58,58));
+        previousSong.setBackground(new Color(58, 58, 58));
         nextSong1.setBorder(null);
-        nextSong1.setBackground(new Color(58,58,58));
+        nextSong1.setBackground(new Color(58, 58, 58));
 
         previousSong.setIcon(previous1);
         playIcons.add(previousSong);
@@ -64,13 +59,13 @@ public class PlayMusic {
         playIcons.add(nextSong1);
 
         downCenterPanel.setLayout(new BorderLayout());
-        downCenterPanel.setBackground(new Color(58,58,58));
-        downCenterPanel.add(playIcons,BorderLayout.NORTH);
+        downCenterPanel.setBackground(new Color(58, 58, 58));
+        downCenterPanel.add(playIcons, BorderLayout.NORTH);
 
         try {
-            Mp3File mp3File=new Mp3File(file);
-      updateWorker=new UpdateWorker((int) mp3File.getLengthInSeconds());
-            downCenterPanel.add(UpdateWorker.getSlider(),BorderLayout.PAGE_END);
+            Mp3File mp3File = new Mp3File(file);
+            updateWorker = new UpdateWorker((int) mp3File.getLengthInSeconds());
+            downCenterPanel.add(UpdateWorker.getSlider(), BorderLayout.PAGE_END);
             updateWorker.execute();
         } catch (IOException e) {
             e.printStackTrace();
@@ -83,10 +78,10 @@ public class PlayMusic {
         DownPanel.addPauseAndResume(downCenterPanel);
 
 
-
         pause.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
 
                 pausablePlayer.pause();
                 updateWorker.setIspaused(true);
@@ -102,7 +97,7 @@ public class PlayMusic {
 
                 updateWorker.setIspaused(false);
 
-               pausablePlayer.resume();
+                pausablePlayer.resume();
 
 
             }

@@ -111,14 +111,20 @@ public class ShowSongs extends JButton {
                         try {
                             if (playedSongs.size()!=0){
                                 playedSongs.get(playedSongs.size()-1).close();
+                                PlayMusic playMusic = new PlayMusic(temp,player);
+                                DownPanel.addPlayingSongInfo(showPlayingSong);
+                                DownPanel.downPanel.revalidate();
                             }
+
+                            PlayMusic playMusic = new PlayMusic(temp,player);
+                            DownPanel.addPlayingSongInfo(showPlayingSong);
                             player.play();
+
+
                             playedSongs.add(player);
                         } catch (JavaLayerException e1) {
                             e1.printStackTrace();
                         }
-                        PlayMusic playMusic = new PlayMusic(temp,player);
-                        DownPanel.addPlayingSongInfo(showPlayingSong);
                         // playMusic.playThread.start();
 
 

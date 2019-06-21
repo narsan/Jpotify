@@ -10,7 +10,7 @@ import java.util.List;
 
 public class UpdateWorker  extends SwingWorker<Void, Integer>  {
 
-    static   JSlider slider = new JSlider();
+    static   JSlider slider ;
 
         private int duration;
 
@@ -26,6 +26,8 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
 
 
         public UpdateWorker(int duration) {
+
+            slider=new JSlider();
             this.duration = duration;
             slider.setBackground(Color.DARK_GRAY);
             slider.setMinimum(0);
@@ -36,10 +38,10 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
         @Override
         protected Void doInBackground() throws Exception {
             for (int i = 1; i <= duration; i++) {
-                Thread.sleep(1000);
 
                 if (ispaused==false){
-                publish(i);}
+                    publish(i);}
+                Thread.sleep(1000);
                 if (ispaused==true){
 
                     while (ispaused){

@@ -55,7 +55,7 @@ public class PlayList {
 
 
         JPanel songsPanel = new JPanel();
-        songsPanel.setBackground(Color.ORANGE);
+        songsPanel.setBackground(Color.black);
         songsPanel.setVisible(true);
         songsPanel.setLayout(new GridLayout(Library.getSongs().size(), Library.getSongs().size()));
         ArrayList<PausablePlayer> playedSongs = new ArrayList<PausablePlayer>();
@@ -182,12 +182,13 @@ public class PlayList {
                 String mimeType = id3v2.getAlbumImageMimeType();
                 System.out.println(mimeType);
                 Title.setText(id3v2.getTitle());
+                //Title.setText(mp3File.getId3v1Tag().getTitle());
 
             }
 
 
             JPanel songData = new JPanel();
-            songData.setBackground(Color.orange);
+            songData.setBackground(Color.black);
             songData.setLayout(new BoxLayout(songData, BoxLayout.Y_AXIS));
             songData.add(songImage);
             songData.add(Title);
@@ -197,40 +198,33 @@ public class PlayList {
 
         }
 
+        AddNewSongToPlayList addNewSongToPlayList=new AddNewSongToPlayList(this);
+
 
         delete.setText("delete this playList");
         delete.setBorder(null);
-        delete.setBackground(Color.orange);
+        delete.setBackground(Color.black);
         delete.setFont(new Font("Arial", Font.PLAIN, 13));
         delete.setForeground(Color.WHITE);
 
 
         setNewName.setText("rename this playList");
         setNewName.setBorder(null);
-        setNewName.setBackground(Color.orange);
+        setNewName.setBackground(Color.black);
         setNewName.setFont(new Font("Arial", Font.PLAIN, 13));
         setNewName.setForeground(Color.WHITE);
 
 
 
-        addNewSong.setText("add new Song..");
-        addNewSong.setBorder(null);
-        addNewSong.setBackground(Color.orange);
-        addNewSong.setFont(new Font("Arial", Font.PLAIN, 13));
-        addNewSong.setForeground(Color.WHITE);
-
-
-
-
         deleteSong.setText("delete a Song..");
         deleteSong.setBorder(null);
-        deleteSong.setBackground(Color.orange);
+        deleteSong.setBackground(Color.black);
         deleteSong.setFont(new Font("Arial", Font.PLAIN, 13));
         deleteSong.setForeground(Color.WHITE);
 
         songsPanel.add(delete);
         songsPanel.add(setNewName);
-        songsPanel.add(addNewSong);
+        songsPanel.add(addNewSongToPlayList.getAddNewSong());
         songsPanel.add(deleteSong);
 
 

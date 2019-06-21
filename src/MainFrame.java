@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 
-public class MainFrame {
+public  class MainFrame {
     JFrame frame = new JFrame();
     private JPanel songsPanel = null;
 
@@ -126,7 +126,7 @@ public class MainFrame {
         this.frame.pack();
     }
 
-    public void refresh(JPanel jPanel) {
+    public  void refresh(JPanel jPanel) {
 
         if (currentPanel!=null){
 
