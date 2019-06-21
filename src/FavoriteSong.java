@@ -8,12 +8,7 @@ public class FavoriteSong extends PlayList {
         super("favorite songs");
         super.delete.setVisible(false);
         super.setNewName.setVisible(false);
-        super.playList.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-            }
-        });
 
     }
 }

@@ -222,7 +222,7 @@ public class PlayList {
 
 
 
-        deleteSong.setText("add new Song..");
+        deleteSong.setText("delete a Song..");
         deleteSong.setBorder(null);
         deleteSong.setBackground(Color.orange);
         deleteSong.setFont(new Font("Arial", Font.PLAIN, 13));

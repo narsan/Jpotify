@@ -91,6 +91,7 @@ public class MainFrame {
                 });
 
 
+
             }
         });
 
@@ -109,6 +110,7 @@ public class MainFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                refresh(favoriteSong.showSongsInPlayList());
 
 
             }
@@ -125,6 +127,15 @@ public class MainFrame {
     }
 
     public void refresh(JPanel jPanel) {
+
+        if (currentPanel!=null){
+
+            currentPanel.setVisible(false);
+
+        this.frame.remove(currentPanel);
+
+        }
+        currentPanel=jPanel;
 
         this.frame.add(jPanel, BorderLayout.CENTER);
 

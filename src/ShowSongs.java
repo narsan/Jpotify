@@ -86,7 +86,7 @@ public class ShowSongs extends JButton {
                         showPlayingSong.add(new JLabel(imageIcon), BorderLayout.WEST);
                         JLabel Artist = new JLabel(id3v2.getArtist());
                         Artist.setForeground(Color.WHITE);
-                        showPlayingSong.add(Artist, BorderLayout.CENTER);
+                        showPlayingSong.add(Artist, BorderLayout.PAGE_END);
                         JLabel Title = new JLabel(id3v2.getTitle());
                         Title.setForeground(Color.WHITE);
                         showPlayingSong.add(Title, BorderLayout.CENTER);
