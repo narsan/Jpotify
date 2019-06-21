@@ -25,6 +25,8 @@ public class MainFrame {
         frame.setSize(500,500);
         frame.setTitle("Jpotify");
         frame.setLayout(new BorderLayout());
+        ImageIcon jpotify = new ImageIcon("src\\icons\\jpotify.jpg");
+        frame.setIconImage(jpotify.getImage());
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.getContentPane().setBackground(Color.BLACK);
@@ -133,6 +135,6 @@ public class MainFrame {
     public static void main(String[] args) throws IOException {
 
         new MainFrame();
-        System.out.println(" ");
+
     }
 }
