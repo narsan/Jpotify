@@ -32,7 +32,11 @@ public class MainFrame {
         LeftPanel leftPanel = new LeftPanel();
         frame.add(leftPanel.getjScrollPane(),BorderLayout.WEST);
         ShowSongs showSongs=new ShowSongs();
+
+        CreatePlayList createPlayList=new CreatePlayList();
         leftPanel.add(showSongs);
+        leftPanel.add(createPlayList.getNewPlayList());
+
         try{
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("src\\savedSongs.bin"));
             while (true)
@@ -65,20 +69,34 @@ public class MainFrame {
 
             }
         });
-
-        CreatePlayList createPlayList=new CreatePlayList();
-        leftPanel.add(createPlayList.getNewPlayList());
-        /*createPlayList.getNewPlayList().addActionListener(new ActionListener() {
+        createPlayList.getNewPlayList().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                System.out.println("there");
-
+                //createPlayList.setName("cool..");
                 ShowSongsToCreatePlayList showSongsToCreatePlayList=new ShowSongsToCreatePlayList();
-                refresh(ShowSongsToCreatePlayList.showSongs);
+                //createPlayList.setPlayList(showSongsToCreatePlayList.getSongsInPlaylist());
+                refresh(showSongsToCreatePlayList.songsName());
+                PlayList playList=new PlayList("cool..");
+                playList.setPlayListSongs(showSongsToCreatePlayList.getSongsInPlaylist());
+                leftPanel.add(playList.getPlayList());
+
 
             }
-        });*/
+        });
+
+
+
+
+
+
+
+        //ToDo
+        JLabel playLists=new JLabel();
+        playLists.setPreferredSize(new Dimension(30,30));
+        playLists.setText(" your playLists");
+        playLists.setFont(new Font("Arial",Font.PLAIN,20));
+        playLists.setForeground(Color.white);
+        leftPanel.add(playLists);
 
         RightPanel rightPanel = new RightPanel();
         frame.add(rightPanel.getJScrollPane(),BorderLayout.EAST);
@@ -94,7 +112,7 @@ public class MainFrame {
 
         this.frame.add(jPanel,BorderLayout.CENTER);
 
-        this.frame.repaint();
+        //this.frame.repaint();
 
         this.frame.revalidate();
 
