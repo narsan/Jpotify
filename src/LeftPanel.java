@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class LeftPanel extends JPanel {
+public  class  LeftPanel extends JPanel {
 
     private JScrollPane jScrollPane ;
     private AddToLibrary addToLibrary;
@@ -43,10 +43,8 @@ public class LeftPanel extends JPanel {
         this.setVisible(true);
 
 
-
-
-
     }
+
 
     public JScrollPane getjScrollPane() {
         return jScrollPane;

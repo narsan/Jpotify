@@ -8,8 +8,8 @@ import java.awt.event.ActionListener;
 import java.io.*;
 
 public class MainFrame {
-        JFrame frame = new JFrame();
-    private JPanel songsPanel=null;
+    JFrame frame = new JFrame();
+    private JPanel songsPanel = null;
 
     public void setCurrentPanel(JPanel currentPanel) {
         this.currentPanel = currentPanel;
@@ -20,9 +20,10 @@ public class MainFrame {
     }
 
     private JPanel currentPanel;
+
     public MainFrame() throws IOException {
-        frame.setLocation(100,100);
-        frame.setSize(500,500);
+        frame.setLocation(100, 100);
+        frame.setSize(500, 500);
         frame.setTitle("Jpotify");
         frame.setLayout(new BorderLayout());
         ImageIcon jpotify = new ImageIcon("src\\icons\\jpotify.jpg");
@@ -31,34 +32,32 @@ public class MainFrame {
         frame.setVisible(true);
         frame.getContentPane().setBackground(Color.BLACK);
 
-        LeftPanel leftPanel = new LeftPanel();
-        frame.add(leftPanel.getjScrollPane(),BorderLayout.WEST);
-        ShowSongs showSongs=new ShowSongs();
 
-        CreatePlayList createPlayList=new CreatePlayList();
+        LeftPanel leftPanel = new LeftPanel();
+        frame.add(leftPanel.getjScrollPane(), BorderLayout.WEST);
+        ShowSongs showSongs = new ShowSongs();
+
+        CreatePlayList createPlayList = new CreatePlayList();
         leftPanel.add(showSongs);
         leftPanel.add(createPlayList.getNewPlayList());
 
-        try{
+        try {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("src\\savedSongs.bin"));
-            while (true)
-            {
+            while (true) {
                 Library.addSong((File) objectInputStream.readObject());
 
             }
-        }
-        catch (EOFException e)
-        {
+        } catch (EOFException e) {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         showSongs.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (songsPanel!=null)
+                if (songsPanel != null)
                     frame.remove(songsPanel);
                 try {
-                    songsPanel=showSongs.CreatButtonFromSongs();
+                    songsPanel = showSongs.CreatButtonFromSongs();
                 } catch (InvalidDataException ex) {
                     ex.printStackTrace();
                 } catch (IOException ex) {
@@ -71,22 +70,23 @@ public class MainFrame {
 
             }
         });
+        ShowSongsToCreatePlayList showSongsToCreatePlayList=new ShowSongsToCreatePlayList();
         createPlayList.getNewPlayList().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //createPlayList.setName("cool..");
-                ShowSongsToCreatePlayList showSongsToCreatePlayList=new ShowSongsToCreatePlayList();
-                //createPlayList.setPlayList(showSongsToCreatePlayList.getSongsInPlaylist());
+
+
                 refresh(showSongsToCreatePlayList.songsName());
-                PlayList playList=new PlayList("cool..");
-                Library.addNewPlayList(playList);
-                playList.setPlayListSongs(showSongsToCreatePlayList.getSongsInPlaylist());
-                leftPanel.add(playList.getPlayList());
-                playList.getPlayList().addActionListener(new ActionListener() {
+
+                Library.addNewPlayList(showSongsToCreatePlayList.getPlayList());
+
+                leftPanel.add(showSongsToCreatePlayList.playList.getPlayList());
+
+                showSongsToCreatePlayList.getPlayList().getPlayList().addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
 
-                        refresh(playList.showSongsInPlayList());
+                        refresh(showSongsToCreatePlayList.getPlayList().showSongsInPlayList());
                     }
                 });
 
@@ -95,41 +95,46 @@ public class MainFrame {
         });
 
 
-
-
-
-
-
         //ToDo
-        JLabel playLists=new JLabel();
-        playLists.setPreferredSize(new Dimension(30,30));
+        JLabel playLists = new JLabel();
+        playLists.setPreferredSize(new Dimension(30, 30));
         playLists.setText(" your playLists");
-        playLists.setFont(new Font("Arial",Font.PLAIN,20));
+        playLists.setFont(new Font("Arial", Font.PLAIN, 20));
         playLists.setForeground(Color.white);
         leftPanel.add(playLists);
 
+        FavoriteSong favoriteSong=new FavoriteSong();
+        leftPanel.add(favoriteSong.playList);
+        favoriteSong.playList.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+
+
+            }
+        });
+
         RightPanel rightPanel = new RightPanel();
-        frame.add(rightPanel.getJScrollPane(),BorderLayout.EAST);
+        frame.add(rightPanel.getJScrollPane(), BorderLayout.EAST);
 
         DownPanel downPanel = new DownPanel();
-        frame.add(downPanel.getDownPanel(),BorderLayout.PAGE_END);
+        frame.add(downPanel.getDownPanel(), BorderLayout.PAGE_END);
 
 
         this.frame.pack();
     }
 
-    public void refresh(JPanel jPanel){
+    public void refresh(JPanel jPanel) {
 
-        this.frame.add(jPanel,BorderLayout.CENTER);
+        this.frame.add(jPanel, BorderLayout.CENTER);
 
         //this.frame.repaint();
 
         this.frame.revalidate();
+       // this.frame.validate();
 
 
     }
-
-
 
 
     public static void main(String[] args) throws IOException {

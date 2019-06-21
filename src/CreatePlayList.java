@@ -8,7 +8,11 @@ public class CreatePlayList {
 
     JButton newPlayList=new JButton();
 
+    private HashSet<Mp3File> playList =new HashSet<>();
     private String name;
+
+
+
 
     public String getName() {
         return name;
@@ -25,8 +29,6 @@ public class CreatePlayList {
     public void setPlayList(HashSet<Mp3File> playList) {
         this.playList = playList;
     }
-
-    private HashSet<Mp3File> playList =new HashSet<>();
 
 
     public JButton getNewPlayList() {

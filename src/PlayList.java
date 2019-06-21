@@ -14,9 +14,14 @@ import java.util.Iterator;
 
 public class PlayList {
 
-    private JButton playList = new JButton();
-    private String playListName;
-    private HashSet<File> playListSongs;
+    protected JButton playList = new JButton();
+    protected String playListName;
+    protected HashSet<File> playListSongs=new HashSet<>();
+
+    JButton deleteSong = new JButton();
+    JButton addNewSong = new JButton();
+    JButton delete = new JButton();
+    JButton setNewName = new JButton();
 
     public HashSet<File> getPlayListSongs() {
         return playListSongs;
@@ -41,6 +46,7 @@ public class PlayList {
         playList.setBackground(Color.BLACK);
         playList.setForeground(Color.white);
         playList.setBorder(null);
+        playList.setVisible(true);
 
     }
 
@@ -52,25 +58,22 @@ public class PlayList {
         songsPanel.setBackground(Color.ORANGE);
         songsPanel.setVisible(true);
         songsPanel.setLayout(new GridLayout(Library.getSongs().size(), Library.getSongs().size()));
-        ArrayList<PausablePlayer> playedSongs=new ArrayList<PausablePlayer>();
+        ArrayList<PausablePlayer> playedSongs = new ArrayList<PausablePlayer>();
 
         // songsPanel.setLayout(new FlowLayout());
         //songsPanel.setBackground(Color.DARK_GRAY);
         JLabel Title = null;
         JButton songImage = null;
-        ArrayList<File> temp=new ArrayList<>();
-        Iterator iterator=playListSongs.iterator();
-        while (iterator.hasNext()){
+        ArrayList<File> temp = new ArrayList<>();
+        Iterator iterator = playListSongs.iterator();
+        while (iterator.hasNext()) {
 
             temp.add((File) iterator.next());
         }
 
 
-
-
 //            Iterator iterator=Library.getSongs().iterator();
         for (int i = 0; i < temp.size(); i++) {
-
 
 
             File temp1 = temp.get(i);
@@ -137,29 +140,29 @@ public class PlayList {
                         album.setForeground(Color.WHITE);
                         showPlayingSong.add(album, BorderLayout.NORTH);
                         showPlayingSong.setBackground(Color.DARK_GRAY);
-                        FileInputStream in= null;
+                        FileInputStream in = null;
                         try {
                             in = new FileInputStream(temp1);
                         } catch (FileNotFoundException e1) {
                             e1.printStackTrace();
                         }
 
-                        PausablePlayer player= null;
+                        PausablePlayer player = null;
                         try {
                             player = new PausablePlayer(in);
                         } catch (JavaLayerException e1) {
                             e1.printStackTrace();
                         }
                         try {
-                            if (playedSongs.size()!=0){
-                                playedSongs.get(playedSongs.size()-1).close();
+                            if (playedSongs.size() != 0) {
+                                playedSongs.get(playedSongs.size() - 1).close();
                             }
                             player.play();
                             playedSongs.add(player);
                         } catch (JavaLayerException e1) {
                             e1.printStackTrace();
                         }
-                        PlayMusic playMusic = new PlayMusic(temp1,player);
+                        PlayMusic playMusic = new PlayMusic(temp1, player);
                         DownPanel.addPlayingSongInfo(showPlayingSong);
                         // playMusic.playThread.start();
 
@@ -168,7 +171,7 @@ public class PlayList {
                 });
 
                 byte[] imageData = id3v2.getAlbumImage();
-               BufferedImage img = null;
+                BufferedImage img = null;
                 try {
                     img = ImageIO.read(new ByteArrayInputStream(imageData));
                 } catch (IOException e) {
@@ -194,13 +197,73 @@ public class PlayList {
 
         }
 
-        return songsPanel;
 
+        delete.setText("delete this playList");
+        delete.setBorder(null);
+        delete.setBackground(Color.orange);
+        delete.setFont(new Font("Arial", Font.PLAIN, 13));
+        delete.setForeground(Color.WHITE);
+
+
+        setNewName.setText("rename this playList");
+        setNewName.setBorder(null);
+        setNewName.setBackground(Color.orange);
+        setNewName.setFont(new Font("Arial", Font.PLAIN, 13));
+        setNewName.setForeground(Color.WHITE);
+
+
+
+        addNewSong.setText("add new Song..");
+        addNewSong.setBorder(null);
+        addNewSong.setBackground(Color.orange);
+        addNewSong.setFont(new Font("Arial", Font.PLAIN, 13));
+        addNewSong.setForeground(Color.WHITE);
+
+
+
+
+        deleteSong.setText("add new Song..");
+        deleteSong.setBorder(null);
+        deleteSong.setBackground(Color.orange);
+        deleteSong.setFont(new Font("Arial", Font.PLAIN, 13));
+        deleteSong.setForeground(Color.WHITE);
+
+        songsPanel.add(delete);
+        songsPanel.add(setNewName);
+        songsPanel.add(addNewSong);
+        songsPanel.add(deleteSong);
+
+
+
+        PlayList thisPlayList = this;
+
+        delete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                Library.deletePlayList(thisPlayList);
+                thisPlayList.playList.setVisible(false);
+                songsPanel.setVisible(false);
+
+            }
+        });
+
+        setNewName.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame enterName=new JFrame();
+               String newName=JOptionPane.showInputDialog(enterName,"enter new name");
+               thisPlayList.setPlayListName(newName);
+               thisPlayList.playList.setText(newName);
+            }
+        });
+
+        return songsPanel;
 
 
     }
 
-    public void addSongToPlayList(File file){
+    public void addSongToPlayList(File file) {
 
         playListSongs.add(file);
     }
@@ -209,7 +272,7 @@ public class PlayList {
         this.playListName = playListName;
     }
 
-    public void removeSongFromPlayList(File file){
+    public void removeSongFromPlayList(File file) {
 
         playListSongs.remove(file);
     }

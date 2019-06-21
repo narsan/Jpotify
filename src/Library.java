@@ -21,6 +21,10 @@ public class Library {
         playLists.add(playList);
     }
 
+    public static ArrayList<PlayList> getPlayLists() {
+        return playLists;
+    }
+
     public static void deletePlayList(PlayList playList){
 
         playLists.remove(playList);
