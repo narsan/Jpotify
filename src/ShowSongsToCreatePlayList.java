@@ -19,7 +19,7 @@ public class ShowSongsToCreatePlayList {
 
     static JPanel showSongs = new JPanel();
 
-    private  HashSet<Mp3File> songsInPlaylist = new HashSet<>();
+    private  HashSet<File> songsInPlaylist = new HashSet<>();
     private ArrayList<JCheckBox> checkBoxes = new ArrayList<>();
 
 
@@ -30,7 +30,7 @@ public class ShowSongsToCreatePlayList {
     public JPanel songsName() {
 
         HashSet<Mp3File> songsInPlaylist1 = new HashSet<Mp3File>();
-        ArrayList<Mp3File> songs = new ArrayList<>();
+        ArrayList<File> songs = new ArrayList<>();
 
         showSongs.setBackground(Color.black);
         showSongs.setVisible(true);
@@ -47,7 +47,7 @@ public class ShowSongsToCreatePlayList {
             } catch (InvalidDataException e) {
                 e.printStackTrace();
             }
-            songs.add(mp3File);
+            songs.add(Library.getSongs().get(i));
 
 
         }
@@ -60,7 +60,16 @@ public class ShowSongsToCreatePlayList {
             checkBox.setBackground(Color.BLACK);
             checkBox.setForeground(Color.WHITE);
             checkBox.setLayout(new GridLayout(songs.size(),songs.size()));
-            checkBox.setText(songs.get(i).getId3v1Tag().getTitle());
+            try {
+                Mp3File mp3File=new Mp3File(songs.get(i));
+                checkBox.setText(mp3File.getId3v1Tag().getTitle());
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (UnsupportedTagException e) {
+                e.printStackTrace();
+            } catch (InvalidDataException e) {
+                e.printStackTrace();
+            }
 
             showSongs.add(checkBox);
             int finalI = i;
@@ -78,13 +87,13 @@ public class ShowSongsToCreatePlayList {
     }
 
 
-    public  HashSet<Mp3File> getSongsInPlaylist() {
+    public  HashSet<File> getSongsInPlaylist() {
         return songsInPlaylist;
     }
 
-    public void addToPlayList(Mp3File mp3File) {
+    public void addToPlayList(File file) {
 
-        songsInPlaylist.add(mp3File);
+        songsInPlaylist.add(file);
     }
 
 
