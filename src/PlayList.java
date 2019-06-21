@@ -199,6 +199,7 @@ public class PlayList {
         }
 
         AddNewSongToPlayList addNewSongToPlayList=new AddNewSongToPlayList(this);
+        DeleteSongFromPlayList deleteSongFromPlayList=new DeleteSongFromPlayList(this);
 
 
         delete.setText("delete this playList");
@@ -216,16 +217,10 @@ public class PlayList {
 
 
 
-        deleteSong.setText("delete a Song..");
-        deleteSong.setBorder(null);
-        deleteSong.setBackground(Color.black);
-        deleteSong.setFont(new Font("Arial", Font.PLAIN, 13));
-        deleteSong.setForeground(Color.WHITE);
-
         songsPanel.add(delete);
         songsPanel.add(setNewName);
         songsPanel.add(addNewSongToPlayList.getAddNewSong());
-        songsPanel.add(deleteSong);
+        songsPanel.add(deleteSongFromPlayList.getDeleteSong());
 
 
 
@@ -247,8 +242,8 @@ public class PlayList {
             public void actionPerformed(ActionEvent e) {
                 JFrame enterName=new JFrame();
                String newName=JOptionPane.showInputDialog(enterName,"enter new name");
-               thisPlayList.setPlayListName(newName);
-               thisPlayList.playList.setText(newName);
+                thisPlayList.playList.setText(newName);
+                thisPlayList.setPlayListName(newName);
             }
         });
 
