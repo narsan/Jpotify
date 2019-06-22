@@ -105,7 +105,9 @@ public  class MainFrame {
         leftPanel.add(playLists);
 
         FavoriteSong favoriteSong=new FavoriteSong();
+        SharedPlayList sharedPlayList=new SharedPlayList();
         leftPanel.add(favoriteSong.playList);
+        leftPanel.add(sharedPlayList.playList);
         favoriteSong.playList.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -200,6 +200,7 @@ public class PlayList {
 
         AddNewSongToPlayList addNewSongToPlayList=new AddNewSongToPlayList(this);
         DeleteSongFromPlayList deleteSongFromPlayList=new DeleteSongFromPlayList(this);
+        ModifySongsOrderInPlayList modify=new ModifySongsOrderInPlayList(this);
 
 
         delete.setText("delete this playList");
@@ -221,6 +222,7 @@ public class PlayList {
         songsPanel.add(setNewName);
         songsPanel.add(addNewSongToPlayList.getAddNewSong());
         songsPanel.add(deleteSongFromPlayList.getDeleteSong());
+        songsPanel.add(modify.getModify());
 
 
 

@@ -62,7 +62,14 @@ public class DeleteSongFromPlayList {
 
                         if (mp3File.getId3v2Tag().getTitle().equals(input)){
 
+                            if (playList.getPlayListSongs().contains(Library.getSongs().get(i))){
+
+
                             playList.removeSongFromPlayList(Library.getSongs().get(i));
+
+                            }
+
+
                         }
 
                     } catch (IOException e1) {
