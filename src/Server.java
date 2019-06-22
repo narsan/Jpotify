@@ -46,5 +46,17 @@ public class Server extends Thread {
         }
 
     }
+
+    public static void main(String[] args) {
+
+        Server server= null;
+        try {
+            server = new Server();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Thread thread=new Thread(server);
+        thread.start();
+    }
 }
 

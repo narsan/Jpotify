@@ -11,7 +11,7 @@ public class Client implements Runnable {
 
     public Client() throws IOException {
 
-        socket=new Socket("her IP",5478);
+        socket=new Socket("192.168.43.141",5478);
         out=new PrintWriter(socket.getOutputStream());
         writer=new BufferedWriter(out);
         in=new InputStreamReader(socket.getInputStream());
@@ -38,5 +38,16 @@ public class Client implements Runnable {
         }
 
 
+    }
+
+    public static void main(String[] args) {
+        Client client= null;
+        try {
+            client = new Client();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Thread thread=new Thread(client);
+        thread.start();
     }
 }
