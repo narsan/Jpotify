@@ -1,53 +1,56 @@
-package Network;
-
+import java.net.*;
 import java.io.*;
-import java.net.InetAddress;
-import java.net.Socket;
+import java.util.Scanner;
 
-public class Client implements Runnable {
-
+public class Client implements Runnable{
     private Socket socket;
-    private PrintWriter out;
-    private InputStreamReader in;
-    BufferedWriter writer;
-    BufferedReader reader;
+    private BufferedReader reader;
+    private PrintWriter writer;
 
-    public Client() throws IOException {
+    public void sendRequestToServer(String string){
+        try {
+            System.out.println(string);
+            writer.println(string);
+            writer.flush();
+        }catch (Exception e){
 
-        socket = new Socket(InetAddress.getByName("192.168.43.141"), 6801);
-        out = new PrintWriter(socket.getOutputStream());
-        writer = new BufferedWriter(out);
-        in = new InputStreamReader(socket.getInputStream());
-        reader = new BufferedReader(in);
-
+        }
     }
-
-
     @Override
     public void run() {
+        int sum ;
         while (true) {
-            System.out.println("here");
-
-            String input = null;
             try {
-                input = reader.readLine();
+                sum = reader.read();
+                System.out.println(sum);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println("server :  " + input);
         }
 
+    }
+    public Client(){
 
+        try
+        {
+            socket = new Socket("localhost",3504);
+            reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
-        Client client = null;
-        try {
-            client = new Client();
-        } catch (IOException e) {
-            e.printStackTrace();
+        Client client = new Client();
+        Thread tr = new Thread(client);
+        tr.start();
+        while (true){
+            Scanner in = new Scanner(System.in);
+            String input = in.next();
+            client.sendRequestToServer(input);
         }
-        Thread thread = new Thread(client);
-        thread.start();
     }
+
 }

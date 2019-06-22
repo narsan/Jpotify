@@ -3,59 +3,46 @@ package Network;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 
-public class Server extends Thread {
-
+public class Server implements Runnable {
     private ServerSocket serverSocket;
-    private ArrayList<String> ips = new ArrayList<>();
-    private PrintWriter out;
-    private InputStreamReader in;
+    private boolean isRun = true;
 
     public Server() throws IOException {
+        this.serverSocket = new ServerSocket(3504);
 
-        serverSocket = new ServerSocket(6801);
-        System.out.println("server waiting for client");
     }
 
     public void run() {
 
-        while (true) {
-
-            Socket client = null;
-            try {
-                client = serverSocket.accept();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            System.out.println("client accepted");
-
-            ClientHandler clientHandler= null;
-            try {
-                clientHandler = new ClientHandler(client);
-                clientHandler.send();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Thread thread=new Thread(clientHandler);
-            thread.start();
-
-
-
-        }
-
-    }
-
-    public static void main(String[] args) {
-
-        Server server= null;
         try {
-            server = new Server();
+
+            while (isRun) {
+                System.out.println("waiting for client ...");
+                Socket client = this.serverSocket.accept();
+                System.out.println("client connected");
+                ClientHandler clientHandler = new ClientHandler(client);
+                Thread thread = new Thread(clientHandler);
+                thread.start();
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Thread thread=new Thread(server);
-        thread.start();
+
+
+    }
+
+
+    public static void main(String[] args)  {
+
+        try {
+            Server srv = new Server();
+            Thread t = new Thread(srv);
+            t.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
-
