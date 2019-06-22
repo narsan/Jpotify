@@ -56,7 +56,11 @@ public class ShowSongsToCreatePlayList  implements ItemListener {
 
         JFrame setName = new JFrame();
         String name1 = JOptionPane.showInputDialog(setName, "Enter your playList name");
-        playList=new PlayList(name1);
+        try {
+            playList=new PlayList(name1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         for (int i = 0; i < songs.size(); i++) {
 
@@ -67,9 +71,31 @@ public class ShowSongsToCreatePlayList  implements ItemListener {
             checkBox.setLayout(new GridLayout(songs.size(),songs.size()));
             try {
                 Mp3File mp3File=new Mp3File(songs.get(i));
-                checkBox.setText(mp3File.getId3v2Tag().getTitle());
-                checkBox.addItemListener(this);
-                int finalI1 = i;
+                if (mp3File.hasId3v1Tag()&&mp3File.getId3v1Tag().getTitle()!=null){
+
+                    checkBox.setText(mp3File.getId3v1Tag().getTitle());
+                    checkBox.addItemListener(this);
+                }
+
+
+                else if (mp3File.hasId3v2Tag()&&mp3File.getId3v2Tag().getTitle()!=null){
+
+
+                    checkBox.setText(mp3File.getId3v2Tag().getTitle());
+                    //checkBox.addItemListener(this);
+                    int finalI = i;
+                    checkBox.addItemListener(new ItemListener() {
+                        @Override
+                        public void itemStateChanged(ItemEvent e) {
+
+                            playList.addSongToPlayList(songs.get(finalI));
+
+                        }
+                    });
+
+                }
+
+
 
 
                 checkBoxes.add(checkBox);

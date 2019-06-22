@@ -17,6 +17,7 @@ public class PlayList {
     protected JButton playList = new JButton();
     protected String playListName;
     protected HashSet<File> playListSongs=new HashSet<>();
+    private ObjectOutputStream out;
 
     JButton deleteSong = new JButton();
     JButton addNewSong = new JButton();
@@ -37,11 +38,14 @@ public class PlayList {
     }
 
 
-    public PlayList(String playListName) {
+    public PlayList(String playListName) throws IOException {
 
         this.playListName = playListName;
+
+        File file=new File("src\\playlists\\"+playListName+".bin");
+        out = new ObjectOutputStream(new FileOutputStream(file));
         playList.setText(playListName);
-        playList.setFont(new Font("Arial", Font.BOLD, 16));
+        playList.setFont(new Font("Arial", Font.PLAIN, 20));
         playList.setBackground(Color.BLACK);
         playList.setForeground(Color.white);
         playList.setBorder(null);
@@ -88,9 +92,9 @@ public class PlayList {
             }
 
 
+//TODO
 
-
-            if (mp3File.hasId3v1Tag()) {
+            if (mp3File.hasId3v1Tag()&&mp3File.getId3v1Tag().getTitle()!=null) {
                 ID3v1 id3v1 = mp3File.getId3v1Tag();
                 Title = new JLabel();
                 Title.setVisible(true);
@@ -103,10 +107,27 @@ public class PlayList {
                 Title.setForeground(Color.white);
             }
 
+            else if (mp3File.hasId3v2Tag()&&mp3File.getId3v2Tag().getTitle()!=null){
+
+                ID3v2 id3v2 = mp3File.getId3v2Tag();
+                Title = new JLabel();
+                Title.setVisible(true);
+
+                Title.setText(id3v2.getTitle());
+                //System.out.println(id3v1.getTitle());
+
+
+                Title.setFont(new Font("Arial", Font.PLAIN, 13));
+                Title.setForeground(Color.white);
+
+
+            }
+
             if (mp3File.hasId3v2Tag()) {
 
 
                 ID3v2 id3v2 = mp3File.getId3v2Tag();
+                ID3v1 id3v1=mp3File.getId3v1Tag();
                 songImage = new JButton();
                 songImage.setBorder(null);
                 songImage.setVisible(true);
@@ -129,15 +150,52 @@ public class PlayList {
                         ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(60, 60, Image.SCALE_DEFAULT));
 
                         showPlayingSong.add(new JLabel(imageIcon), BorderLayout.WEST);
-                        JLabel Artist = new JLabel(id3v2.getArtist());
-                        Artist.setForeground(Color.WHITE);
-                        showPlayingSong.add(Artist, BorderLayout.CENTER);
-                        JLabel Title = new JLabel(id3v2.getTitle());
-                        Title.setForeground(Color.WHITE);
-                        showPlayingSong.add(Title, BorderLayout.PAGE_END);
-                        JLabel album = new JLabel(id3v2.getAlbum());
-                        album.setForeground(Color.WHITE);
-                        showPlayingSong.add(album, BorderLayout.NORTH);
+                        if (id3v2.getArtist()!=null){
+
+                          JLabel Artist = new JLabel(id3v2.getArtist());
+                            Artist.setForeground(Color.WHITE);
+                            showPlayingSong.add(Artist, BorderLayout.CENTER);
+
+                        }
+
+                        else if (id3v1.getArtist()!=null){
+
+                            JLabel Artist = new JLabel(id3v2.getArtist());
+                            Artist.setForeground(Color.WHITE);
+                            showPlayingSong.add(Artist, BorderLayout.CENTER);
+
+                        }
+
+                        if (id3v2.getTitle()!=null){
+
+                            JLabel Title = new JLabel(id3v2.getTitle());
+                            Title.setForeground(Color.WHITE);
+                            showPlayingSong.add(Title, BorderLayout.PAGE_END);
+                        }
+
+                        else if (id3v1.getTitle()!=null){
+
+                            JLabel Title = new JLabel(id3v2.getTitle());
+                            Title.setForeground(Color.WHITE);
+                            showPlayingSong.add(Title, BorderLayout.PAGE_END);
+
+                        }
+
+                        if (id3v2.getAlbum()!=null){
+
+
+                            JLabel album = new JLabel(id3v2.getAlbum());
+                            album.setForeground(Color.WHITE);
+                            showPlayingSong.add(album, BorderLayout.NORTH);
+                        }
+
+                        else if (id3v1.getAlbum()!=null){
+
+                            JLabel album = new JLabel(id3v2.getAlbum());
+                            album.setForeground(Color.WHITE);
+                            showPlayingSong.add(album, BorderLayout.NORTH);
+
+                        }
                         showPlayingSong.setBackground(Color.DARK_GRAY);
                         FileInputStream in = null;
                         try {
@@ -180,8 +238,16 @@ public class PlayList {
                 songImage.setIcon(imageIcon);
                 String mimeType = id3v2.getAlbumImageMimeType();
                 System.out.println(mimeType);
-                Title.setText(id3v2.getTitle());
-                //Title.setText(mp3File.getId3v1Tag().getTitle());
+                if (mp3File.hasId3v1Tag()&&mp3File.getId3v1Tag().getTitle()!=null){
+
+                    Title.setText(id3v1.getTitle());
+                }
+
+                else if (mp3File.hasId3v2Tag()&&mp3File.getId3v2Tag().getTitle()!=null){
+
+
+                    Title.setText(mp3File.getId3v2Tag().getTitle());
+                }
 
             }
 
@@ -256,6 +322,16 @@ public class PlayList {
     public void addSongToPlayList(File file) {
 
         playListSongs.add(file);
+        try {
+            out.writeObject(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setPlayListName(String playListName) {

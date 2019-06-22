@@ -51,6 +51,26 @@ public  class MainFrame {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        File temp=new File("src\\playlists");
+        if (temp.exists()){
+            for(File file:temp.listFiles()){
+
+                ObjectInputStream in=new ObjectInputStream(new FileInputStream(file));
+
+                String name=file.getName();
+                PlayList playList=new PlayList(name);
+                /*try {
+                    playList.addSongToPlayList((File) in.readObject());
+
+
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }*/
+                leftPanel.add(playList.getPlayList());
+
+            }
+
+        }
         showSongs.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -103,9 +123,9 @@ public  class MainFrame {
         playLists.setForeground( new Color(195,195,195));
         leftPanel.add(playLists);
 
-        FavoriteSong favoriteSong=new FavoriteSong();
-        SharedPlayList sharedPlayList=new SharedPlayList();
-        leftPanel.add(favoriteSong.playList);
+        //FavoriteSong favoriteSong=new FavoriteSong();
+        //SharedPlayList sharedPlayList=new SharedPlayList();
+        /*leftPanel.add(favoriteSong.playList);
         leftPanel.add(sharedPlayList.playList);
         favoriteSong.playList.addActionListener(new ActionListener() {
             @Override
@@ -115,7 +135,7 @@ public  class MainFrame {
 
 
             }
-        });
+        });*/
 
         RightPanel rightPanel = new RightPanel();
         frame.add(rightPanel.getJScrollPane(), BorderLayout.EAST);

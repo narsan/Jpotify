@@ -1,7 +1,9 @@
+import java.io.IOException;
+
 public class SharedPlayList extends PlayList {
 
 
-    public SharedPlayList(){
+    public SharedPlayList() throws IOException {
 
 
         super("Shared playlist");

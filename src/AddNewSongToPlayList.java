@@ -48,7 +48,12 @@ public class AddNewSongToPlayList {
 
                     try {
                         mp3File = new Mp3File(Library.getSongs().get(i));
-                        songsName.add(mp3File.getId3v2Tag().getTitle());
+                        if (mp3File.hasId3v1Tag()&&mp3File.getId3v1Tag().getTitle()!=null){
+                        songsName.add(mp3File.getId3v1Tag().getTitle());}
+                        else if (mp3File.hasId3v2Tag()&&mp3File.getId3v2Tag().getTitle()!=null){
+
+                            songsName.add(mp3File.getId3v1Tag().getTitle());
+                        }
                     } catch (IOException e4) {
                         e4.printStackTrace();
                     } catch (UnsupportedTagException e5) {
@@ -70,11 +75,27 @@ public class AddNewSongToPlayList {
 
                     try {
                         mp3File = new Mp3File(Library.getSongs().get(i));
+                        if (mp3File.hasId3v1Tag()&&mp3File.getId3v1Tag().getTitle()!=null){
 
-                        if (mp3File.getId3v2Tag().getTitle().equals(input)){
+                            if (mp3File.getId3v1Tag().getTitle().equals(input)){
 
-                            playList.addSongToPlayList(Library.getSongs().get(i));
+                                playList.addSongToPlayList(Library.getSongs().get(i));
+                            }
+
+
                         }
+
+                        else if (mp3File.hasId3v2Tag()&&mp3File.getId3v2Tag().getTitle()!=null){
+
+                            if (mp3File.getId3v2Tag().getTitle().equals(input)){
+
+                                playList.addSongToPlayList(Library.getSongs().get(i));
+                            }
+
+
+                        }
+
+
 
                     } catch (IOException e1) {
                         e1.printStackTrace();

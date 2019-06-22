@@ -44,24 +44,39 @@ public class ShowSongs extends JButton {
             File temp = Library.getSongs().get(i);
             Mp3File mp3File = new Mp3File(temp);
 
-            System.out.println(Library.getSongs().size());
-            if (mp3File.hasId3v1Tag()) {
+            if (mp3File.hasId3v1Tag()&&mp3File.getId3v1Tag().getTitle()!=null) {
                 ID3v1 id3v1 = mp3File.getId3v1Tag();
                 Title = new JLabel();
                 Title.setVisible(true);
 
-                //Title.setText(id3v1.getTitle());
-                System.out.println(id3v1.getTitle());
+                Title.setText(id3v1.getTitle());
+
 
 
                 Title.setFont(new Font("Arial", Font.PLAIN, 13));
                 Title.setForeground(Color.white);
             }
 
+            else if (mp3File.hasId3v2Tag()&&mp3File.getId3v2Tag().getTitle()!=null){
+
+                ID3v2 id3v2 = mp3File.getId3v2Tag();
+                Title = new JLabel();
+                Title.setVisible(true);
+
+                Title.setText(id3v2.getTitle());
+
+                Title.setFont(new Font("Arial", Font.PLAIN, 13));
+                Title.setForeground(Color.white);
+
+            }
+
+
+
             if (mp3File.hasId3v2Tag()) {
 
 
                 ID3v2 id3v2 = mp3File.getId3v2Tag();
+                ID3v1 id3v1=mp3File.getId3v1Tag();
                 songImage = new JButton();
                 songImage.setBorder(null);
                 songImage.setVisible(true);
@@ -84,15 +99,49 @@ public class ShowSongs extends JButton {
                         ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(80, 80, Image.SCALE_DEFAULT));
 
                         showPlayingSong.add(new JLabel(imageIcon), BorderLayout.WEST);
+                        if(id3v2.getArtist()!=null){
                         JLabel Artist = new JLabel(id3v2.getArtist());
-                        Artist.setForeground(Color.WHITE);
-                        showPlayingSong.add(Artist, BorderLayout.PAGE_END);
-                        JLabel Title = new JLabel(id3v2.getTitle());
-                        Title.setForeground(Color.WHITE);
-                        showPlayingSong.add(Title, BorderLayout.CENTER);
-                        JLabel album = new JLabel(id3v2.getAlbum());
-                        album.setForeground(Color.WHITE);
-                        showPlayingSong.add(album, BorderLayout.NORTH);
+                            Artist.setForeground(Color.WHITE);
+                            showPlayingSong.add(Artist, BorderLayout.PAGE_END);
+                        }
+
+                        else if (mp3File.hasId3v1Tag()&&mp3File.getId3v1Tag().getArtist()!=null){
+
+                            JLabel Artist = new JLabel(id3v1.getArtist());
+                            Artist.setForeground(Color.WHITE);
+                            showPlayingSong.add(Artist, BorderLayout.PAGE_END);
+
+                        }
+
+                        if(id3v2.getTitle()!=null){
+
+                            JLabel Title = new JLabel(id3v2.getTitle());
+                            Title.setForeground(Color.WHITE);
+                            showPlayingSong.add(Title, BorderLayout.CENTER);
+                        }
+
+                        else if(id3v1.getAlbum()!=null){
+
+                            JLabel Title = new JLabel(id3v1.getTitle());
+                            Title.setForeground(Color.WHITE);
+                            showPlayingSong.add(Title, BorderLayout.CENTER);
+
+                        }
+
+                        if (id3v2.getAlbum()!=null){
+
+
+                            JLabel album = new JLabel(id3v2.getAlbum());
+                            album.setForeground(Color.WHITE);
+                            showPlayingSong.add(album, BorderLayout.NORTH);
+                        }
+
+                        else if (id3v1.getAlbum()!=null){
+                            JLabel album = new JLabel(id3v1.getAlbum());
+                            album.setForeground(Color.WHITE);
+                            showPlayingSong.add(album, BorderLayout.NORTH);
+
+                        }
                         showPlayingSong.setBackground(new Color(58,58,58));
                         showPlayingSong.setPreferredSize(new Dimension(318,0));
                         FileInputStream in= null;
