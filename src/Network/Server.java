@@ -24,6 +24,7 @@ public class Server implements Runnable {
                 ClientHandler clientHandler = new ClientHandler(client);
                 Thread thread = new Thread(clientHandler);
                 thread.start();
+                System.out.println(" ");
             }
 
         } catch (IOException e) {
