@@ -298,6 +298,7 @@ public class PlayList {
                 Library.deletePlayList(thisPlayList);
                 thisPlayList.playList.setVisible(false);
                 songsPanel.setVisible(false);
+                System.out.println();
 
             }
         });
