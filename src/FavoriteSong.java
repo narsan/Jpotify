@@ -5,7 +5,7 @@ public class FavoriteSong extends PlayList {
 
     public FavoriteSong(){
 
-        super("favorite songs");
+        super("Favorite songs");
         super.delete.setVisible(false);
         super.setNewName.setVisible(false);
 

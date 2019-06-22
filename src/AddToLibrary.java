@@ -17,12 +17,13 @@ public class AddToLibrary extends Library {
     }
 
     public AddToLibrary() throws IOException {
-        songAdder.setText("add song");
-        songAdder.setFont(new Font("Arial", Font.PLAIN, 20));
+        songAdder.setText("Add song");
+        songAdder.setFont(new Font("Arial", Font.BOLD, 16));
         songAdder.setBackground(Color.BLACK);
         songAdder.setForeground(Color.white);
         songAdder.setBorder(null);
         songAdder.addActionListener(new ActionListener() {
+            //TODO
             @Override
             public void actionPerformed(ActionEvent e){
                 try {

@@ -37,8 +37,8 @@ public class CreatePlayList {
 
     public CreatePlayList(){
 
-        newPlayList.setText("Create playList");
-        newPlayList.setFont(new Font("Arial",Font.PLAIN,20));
+        newPlayList.setText("Create playlist");
+        newPlayList.setFont(new Font("Arial",Font.BOLD,16));
         newPlayList.setBackground(Color.BLACK);
         newPlayList.setForeground(Color.white);
         newPlayList.setBorder(null);

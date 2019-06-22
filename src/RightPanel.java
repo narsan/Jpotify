@@ -17,12 +17,12 @@ public class RightPanel {
 
         rightPanel.setPreferredSize(new Dimension(210, 40));
         rightPanel.setVisible(true);
-        rightPanel.setBackground(Color.blue);
+        rightPanel.setBackground(Color.BLACK);
 
         JTextField textField = new JTextField();
         textField.setText("Friends activity");
         textField.setEditable(false);
-        textField.setFont(new Font("Courier New", Font.BOLD, 12));
+        textField.setFont(new Font("Arial", Font.BOLD, 15));
         textField.setBackground(Color.black);
         textField.setForeground(Color.white);
         textField.setBorder(null);
