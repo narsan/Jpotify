@@ -42,8 +42,8 @@ public class PlayList {
 
         this.playListName = playListName;
 
-        File file=new File("src\\playlists\\"+playListName+".bin");
-        out = new ObjectOutputStream(new FileOutputStream(file));
+        //File file=new File("src\\playlists\\"+playListName+".bin");
+        //out = new ObjectOutputStream(new FileOutputStream(file));
         playList.setText(playListName);
         playList.setFont(new Font("Arial", Font.PLAIN, 20));
         playList.setBackground(Color.BLACK);
