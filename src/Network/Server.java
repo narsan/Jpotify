@@ -1,3 +1,5 @@
+package Network;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -12,7 +14,8 @@ public class Server extends Thread {
 
     public Server() throws IOException {
 
-        serverSocket = new ServerSocket(5478);
+        serverSocket = new ServerSocket(6801);
+        System.out.println("server waiting for client");
     }
 
     public void run() {
@@ -26,21 +29,15 @@ public class Server extends Thread {
                 e.printStackTrace();
             }
             System.out.println("client accepted");
+            ClientHandler clientHandler= null;
             try {
-                out = new PrintWriter(client.getOutputStream());
-                in=new InputStreamReader(client.getInputStream());
-               BufferedWriter writer=new BufferedWriter(out);
-               BufferedReader reader=new BufferedReader(in);
-               writer.write("hello");
-               writer.flush();
-
-               String input=reader.readLine();
-                System.out.println("client: "+ input);
-
-
+                clientHandler = new ClientHandler(client);
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            Thread thread=new Thread(clientHandler);
+            thread.start();
+
 
 
         }

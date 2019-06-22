@@ -1,4 +1,7 @@
+package Network;
+
 import java.io.*;
+import java.net.InetAddress;
 import java.net.Socket;
 
 public class Client implements Runnable {
@@ -11,7 +14,7 @@ public class Client implements Runnable {
 
     public Client() throws IOException {
 
-        socket=new Socket("192.168.43.141",5478);
+        socket=new Socket(InetAddress.getByName("localhost"),6801);
         out=new PrintWriter(socket.getOutputStream());
         writer=new BufferedWriter(out);
         in=new InputStreamReader(socket.getInputStream());
@@ -29,13 +32,9 @@ public class Client implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("server: "+ input);
-        try {
-            writer.write("khobi");
-            writer.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        System.out.println("server :  "+input);
+
+
 
 
     }
