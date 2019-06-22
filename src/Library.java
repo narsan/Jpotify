@@ -6,6 +6,7 @@ import java.util.HashSet;
 
 public class Library {
     private static ArrayList<File> songs=new ArrayList<>();
+    private static ArrayList<File> palyedSongs=new ArrayList<>();
     private static ArrayList<PlayList> playLists=new ArrayList<>();
 //    private static HashSet<File> songs=new HashSet<>();
 
