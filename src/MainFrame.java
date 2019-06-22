@@ -41,6 +41,13 @@ public  class MainFrame {
         leftPanel.add(showSongs);
         leftPanel.add(createPlayList.getNewPlayList());
 
+
+        JLabel playLists = new JLabel();
+        playLists.setPreferredSize(new Dimension(30, 30));
+        playLists.setText("Your Playlists");
+        playLists.setFont(new Font("Arial", Font.ITALIC, 16));
+        playLists.setForeground( new Color(195,195,195));
+        leftPanel.add(playLists);
         try {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("src\\savedSongs.bin"));
             while (true) {
@@ -57,17 +64,34 @@ public  class MainFrame {
 
                 ObjectInputStream in=new ObjectInputStream(new FileInputStream(file));
 
-                String name=file.getName();
+                String name=file.getName().replace(".bin","");
                 PlayList playList=new PlayList(name);
-                /*try {
-                    playList.addSongToPlayList((File) in.readObject());
-
-
+                try {
+                    while (true) {
+                        System.out.println("-");
+                        playList.addSongToPlayList((File) in.readObject());
+                    }
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
-                }*/
-                leftPanel.add(playList.getPlayList());
+                }
+                catch (EOFException e)
+                {
+                    System.out.println(playList.getPlayListSongs());
+                    in.close();
+                }
+                ShowSongsToCreatePlayList showSongsToCreatePlayList = new ShowSongsToCreatePlayList();
+                showSongsToCreatePlayList.setPlayList(playList);
+                Library.addNewPlayList(showSongsToCreatePlayList.getPlayList());
 
+                leftPanel.add(showSongsToCreatePlayList.playList.getPlayList());
+
+                showSongsToCreatePlayList.getPlayList().getPlayList().addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+
+                        refresh(showSongsToCreatePlayList.getPlayList().showSongsInPlayList());
+                    }
+                });
             }
 
         }
@@ -115,13 +139,6 @@ public  class MainFrame {
             }
         });
 
-
-        JLabel playLists = new JLabel();
-        playLists.setPreferredSize(new Dimension(30, 30));
-        playLists.setText("Your Playlists");
-        playLists.setFont(new Font("Arial", Font.ITALIC, 16));
-        playLists.setForeground( new Color(195,195,195));
-        leftPanel.add(playLists);
 
         //FavoriteSong favoriteSong=new FavoriteSong();
         //SharedPlayList sharedPlayList=new SharedPlayList();

@@ -42,8 +42,6 @@ public class PlayList {
 
         this.playListName = playListName;
 
-        File file=new File("src\\playlists\\"+playListName+".bin");
-        out = new ObjectOutputStream(new FileOutputStream(file));
         playList.setText(playListName);
         playList.setFont(new Font("Arial", Font.PLAIN, 20));
         playList.setBackground(Color.BLACK);
@@ -92,7 +90,6 @@ public class PlayList {
             }
 
 
-//TODO
 
             if (mp3File.hasId3v1Tag()&&mp3File.getId3v1Tag().getTitle()!=null) {
                 ID3v1 id3v1 = mp3File.getId3v1Tag();
@@ -296,7 +293,8 @@ public class PlayList {
         delete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                File file = new File("./src/playlists/"+playListName+".bin");
+                file.delete();
                 Library.deletePlayList(thisPlayList);
                 thisPlayList.playList.setVisible(false);
                 songsPanel.setVisible(false);
@@ -320,14 +318,15 @@ public class PlayList {
     }
 
     public void addSongToPlayList(File file) {
-
         playListSongs.add(file);
+    }
+    public void writeSongs() throws IOException {
+        File path=new File("src\\playlists\\"+playListName+".bin");
+        out = new ObjectOutputStream(new FileOutputStream(path));
         try {
-            out.writeObject(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
+            for (File f:playListSongs) {
+                out.writeObject(f);
+            }
             out.close();
         } catch (IOException e) {
             e.printStackTrace();

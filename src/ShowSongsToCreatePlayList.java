@@ -13,11 +13,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 
-public class ShowSongsToCreatePlayList  implements ItemListener {
+public class ShowSongsToCreatePlayList implements ItemListener {
 
     static JPanel showSongs = new JPanel();
 
-    private static   HashSet<File> songsInPlaylist;
+    private static HashSet<File> songsInPlaylist;
     private ArrayList<JCheckBox> checkBoxes;
     PlayList playList;
 
@@ -33,7 +33,7 @@ public class ShowSongsToCreatePlayList  implements ItemListener {
 
         HashSet<Mp3File> songsInPlaylist1 = new HashSet<Mp3File>();
         ArrayList<File> songs = new ArrayList<>();
-        checkBoxes=new ArrayList<>();
+        checkBoxes = new ArrayList<>();
         showSongs.setBackground(Color.black);
         showSongs.setVisible(true);
         //TODO
@@ -57,7 +57,7 @@ public class ShowSongsToCreatePlayList  implements ItemListener {
         JFrame setName = new JFrame();
         String name1 = JOptionPane.showInputDialog(setName, "Enter your playList name");
         try {
-            playList=new PlayList(name1);
+            playList = new PlayList(name1);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -68,17 +68,14 @@ public class ShowSongsToCreatePlayList  implements ItemListener {
             checkBox.setBorder(null);
             checkBox.setBackground(Color.BLACK);
             checkBox.setForeground(Color.WHITE);
-            checkBox.setLayout(new GridLayout(songs.size(),songs.size()));
+            checkBox.setLayout(new GridLayout(songs.size(), songs.size()));
             try {
-                Mp3File mp3File=new Mp3File(songs.get(i));
-                if (mp3File.hasId3v1Tag()&&mp3File.getId3v1Tag().getTitle()!=null){
+                Mp3File mp3File = new Mp3File(songs.get(i));
+                if (mp3File.hasId3v1Tag() && mp3File.getId3v1Tag().getTitle() != null) {
 
                     checkBox.setText(mp3File.getId3v1Tag().getTitle());
                     checkBox.addItemListener(this);
-                }
-
-
-                else if (mp3File.hasId3v2Tag()&&mp3File.getId3v2Tag().getTitle()!=null){
+                } else if (mp3File.hasId3v2Tag() && mp3File.getId3v2Tag().getTitle() != null) {
 
 
                     checkBox.setText(mp3File.getId3v2Tag().getTitle());
@@ -89,13 +86,15 @@ public class ShowSongsToCreatePlayList  implements ItemListener {
                         public void itemStateChanged(ItemEvent e) {
 
                             playList.addSongToPlayList(songs.get(finalI));
-
+                            try {
+                                playList.writeSongs();
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                            }
                         }
                     });
 
                 }
-
-
 
 
                 checkBoxes.add(checkBox);
@@ -113,11 +112,7 @@ public class ShowSongsToCreatePlayList  implements ItemListener {
             showSongs.add(checkBox);
 
 
-
-
-
         }
-
 
 
         return showSongs;
@@ -126,13 +121,18 @@ public class ShowSongsToCreatePlayList  implements ItemListener {
     @Override
     public void itemStateChanged(ItemEvent e) {
 
-        for (int i = 0; i <checkBoxes.size() ; i++) {
+        for (int i = 0; i < checkBoxes.size(); i++) {
 
-            if (checkBoxes.get(i).isSelected()){
+            if (checkBoxes.get(i).isSelected()) {
 
-               // System.out.println("selected");
+                // System.out.println("selected");
 
                 playList.addSongToPlayList(Library.getSongs().get(i));
+                try {
+                    playList.writeSongs();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
 
         }
@@ -140,7 +140,7 @@ public class ShowSongsToCreatePlayList  implements ItemListener {
         System.out.println(playList.getPlayListSongs().size());
     }
 
-    public  HashSet<File> getSongsInPlaylist() {
+    public HashSet<File> getSongsInPlaylist() {
         return songsInPlaylist;
     }
 
@@ -150,8 +150,9 @@ public class ShowSongsToCreatePlayList  implements ItemListener {
     }
 
 
-
-
+    public void setPlayList(PlayList playList) {
+        this.playList = playList;
+    }
 }
 
 
