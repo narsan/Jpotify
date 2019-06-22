@@ -29,9 +29,11 @@ public class Server extends Thread {
                 e.printStackTrace();
             }
             System.out.println("client accepted");
+
             ClientHandler clientHandler= null;
             try {
                 clientHandler = new ClientHandler(client);
+                clientHandler.send();
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -14,39 +14,40 @@ public class Client implements Runnable {
 
     public Client() throws IOException {
 
-        socket=new Socket(InetAddress.getByName("localhost"),6801);
-        out=new PrintWriter(socket.getOutputStream());
-        writer=new BufferedWriter(out);
-        in=new InputStreamReader(socket.getInputStream());
-        reader=new BufferedReader(in);
+        socket = new Socket(InetAddress.getByName("192.168.43.141"), 6801);
+        out = new PrintWriter(socket.getOutputStream());
+        writer = new BufferedWriter(out);
+        in = new InputStreamReader(socket.getInputStream());
+        reader = new BufferedReader(in);
 
     }
 
 
     @Override
     public void run() {
+        while (true) {
+            System.out.println("here");
 
-        String input= null;
-        try {
-            input = reader.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
+            String input = null;
+            try {
+                input = reader.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("server :  " + input);
         }
-        System.out.println("server :  "+input);
-
-
 
 
     }
 
     public static void main(String[] args) {
-        Client client= null;
+        Client client = null;
         try {
             client = new Client();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Thread thread=new Thread(client);
+        Thread thread = new Thread(client);
         thread.start();
     }
 }

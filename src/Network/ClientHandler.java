@@ -13,12 +13,16 @@ public class ClientHandler implements Runnable{
         writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()));
         reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
     }
+    public void send(){
+
+           writer.write("hello client");
+           writer.flush();
+    }
 
     @Override
     public void run() {
 
-           writer.write("hello client");
-           writer.flush();
+
 
 
 

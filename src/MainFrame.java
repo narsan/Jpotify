@@ -99,7 +99,7 @@ public  class MainFrame {
         //ToDo
         JLabel playLists = new JLabel();
         playLists.setPreferredSize(new Dimension(30, 30));
-        playLists.setText(" your playLists");
+        playLists.setText("Your playLists");
         playLists.setFont(new Font("Arial", Font.PLAIN, 20));
         playLists.setForeground(Color.white);
         leftPanel.add(playLists);

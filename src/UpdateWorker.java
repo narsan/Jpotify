@@ -1,11 +1,5 @@
-import com.mpatric.mp3agic.InvalidDataException;
-import com.mpatric.mp3agic.Mp3File;
-import com.mpatric.mp3agic.UnsupportedTagException;
-
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
-import java.time.Duration;
 import java.util.List;
 
 public class UpdateWorker  extends SwingWorker<Void, Integer>  {
@@ -29,7 +23,7 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
 
             slider=new JSlider();
             this.duration = duration;
-            slider.setBackground(Color.DARK_GRAY);
+            slider.setBackground(new Color(58,58,58));
             slider.setMinimum(0);
             slider.setMaximum(duration);
             slider.setValue(0);
