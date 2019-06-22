@@ -2,11 +2,13 @@ package Network;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class ClientHandler implements Runnable {
     private Socket client;
     private BufferedReader reader;
     private PrintWriter writer;
+
 
     public ClientHandler(Socket client) throws IOException {
         this.client = client;
@@ -20,11 +22,7 @@ public class ClientHandler implements Runnable {
         while (true) {
             try {
 
-                String command = reader.readLine();
-                writer.write("ddd  "+command);
-                // System.out.println("Answer is : "+sum);
-                writer.flush();
-
+                String ip = reader.readLine();
 
             } catch (IOException e) {
                 e.printStackTrace();

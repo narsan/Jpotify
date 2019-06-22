@@ -30,7 +30,7 @@ public class AddNewSongToPlayList {
         ArrayList<String> songsName=new ArrayList<>();
 
 
-        addNewSong.setText("add new Song..");
+        addNewSong.setText("Add new Song..");
         addNewSong.setBorder(null);
         addNewSong.setBackground(Color.black);
         addNewSong.setFont(new Font("Arial", Font.PLAIN, 13));

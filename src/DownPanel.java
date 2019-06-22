@@ -12,11 +12,11 @@ public class DownPanel {
         downPanel.setVisible(true);
         downPanel.setLayout(new BorderLayout());
         downPanel.setBackground(new Color(58,58,58));
-        volume.setBackground(Color.ORANGE/*new Color(58,58,58)*/);
+        volume.setBackground(new Color(58,58,58));
         volume.setPreferredSize(new Dimension(225,0));
         downPanel.setPreferredSize(new Dimension(300,65));
         JSlider jSlider = new JSlider();
-       // jSlider.setPreferredSize(new Dimension(700,10));
+        jSlider.setPreferredSize(new Dimension(100,50));
         jSlider.setBackground(new Color(58,58,58));
         volume.add(jSlider,BorderLayout.PAGE_END);
         downPanel.add(volume,BorderLayout.EAST);

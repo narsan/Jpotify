@@ -23,7 +23,7 @@ public  class MainFrame {
 
     public MainFrame() throws IOException {
         frame.setLocation(100, 100);
-        frame.setSize(500, 500);
+        frame.setSize(700, 500);
         frame.setTitle("Jpotify");
         frame.setLayout(new BorderLayout());
         ImageIcon jpotify = new ImageIcon("src\\icons\\jpotify.jpg");
@@ -96,12 +96,11 @@ public  class MainFrame {
         });
 
 
-        //ToDo
         JLabel playLists = new JLabel();
         playLists.setPreferredSize(new Dimension(30, 30));
-        playLists.setText("Your playLists");
-        playLists.setFont(new Font("Arial", Font.PLAIN, 20));
-        playLists.setForeground(Color.white);
+        playLists.setText("Your Playlists");
+        playLists.setFont(new Font("Arial", Font.ITALIC, 16));
+        playLists.setForeground( new Color(195,195,195));
         leftPanel.add(playLists);
 
         FavoriteSong favoriteSong=new FavoriteSong();
@@ -125,7 +124,6 @@ public  class MainFrame {
         frame.add(downPanel.getDownPanel(), BorderLayout.PAGE_END);
 
 
-        this.frame.pack();
     }
 
     public  void refresh(JPanel jPanel) {

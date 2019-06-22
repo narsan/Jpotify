@@ -40,9 +40,8 @@ public class PlayList {
     public PlayList(String playListName) {
 
         this.playListName = playListName;
-
         playList.setText(playListName);
-        playList.setFont(new Font("Arial", Font.PLAIN, 20));
+        playList.setFont(new Font("Arial", Font.BOLD, 16));
         playList.setBackground(Color.BLACK);
         playList.setForeground(Color.white);
         playList.setBorder(null);
@@ -89,7 +88,7 @@ public class PlayList {
             }
 
 
-//TODO
+
 
             if (mp3File.hasId3v1Tag()) {
                 ID3v1 id3v1 = mp3File.getId3v1Tag();

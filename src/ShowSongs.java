@@ -17,7 +17,7 @@ public class ShowSongs extends JButton {
     public ShowSongs() {
 
 
-        this.setFont(new Font("Arial", Font.PLAIN, 20));
+        this.setFont(new Font("Arial", Font.BOLD, 16));
         this.setText("Songs");
         this.setBackground(Color.BLACK);
         this.setForeground(Color.white);

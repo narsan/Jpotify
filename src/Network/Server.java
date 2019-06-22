@@ -3,6 +3,7 @@ package Network;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class Server implements Runnable {
     private ServerSocket serverSocket;
@@ -24,7 +25,7 @@ public class Server implements Runnable {
                 ClientHandler clientHandler = new ClientHandler(client);
                 Thread thread = new Thread(clientHandler);
                 thread.start();
-                System.out.println(" ");
+//                System.out.println(" ");
             }
 
         } catch (IOException e) {
@@ -35,7 +36,7 @@ public class Server implements Runnable {
     }
 
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
 
         try {
             Server srv = new Server();
