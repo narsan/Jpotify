@@ -1,5 +1,6 @@
 import com.mpatric.mp3agic.*;
 import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -161,8 +162,9 @@ public class ShowSongs extends JButton {
                         }
 
                         PausablePlayer player = null;
+
                         try {
-                            player = new PausablePlayer(in);
+                            player=new PausablePlayer(in);
                         } catch (JavaLayerException e1) {
                             e1.printStackTrace();
                         }
@@ -177,6 +179,13 @@ public class ShowSongs extends JButton {
                         } catch (JavaLayerException e1) {
                             e1.printStackTrace();
                         }
+                        Player player1= null;
+                        try {
+                            player1 = new Player(in);
+                        } catch (JavaLayerException e1) {
+                            e1.printStackTrace();
+                        }
+
 
                         if (cuurentPanel != null) {
 
@@ -195,39 +204,6 @@ public class ShowSongs extends JButton {
                         }
 
 
-                       /* FileInputStream in= null;
-                        try {
-                            in = new FileInputStream(temp);
-                        } catch (FileNotFoundException e1) {
-                            e1.printStackTrace();
-                        }
-
-                        PausablePlayer player= null;
-                        try {
-                            player = new PausablePlayer(in);
-                        } catch (JavaLayerException e1) {
-                            e1.printStackTrace();
-                        }
-                        try {
-                            if (playedSongs.size()!=0){
-                                playedSongs.get(playedSongs.size()-1).close();
-                                PlayMusic playMusic = new PlayMusic(temp,player);
-                                DownPanel.addPlayingSongInfo(showPlayingSong);
-                                DownPanel.downPanel.revalidate();
-                            }
-
-                            PlayMusic playMusic = new PlayMusic(temp,player);
-                            DownPanel.addPlayingSongInfo(showPlayingSong);
-                            player.play();
-
-
-                            playedSongs.add(player);
-                        } catch (JavaLayerException e1) {
-                            e1.printStackTrace();
-                        }
-                        // playMusic.playThread.start();*/
-
-
 
                     }
                 });
@@ -244,32 +220,11 @@ public class ShowSongs extends JButton {
 
 
             JPanel songData = new JPanel();
-            songData.setBackground(Color.orange);
+            songData.setBackground(Color.black);
             songData.setLayout(new BoxLayout(songData, BoxLayout.Y_AXIS));
             songData.add(songImage);
             songData.add(Title);
             songData.setMinimumSize(new Dimension(200, 200));
-
-
-            /*double[][] weights = gridBagLayout.getLayoutWeights();
-            for (int k = 0; k < 2; k++) {
-                for (int j = 0; j < weights[k].length; j++) {
-                    weights[k][j] = 1;
-                }
-            }
-            gridBagLayout.columnWeights = weights[0];
-            gridBagLayout.rowWeights = weights[1];*/
-
-/*            int top = 20;
-            int left = 20;
-            int bottom = 2;
-            int right = 40;
-            gbc.insets = new Insets(top, left, bottom, right);
-            gridBagLayout.setConstraints(songData,gbc);*/
-
-
-
-
 
 
             songsPanel.add(songData,gbc);
@@ -277,10 +232,10 @@ public class ShowSongs extends JButton {
 
         }
 
-        songsPanel.setBackground(Color.ORANGE);
+        songsPanel.setBackground(Color.black);
 
         return songsPanel;
-        // return test;
+
 
     }
 

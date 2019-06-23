@@ -34,6 +34,7 @@ public class ShowSongsToCreatePlayList implements ItemListener {
         HashSet<Mp3File> songsInPlaylist1 = new HashSet<Mp3File>();
         ArrayList<File> songs = new ArrayList<>();
         checkBoxes = new ArrayList<>();
+        showSongs.setLayout(new FlowLayout());
         showSongs.setBackground(Color.black);
         showSongs.setVisible(true);
         //TODO
@@ -74,6 +75,7 @@ public class ShowSongsToCreatePlayList implements ItemListener {
                 if (mp3File.hasId3v1Tag() && mp3File.getId3v1Tag().getTitle() != null) {
 
                     checkBox.setText(mp3File.getId3v1Tag().getTitle());
+                    checkBox.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
                     checkBox.addItemListener(this);
                 } else if (mp3File.hasId3v2Tag() && mp3File.getId3v2Tag().getTitle() != null) {
 

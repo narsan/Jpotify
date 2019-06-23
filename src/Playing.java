@@ -30,8 +30,6 @@ public class Playing  {
         else if (plaiyingSongs.size()!=1){
 
 
-
-
             plaiyingSongs.get(plaiyingSongs.size()-2).stop();
             player.play();
         }

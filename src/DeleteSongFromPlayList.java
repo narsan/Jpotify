@@ -22,7 +22,7 @@ public class DeleteSongFromPlayList {
         deleteSong.setText("delete a song");
         deleteSong.setBorder(null);
         deleteSong.setBackground(Color.black);
-        deleteSong.setFont(new Font("Arial", Font.PLAIN, 13));
+        deleteSong.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
         deleteSong.setForeground(Color.WHITE);
 
 

@@ -33,7 +33,7 @@ public class AddNewSongToPlayList {
         addNewSong.setText("Add new Song..");
         addNewSong.setBorder(null);
         addNewSong.setBackground(Color.black);
-        addNewSong.setFont(new Font("Arial", Font.PLAIN, 13));
+        addNewSong.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
         addNewSong.setForeground(Color.WHITE);
 
 

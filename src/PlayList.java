@@ -1,5 +1,6 @@
 import com.mpatric.mp3agic.*;
 import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -62,9 +63,12 @@ public class PlayList {
 
 
         JPanel songsPanel = new JPanel();
+        JPanel option=new JPanel();
+        option.setBackground(Color.BLACK);
+        option.setLayout(new GridLayout(4,0));
         songsPanel.setBackground(Color.black);
         songsPanel.setVisible(true);
-        songsPanel.setLayout(new GridLayout(Library.getSongs().size(), Library.getSongs().size()));
+        songsPanel.setLayout( new FlowLayout());
         ArrayList<PausablePlayer> playedSongs = new ArrayList<PausablePlayer>();
 
         // songsPanel.setLayout(new FlowLayout());
@@ -225,7 +229,7 @@ public class PlayList {
 
 
 
-                        Playing.setFile(temp1);
+                        /*Playing.setFile(temp1);
                         Playing.setPlayer(player);
                         Playing.plaiyingSongs.add(player);
                         PlayMusic playMusic1=new PlayMusic(temp1,player);
@@ -233,7 +237,16 @@ public class PlayList {
                             Playing.Play();
                         } catch (JavaLayerException e1) {
                             e1.printStackTrace();
+                        }*/
+
+
+                        Thread thread= null;
+                        try {
+                            thread = new Thread( new newPalyer(new Player(in)));
+                        } catch (JavaLayerException e1) {
+                            e1.printStackTrace();
                         }
+                        thread.start();
 
 
                         DownPanel.addPlayingSongInfo(showPlayingSong);
@@ -287,23 +300,33 @@ public class PlayList {
         delete.setText("delete this playList");
         delete.setBorder(null);
         delete.setBackground(Color.black);
-        delete.setFont(new Font("Arial", Font.PLAIN, 13));
+        delete.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
         delete.setForeground(Color.WHITE);
 
 
         setNewName.setText("rename this playList");
         setNewName.setBorder(null);
         setNewName.setBackground(Color.black);
-        setNewName.setFont(new Font("Arial", Font.PLAIN, 13));
+        setNewName.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
         setNewName.setForeground(Color.WHITE);
 
 
 
-        songsPanel.add(delete);
+
+        option.add(delete);
+        option.add(setNewName);
+        option.add(addNewSongToPlayList.getAddNewSong());
+        option.add(deleteSongFromPlayList.getDeleteSong());
+
+        songsPanel.add(option);
+
+
+
+        /*songsPanel.add(delete);
         songsPanel.add(setNewName);
         songsPanel.add(addNewSongToPlayList.getAddNewSong());
         songsPanel.add(deleteSongFromPlayList.getDeleteSong());
-      //  songsPanel.add(modify.getModify());
+      //  songsPanel.add(modify.getModify());*/
 
 
 
@@ -338,6 +361,8 @@ public class PlayList {
     }
 
     public void addSongToPlayList(File file) throws IOException {
+
+        System.out.println("here adding");
         playListSongs.add(file);
         try {
             out.writeObject(file);
@@ -349,7 +374,7 @@ public class PlayList {
     }
     public void writeSongs() throws IOException {
 
-        path=new File("src\\playlists\\"+playListName+".bin");
+        path=new File("./src/playlists/"+playListName+".bin");
         out = new ObjectOutputStream(new FileOutputStream(path));
 
 
@@ -366,12 +391,11 @@ public class PlayList {
     }
 
     public void setPlayListName(String playListName) {
-       // File file1=new File("src\\playlists"+playListName+".bin");
+
         this.playListName = playListName;
+        //./src/playlists/
         File file2=new File("./src/playlists/"+playListName+".bin");
 
-
-        //File file2=new File("src\\playlists"+playListName+".bin");
         if ( path.renameTo(file2)){
 
             System.out.println("renamed");

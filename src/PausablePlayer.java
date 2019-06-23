@@ -2,6 +2,10 @@ import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.AudioDevice;
 import javazoom.jl.player.Player;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.InputStream;
 
 public class PausablePlayer {
@@ -29,7 +33,9 @@ public class PausablePlayer {
 
     public PausablePlayer(final InputStream inputStream, final AudioDevice audioDevice) throws JavaLayerException {
         this.player = new Player(inputStream, audioDevice);
+
     }
+
 
     /**
      * Starts playback (resumes if paused)
@@ -75,6 +81,8 @@ public class PausablePlayer {
      * Resumes playback. Returns true if the new state is PLAYING.
      */
     public boolean resume() {
+
+
         synchronized (playerLock) {
             if (playerStatus == PAUSED) {
                 playerStatus = PLAYING;
@@ -83,6 +91,7 @@ public class PausablePlayer {
             return playerStatus == PLAYING;
         }
     }
+
 
     /**
      * Stops playback. If not playing, does nothing
@@ -131,4 +140,6 @@ public class PausablePlayer {
             // ignore, we are terminating anyway
         }
     }
+
+
 }

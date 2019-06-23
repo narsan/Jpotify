@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.io.*;
 
 public  class MainFrame {
-    JFrame frame = new JFrame();
+   static JFrame frame = new JFrame();
     private JPanel songsPanel = null;
 
     public void setCurrentPanel(JPanel currentPanel) {
@@ -21,7 +21,7 @@ public  class MainFrame {
         return currentPanel;
     }
 
-    private JPanel currentPanel;
+    private static JPanel currentPanel;
 
     public MainFrame() throws IOException {
         frame.setLocation(100, 100);
@@ -56,9 +56,11 @@ public  class MainFrame {
         LeftPanel leftPanel = new LeftPanel();
         frame.add(leftPanel.getjScrollPane(), BorderLayout.WEST);
         ShowSongs showSongs = new ShowSongs();
+        ShowAlbum showAlbum=new ShowAlbum();
 
         CreatePlayList createPlayList = new CreatePlayList();
         leftPanel.add(showSongs);
+        leftPanel.add(showAlbum);
         leftPanel.add(createPlayList.getNewPlayList());
 
 
@@ -79,8 +81,9 @@ public  class MainFrame {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        File temp=new File("src\\playlists");
+        File temp=new File("./src/playlists");
         if (temp.exists()){
+
             for(File file:temp.listFiles()){
 
                 ObjectInputStream in=new ObjectInputStream(new FileInputStream(file));
@@ -135,6 +138,25 @@ public  class MainFrame {
 
             }
         });
+
+        showAlbum.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+
+                if (songsPanel != null)
+                    frame.remove(songsPanel);
+
+                    songsPanel = showAlbum.getAlbums();
+
+                   refresh(songsPanel);
+
+
+
+
+
+            }
+        });
         ShowSongsToCreatePlayList showSongsToCreatePlayList=new ShowSongsToCreatePlayList();
         createPlayList.getNewPlayList().addActionListener(new ActionListener() {
             @Override
@@ -160,6 +182,26 @@ public  class MainFrame {
             }
         });
 
+     /*   showAlbum.AlbumImage.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                System.out.println("hii");
+
+
+
+                try {
+                    refresh(showAlbum.showSongsInAlbum());
+                } catch (InvalidDataException e1) {
+                    e1.printStackTrace();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                } catch (UnsupportedTagException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
+*/
 
         //FavoriteSong favoriteSong=new FavoriteSong();
         //SharedPlayList sharedPlayList=new SharedPlayList();
@@ -190,22 +232,22 @@ public  class MainFrame {
 
     }
 
-    public  void refresh(JPanel jPanel) {
+    public  static void refresh(JPanel jPanel) {
 
         if (currentPanel!=null){
 
             currentPanel.setVisible(false);
 
-        this.frame.remove(currentPanel);
+        frame.remove(currentPanel);
 
         }
         currentPanel=jPanel;
 
-        this.frame.add(jPanel, BorderLayout.CENTER);
+        frame.add(jPanel, BorderLayout.CENTER);
 
         //this.frame.repaint();
 
-        this.frame.revalidate();
+        frame.revalidate();
        // this.frame.validate();
 
 
