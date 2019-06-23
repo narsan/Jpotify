@@ -6,7 +6,13 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
 
     static   JSlider slider ;
 
-        private int duration;
+    private int duration;
+
+    public JLabel getTime() {
+        return time;
+    }
+
+    private JLabel time=new JLabel();
 
     public boolean isIspaused() {
         return ispaused;
@@ -21,20 +27,36 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
 
         public UpdateWorker(int duration) {
 
-            slider=new JSlider();
             this.duration = duration;
+            slider=new JSlider();
             slider.setBackground(new Color(58,58,58));
             slider.setMinimum(0);
             slider.setMaximum(duration);
             slider.setValue(0);
         }
 
-        @Override
+    public void setDuration(int duration) {
+        this.duration = duration;
+
+    }
+
+    @Override
         protected Void doInBackground() throws Exception {
+
+
+            time.setForeground(Color.pink);
+
+            time.setFont(new Font("Arial",Font.PLAIN,13));
+
+
             for (int i = 1; i <= duration; i++) {
 
                 if (ispaused==false){
-                    publish(i);}
+                    publish(i);
+
+                    time.setText("passed :"+String.valueOf(i));
+
+                }
                 Thread.sleep(1000);
                 if (ispaused==true){
 

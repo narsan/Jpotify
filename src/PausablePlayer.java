@@ -62,6 +62,7 @@ public class PausablePlayer {
      * Pauses playback. Returns true if new state is PAUSED.
      */
     public  boolean pause() {
+
         synchronized (playerLock) {
             if (playerStatus == PLAYING) {
                 playerStatus = PAUSED;

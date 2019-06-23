@@ -9,7 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 
 public class ShowSongs extends JButton {
@@ -28,13 +31,19 @@ public class ShowSongs extends JButton {
     public JPanel CreatButtonFromSongs() throws InvalidDataException, IOException, UnsupportedTagException {
         JPanel songsPanel = new JPanel();
         songsPanel.setVisible(true);
-        songsPanel.setLayout(new GridLayout(Library.getSongs().size(), Library.getSongs().size()));
+       // songsPanel.setLayout(new GridBagLayout());
+        songsPanel.setLayout(new BoxLayout(songsPanel,BoxLayout.X_AXIS));
+        songsPanel.setLayout(new GridLayout(0,Library.getSongs().size()));
         ArrayList<PausablePlayer> playedSongs=new ArrayList<PausablePlayer>();
+        ArrayList<PlayMusic> playMusics=new ArrayList<>();
+
 
         // songsPanel.setLayout(new FlowLayout());
         songsPanel.setBackground(new Color(58,58,58));
+        //songsPanel.setBackground(Color.BLACK);
         JLabel Title = null;
         JButton songImage = null;
+        PlayMusic playMusic=null;
 
 
 
@@ -86,6 +95,7 @@ public class ShowSongs extends JButton {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         JPanel showPlayingSong = new JPanel();
+                        JPanel cuurentPanel=null;
                         showPlayingSong.setLayout(new BorderLayout());
                         showPlayingSong.setBackground(Color.black);
                         byte[] imageData = id3v2.getAlbumImage();
@@ -144,6 +154,7 @@ public class ShowSongs extends JButton {
                         }
                         showPlayingSong.setBackground(new Color(58,58,58));
                         showPlayingSong.setPreferredSize(new Dimension(318,0));
+
                         FileInputStream in= null;
                         try {
                             in = new FileInputStream(temp);
@@ -157,24 +168,60 @@ public class ShowSongs extends JButton {
                         } catch (JavaLayerException e1) {
                             e1.printStackTrace();
                         }
+
+
+                            Playing.setFile(temp);
+                            Playing.setPlayer(player);
+                            Playing.plaiyingSongs.add(player);
+                            PlayMusic playMusic1=new PlayMusic(temp,player);
                         try {
-                            if (playedSongs.size()!=0){
-                                playedSongs.get(playedSongs.size()-1).close();
-                                PlayMusic playMusic = new PlayMusic(temp,player);
-                                DownPanel.addPlayingSongInfo(showPlayingSong);
-                                DownPanel.downPanel.revalidate();
-                            }
-
-                            PlayMusic playMusic = new PlayMusic(temp,player);
-                            DownPanel.addPlayingSongInfo(showPlayingSong);
-                            player.play();
-
-
-                            playedSongs.add(player);
+                            Playing.Play();
                         } catch (JavaLayerException e1) {
                             e1.printStackTrace();
                         }
-                        // playMusic.playThread.start();
+
+                        if (cuurentPanel!=null){
+
+                            cuurentPanel.setVisible(false);
+                            DownPanel.downPanel.remove(cuurentPanel);
+                            cuurentPanel=showPlayingSong;
+                            DownPanel.addPlayingSongInfo(showPlayingSong);
+                            DownPanel.downPanel.revalidate();
+                        }
+
+                        else {
+
+                            cuurentPanel=showPlayingSong;
+
+                            DownPanel.addPlayingSongInfo(showPlayingSong);
+                            DownPanel.downPanel.revalidate();
+
+                        }
+
+
+
+
+                            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                            Date date = new Date();
+                            File file=Library.file;
+                            PrintWriter writer= null;
+                            try {
+                                writer = new PrintWriter(file);
+                            } catch (FileNotFoundException e1) {
+                                e1.printStackTrace();
+                            }
+
+
+                        /*try {
+                           // player.play();
+                        } catch (JavaLayerException e1) {
+                            e1.printStackTrace();
+                        }*/
+
+                        writer.println(dateFormat.format(date)+"  "+temp);
+
+                            playedSongs.add(player);
+
 
 
                     }

@@ -102,7 +102,7 @@ public class DeleteSongFromPlayList {
                         }
 
 
-                    } catch (IOException e1) {
+                    } catch (IOException | ClassNotFoundException e1) {
                         e1.printStackTrace();
                     } catch (UnsupportedTagException e2) {
                         e2.printStackTrace();

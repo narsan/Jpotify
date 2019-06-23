@@ -2,6 +2,8 @@ import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.UnsupportedTagException;
 
 import javax.swing.*;
+import javax.swing.border.AbstractBorder;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,6 +33,26 @@ public  class MainFrame {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.getContentPane().setBackground(Color.BLACK);
+
+        JPanel userName=new JPanel();
+        userName.setBackground(Color.black);
+        userName.setVisible(true);
+        userName.setLayout(new BorderLayout());
+        JTextField searchBar=new JTextField("search...");
+        searchBar.setBackground(Color.white);
+        searchBar.setForeground(Color.pink);
+        searchBar.setColumns(10);
+        searchBar.setBorder(BorderFactory.createCompoundBorder(
+                new CustomeBorder(),
+                new EmptyBorder(new Insets(15, 25, 15, 25))));
+        userName.add(searchBar,BorderLayout.WEST);
+
+        JLabel account=new JLabel("9731074");
+        account.setForeground(Color.WHITE);
+        account.setFont(new Font("Arial",Font.PLAIN,13));
+        userName.add(account,BorderLayout.EAST);
+
+        //frame.add(userName,BorderLayout.NORTH);
 
 
         LeftPanel leftPanel = new LeftPanel();
@@ -161,6 +183,9 @@ public  class MainFrame {
         frame.add(downPanel.getDownPanel(), BorderLayout.PAGE_END);
 
 
+
+
+
     }
 
     public  void refresh(JPanel jPanel) {
@@ -183,7 +208,18 @@ public  class MainFrame {
 
 
     }
-
+    class CustomeBorder extends AbstractBorder {
+        @Override
+        public void paintBorder(Component c, Graphics g, int x, int y,
+                                int width, int height) {
+            // TODO Auto-generated method stubs
+            super.paintBorder(c, g, x, y, width, height);
+            Graphics2D g2d = (Graphics2D)g;
+            g2d.setStroke(new BasicStroke(12));
+            g2d.setColor(Color.black);
+            g2d.drawRoundRect(x, y, width - 1, height - 1, 25, 25);
+        }
+    }
 
     public static void main(String[] args) throws IOException {
 
