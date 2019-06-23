@@ -23,13 +23,11 @@ public  class MainFrame {
 
     public MainFrame() throws IOException {
         frame.setLocation(100, 100);
-        frame.setSize(700, 500);
         frame.setTitle("Jpotify");
         frame.setLayout(new BorderLayout());
         ImageIcon jpotify = new ImageIcon("src\\icons\\jpotify.jpg");
         frame.setIconImage(jpotify.getImage());
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setVisible(true);
         frame.getContentPane().setBackground(Color.BLACK);
 
 
@@ -160,6 +158,9 @@ public  class MainFrame {
         DownPanel downPanel = new DownPanel();
         frame.add(downPanel.getDownPanel(), BorderLayout.PAGE_END);
 
+        frame.setMinimumSize(new Dimension(1200,700));
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setVisible(true);
 
     }
 

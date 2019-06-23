@@ -17,22 +17,18 @@ public class PlayMusic {
     JPanel downCenterPanel = new JPanel();
 
     private File musicToPlay;
-    int index;
+    private static int index;
     private JButton pause = new JButton();
     private JButton resume = new JButton();
     private JButton nextSong1 = new JButton();
     private JButton previousSong = new JButton();
     private BufferedInputStream bufferedInputStream;
     FileInputStream fileInputStream;
-    Player player;
+    static Player player;
     private UpdateWorker updateWorker;
-    private PausablePlayer pausablePlayer;
-
+    private static PausablePlayer pausablePlayer;
 
     public PlayMusic(File file, PausablePlayer pausablePlayer) {
-        JButton pause = new JButton();
-        JButton nextSong1 = new JButton();
-        JButton previousSong = new JButton();
         index = Library.getSongs().indexOf(file);
 
         this.pausablePlayer = pausablePlayer;
@@ -109,33 +105,30 @@ public class PlayMusic {
         nextSong1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                pausablePlayer.pause();
+                pausablePlayer.stop();
+                pausablePlayer.close();
                 System.out.println(index);
-                int temp = index + 1;
+                index++;
 
 
                 PausablePlayer player1 = null;
                 try {
                     FileInputStream in = null;
                     try {
-                        in = new FileInputStream(Library.getSongs().get(temp));
+                        in = new FileInputStream(Library.getSongs().get(index));
                     } catch (FileNotFoundException e1) {
                         e1.printStackTrace();
                     }
-
                     player1 = new PausablePlayer(in);
-                    PlayMusic playMusic=new PlayMusic(Library.getSongs().get(temp),player1);
                 } catch (JavaLayerException e1) {
                     e1.printStackTrace();
                 }
                 pausablePlayer.close();
-
-
-
                 try {
 
                     try {
-                        Mp3File mp3File = new Mp3File(Library.getSongs().get(temp));
+                        Mp3File mp3File = new Mp3File(Library.getSongs().get(index));
                         DownPanel.addPlayingSongInfo(showSongs(mp3File));
 
 
@@ -152,6 +145,7 @@ public class PlayMusic {
                 } catch (JavaLayerException e1) {
                     e1.printStackTrace();
                 }
+                new PlayMusic(Library.getSongs().get(index), player1);
             }
         });
 
@@ -161,17 +155,14 @@ public class PlayMusic {
 
 
                 System.out.println(index);
-                int temp = index - 1;
-
-
-
+                index--;
 
 
                 PausablePlayer player1 = null;
                 try {
                     FileInputStream in = null;
                     try {
-                        in = new FileInputStream(Library.getSongs().get(temp));
+                        in = new FileInputStream(Library.getSongs().get(index));
                     } catch (FileNotFoundException e1) {
                         e1.printStackTrace();
                     }
@@ -184,7 +175,7 @@ public class PlayMusic {
                 try {
 
                     try {
-                        Mp3File mp3File = new Mp3File(Library.getSongs().get(temp));
+                        Mp3File mp3File = new Mp3File(Library.getSongs().get(index));
                         DownPanel.addPlayingSongInfo(showSongs(mp3File));
 
 
@@ -268,4 +259,5 @@ public class PlayMusic {
 
         return showPlayingSong;
     }
+
 }
