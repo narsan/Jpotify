@@ -18,10 +18,10 @@ public class PlayMusic {
 
     private File musicToPlay;
     int index;
-    private JButton pause ;
-    private JButton resume ;
-    private JButton nextSong1 ;
-    private JButton previousSong ;
+    private JButton pause = new JButton();
+    private JButton resume = new JButton();
+    private JButton nextSong1 = new JButton();
+    private JButton previousSong = new JButton();
     private BufferedInputStream bufferedInputStream;
     FileInputStream fileInputStream;
     Player player;
@@ -29,43 +29,11 @@ public class PlayMusic {
     private PausablePlayer pausablePlayer;
 
 
-    public void setPausablePlayer(PausablePlayer pausablePlayer) {
-        this.pausablePlayer = pausablePlayer;
-    }
-
-    public void setUpdateWorker(UpdateWorker updateWorker) {
-        this.updateWorker = updateWorker;
-    }
-
-    public void setMusicToPlay(File musicToPlay) {
-        this.musicToPlay = musicToPlay;
-    }
-
-    public UpdateWorker getUpdateWorker() {
-        return updateWorker;
-    }
-
     public PlayMusic(File file, PausablePlayer pausablePlayer) {
-        pause = new JButton();
-        resume=new JButton();
-        nextSong1 = new JButton();
-        previousSong = new JButton();
+        JButton pause = new JButton();
+        JButton nextSong1 = new JButton();
+        JButton previousSong = new JButton();
         index = Library.getSongs().indexOf(file);
-        Mp3File mp3File = null;
-        try {
-            mp3File = new Mp3File(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (UnsupportedTagException e) {
-            e.printStackTrace();
-        } catch (InvalidDataException e) {
-            e.printStackTrace();
-        }
-
-        int TotalTime=(int )mp3File.getLengthInSeconds();
-        JLabel TotalTime1=new JLabel("total:"+Integer.toString(TotalTime)+"seconds");
-        TotalTime1.setForeground(Color.pink);
-        TotalTime1.setFont(new Font("Arial",Font.PLAIN,13));
 
         this.pausablePlayer = pausablePlayer;
         ImageIcon pause_Icon = new ImageIcon(new ImageIcon("src\\icons\\pause.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
@@ -97,22 +65,26 @@ public class PlayMusic {
         downCenterPanel.setBackground(new Color(58, 58, 58));
         downCenterPanel.add(playIcons, BorderLayout.NORTH);
 
-
-
-           // Mp3File mp3File = new Mp3File(file);
+        try {
+            Mp3File mp3File = new Mp3File(file);
             updateWorker = new UpdateWorker((int) mp3File.getLengthInSeconds());
             downCenterPanel.add(UpdateWorker.getSlider(), BorderLayout.PAGE_END);
-            downCenterPanel.add(TotalTime1,BorderLayout.EAST);
-            downCenterPanel.add(updateWorker.getTime(),BorderLayout.BEFORE_LINE_BEGINS);
             updateWorker.execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (UnsupportedTagException e) {
+            e.printStackTrace();
+        } catch (InvalidDataException e) {
+            e.printStackTrace();
+        }
 
-
-             DownPanel.addPauseAndResume(downCenterPanel);
+        DownPanel.addPauseAndResume(downCenterPanel);
 
 
         pause.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
 
                 pausablePlayer.pause();
                 updateWorker.setIspaused(true);
