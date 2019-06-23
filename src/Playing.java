@@ -30,7 +30,7 @@ public class Playing  {
         else if (plaiyingSongs.size()!=1){
 
 
-            System.out.println("heeloo");
+
 
             plaiyingSongs.get(plaiyingSongs.size()-2).stop();
             player.play();

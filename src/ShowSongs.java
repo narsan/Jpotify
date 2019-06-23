@@ -28,13 +28,19 @@ public class ShowSongs extends JButton {
     public JPanel CreatButtonFromSongs() throws InvalidDataException, IOException, UnsupportedTagException {
         JPanel songsPanel = new JPanel();
         songsPanel.setVisible(true);
-        songsPanel.setLayout(new GridLayout(Library.getSongs().size(), Library.getSongs().size()));
+        GridBagLayout gridBagLayout=new GridBagLayout();
+       // gridBagLayout.layoutContainer(songsPanel);
+        songsPanel.setLayout(new FlowLayout());
+        songsPanel.setPreferredSize(new Dimension(300,100));
+        GridBagConstraints gbc = new GridBagConstraints();
         ArrayList<PausablePlayer> playedSongs=new ArrayList<PausablePlayer>();
 
         // songsPanel.setLayout(new FlowLayout());
         songsPanel.setBackground(new Color(58,58,58));
         JLabel Title = null;
         JButton songImage = null;
+        int x=0;
+        int y=0;
 
 
 
@@ -86,6 +92,7 @@ public class ShowSongs extends JButton {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         JPanel showPlayingSong = new JPanel();
+                        JPanel cuurentPanel=null;
                         showPlayingSong.setLayout(new BorderLayout());
                         showPlayingSong.setBackground(Color.black);
                         byte[] imageData = id3v2.getAlbumImage();
@@ -144,7 +151,51 @@ public class ShowSongs extends JButton {
                         }
                         showPlayingSong.setBackground(new Color(58,58,58));
                         showPlayingSong.setPreferredSize(new Dimension(318,0));
-                        FileInputStream in= null;
+
+
+                        FileInputStream in = null;
+                        try {
+                            in = new FileInputStream(temp);
+                        } catch (FileNotFoundException e1) {
+                            e1.printStackTrace();
+                        }
+
+                        PausablePlayer player = null;
+                        try {
+                            player = new PausablePlayer(in);
+                        } catch (JavaLayerException e1) {
+                            e1.printStackTrace();
+                        }
+
+
+                        Playing.setFile(temp);
+                        Playing.setPlayer(player);
+                        Playing.plaiyingSongs.add(player);
+                        PlayMusic playMusic1 = new PlayMusic(temp, player);
+                        try {
+                            Playing.Play();
+                        } catch (JavaLayerException e1) {
+                            e1.printStackTrace();
+                        }
+
+                        if (cuurentPanel != null) {
+
+                            cuurentPanel.setVisible(false);
+                            DownPanel.downPanel.remove(cuurentPanel);
+                            cuurentPanel = showPlayingSong;
+                            DownPanel.addPlayingSongInfo(showPlayingSong);
+                            DownPanel.downPanel.revalidate();
+                        } else {
+
+                            cuurentPanel = showPlayingSong;
+
+                            DownPanel.addPlayingSongInfo(showPlayingSong);
+                            DownPanel.downPanel.revalidate();
+
+                        }
+
+
+                       /* FileInputStream in= null;
                         try {
                             in = new FileInputStream(temp);
                         } catch (FileNotFoundException e1) {
@@ -174,7 +225,8 @@ public class ShowSongs extends JButton {
                         } catch (JavaLayerException e1) {
                             e1.printStackTrace();
                         }
-                        // playMusic.playThread.start();
+                        // playMusic.playThread.start();*/
+
 
 
                     }
@@ -192,15 +244,40 @@ public class ShowSongs extends JButton {
 
 
             JPanel songData = new JPanel();
-            songData.setBackground(Color.black);
+            songData.setBackground(Color.orange);
             songData.setLayout(new BoxLayout(songData, BoxLayout.Y_AXIS));
             songData.add(songImage);
             songData.add(Title);
             songData.setMinimumSize(new Dimension(200, 200));
-            songsPanel.add(songData);
+
+
+            /*double[][] weights = gridBagLayout.getLayoutWeights();
+            for (int k = 0; k < 2; k++) {
+                for (int j = 0; j < weights[k].length; j++) {
+                    weights[k][j] = 1;
+                }
+            }
+            gridBagLayout.columnWeights = weights[0];
+            gridBagLayout.rowWeights = weights[1];*/
+
+/*            int top = 20;
+            int left = 20;
+            int bottom = 2;
+            int right = 40;
+            gbc.insets = new Insets(top, left, bottom, right);
+            gridBagLayout.setConstraints(songData,gbc);*/
+
+
+
+
+
+
+            songsPanel.add(songData,gbc);
 
 
         }
+
+        songsPanel.setBackground(Color.ORANGE);
 
         return songsPanel;
         // return test;

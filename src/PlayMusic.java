@@ -35,6 +35,9 @@ public class PlayMusic {
         JButton previousSong = new JButton();
         index = Library.getSongs().indexOf(file);
 
+
+
+
         this.pausablePlayer = pausablePlayer;
         ImageIcon pause_Icon = new ImageIcon(new ImageIcon("src\\icons\\pause.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
         ImageIcon nextSong = new ImageIcon(new ImageIcon("src\\icons\\nextSong.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
@@ -66,9 +69,16 @@ public class PlayMusic {
         downCenterPanel.add(playIcons, BorderLayout.NORTH);
 
         try {
+
             Mp3File mp3File = new Mp3File(file);
+            JLabel totalTime=new JLabel();
+            totalTime.setText("Total:"+mp3File.getLengthInSeconds());
+            totalTime.setForeground(Color.pink);
+            totalTime.setFont(new Font("Arial",Font.PLAIN,13));
             updateWorker = new UpdateWorker((int) mp3File.getLengthInSeconds());
             downCenterPanel.add(UpdateWorker.getSlider(), BorderLayout.PAGE_END);
+            downCenterPanel.add(totalTime,BorderLayout.CENTER);
+            downCenterPanel.add(updateWorker.getTime(),BorderLayout.EAST);
             updateWorker.execute();
         } catch (IOException e) {
             e.printStackTrace();

@@ -43,7 +43,6 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
     @Override
         protected Void doInBackground() throws Exception {
 
-
             time.setForeground(Color.pink);
 
             time.setFont(new Font("Arial",Font.PLAIN,13));
@@ -55,6 +54,7 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
                     publish(i);
 
                     time.setText("passed :"+String.valueOf(i));
+
 
                 }
                 Thread.sleep(1000);

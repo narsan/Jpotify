@@ -69,6 +69,7 @@ public  class MainFrame {
         playLists.setForeground( new Color(195,195,195));
         leftPanel.add(playLists);
         try {
+            File file=new File("src\\saveSongs.bin");
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("src\\savedSongs.bin"));
             while (true) {
                 Library.addSong((File) objectInputStream.readObject());
