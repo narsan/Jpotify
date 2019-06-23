@@ -32,10 +32,10 @@ public class PlayMusic {
         index = Library.getSongs().indexOf(file);
 
         this.pausablePlayer = pausablePlayer;
-        ImageIcon pause_Icon = new ImageIcon(new ImageIcon("src\\icons\\pause.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
-        ImageIcon nextSong = new ImageIcon(new ImageIcon("src\\icons\\nextSong.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
-        ImageIcon play = new ImageIcon(new ImageIcon("src\\icons\\play.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
-        ImageIcon previous1 = new ImageIcon(new ImageIcon("src\\icons\\previousSong.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+        ImageIcon pause_Icon = new ImageIcon(new ImageIcon("src\\icons\\pause.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+        ImageIcon nextSong = new ImageIcon(new ImageIcon("src\\icons\\nextSong.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+        ImageIcon play = new ImageIcon(new ImageIcon("src\\icons\\play.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+        ImageIcon previous1 = new ImageIcon(new ImageIcon("src\\icons\\previousSong.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
         playIcons.setLayout(new GridLayout(1, 2));
         //playIcons.setLayout(new GridBagLayout());
         playIcons.setBackground(new Color(58, 58, 58));
@@ -214,7 +214,7 @@ public class PlayMusic {
             e1.printStackTrace();
         }
 
-        ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(80, 80, Image.SCALE_DEFAULT));
+        ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
 
         showPlayingSong.add(new JLabel(imageIcon), BorderLayout.WEST);
         if (id3v2.getArtist() != null) {
@@ -255,7 +255,7 @@ public class PlayMusic {
 
         }
         showPlayingSong.setBackground(new Color(58, 58, 58));
-        showPlayingSong.setPreferredSize(new Dimension(318, 0));
+        showPlayingSong.setPreferredSize(new Dimension(318, 80));
 
         return showPlayingSong;
     }

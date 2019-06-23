@@ -13,8 +13,8 @@ public class DownPanel {
         downPanel.setLayout(new BorderLayout());
         downPanel.setBackground(new Color(58,58,58));
         volume.setBackground(new Color(58,58,58));
-        volume.setPreferredSize(new Dimension(225,0));
-        downPanel.setPreferredSize(new Dimension(300,65));
+        volume.setPreferredSize(new Dimension(225,75));
+        downPanel.setPreferredSize(new Dimension(300,75));
         JSlider jSlider = new JSlider();
         jSlider.setPreferredSize(new Dimension(100,50));
         jSlider.setBackground(new Color(58,58,58));

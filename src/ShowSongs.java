@@ -32,7 +32,7 @@ public class ShowSongs extends JButton {
         ArrayList<PausablePlayer> playedSongs=new ArrayList<PausablePlayer>();
 
         // songsPanel.setLayout(new FlowLayout());
-        songsPanel.setBackground(new Color(58,58,58));
+        songsPanel.setBackground(Color.BLACK);
         JLabel Title = null;
         JButton songImage = null;
 
@@ -182,7 +182,7 @@ public class ShowSongs extends JButton {
 
                 byte[] imageData = id3v2.getAlbumImage();
                 BufferedImage img = ImageIO.read(new ByteArrayInputStream(imageData));
-                ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+                ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(150, 150, Image.SCALE_SMOOTH));
                 songImage.setIcon(imageIcon);
                 String mimeType = id3v2.getAlbumImageMimeType();
                 System.out.println(mimeType);
@@ -193,11 +193,13 @@ public class ShowSongs extends JButton {
 
             JPanel songData = new JPanel();
             songData.setBackground(Color.black);
-            songData.setLayout(new BoxLayout(songData, BoxLayout.Y_AXIS));
             songData.add(songImage);
             songData.add(Title);
+            songData.setLayout(new BoxLayout(songData, BoxLayout.Y_AXIS));
             songData.setMinimumSize(new Dimension(200, 200));
             songsPanel.add(songData);
+            //TODO
+            songsPanel.setLayout(new BoxLayout(songsPanel,BoxLayout.LINE_AXIS));
 
 
         }

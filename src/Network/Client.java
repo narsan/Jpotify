@@ -1,15 +1,17 @@
-package Network;
+/*package Network;
 
 import java.net.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Vector;
 
 public class Client implements Runnable {
     private Socket socket;
-    private BufferedReader reader;
-    private PrintWriter writer;
+    private ObjectInputStream reader;
+    private ObjectOutputStream writer;
     private ArrayList<String> ips = new ArrayList<>();
+    protected static Vector<Socket> sockets = new Vector<>();
 
     public void addIP(String ip) {
         ips.add(ip);
@@ -23,7 +25,7 @@ public class Client implements Runnable {
     public void sendRequestToServer(String ip) {
         try {
             System.out.println(ip);
-            writer.println(ip);
+            //writer.writeObject();
             writer.flush();
         } catch (Exception e) {
 
@@ -32,11 +34,15 @@ public class Client implements Runnable {
 
     @Override
     public void run() {
-        String sum;
+
         while (true) {
             try {
-                sum = reader.readLine();
-                System.out.println(sum);
+                try {
+                  //  = reader.readObject();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -49,8 +55,13 @@ public class Client implements Runnable {
         try {
             for (String str : ips) {
                 socket = new Socket(str, 3504);
-                reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
+                sockets.add(socket);
+                ServerHandler serverHandler = new ServerHandler(socket);
+                Thread thread = new Thread(serverHandler);
+                thread.start();
+
+                reader = new ObjectInputStream(socket.getInputStream());
+                writer = new ObjectOutputStream(socket.getOutputStream());
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -69,3 +80,4 @@ public class Client implements Runnable {
     }
 
 }
+*/
