@@ -57,7 +57,6 @@ public  class MainFrame {
         frame.add(leftPanel.getjScrollPane(), BorderLayout.WEST);
         ShowSongs showSongs = new ShowSongs();
 
-
         CreatePlayList createPlayList = new CreatePlayList();
         leftPanel.add(showSongs);
         leftPanel.add(createPlayList.getNewPlayList());
