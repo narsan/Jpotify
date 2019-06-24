@@ -33,6 +33,7 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
             slider.setMinimum(0);
             slider.setMaximum(duration);
             slider.setValue(0);
+            //slider.addMouseListener();
         }
 
     public void setDuration(int duration) {

@@ -25,12 +25,11 @@ public class AddToLibrary extends Library {
         songAdder.addActionListener(new ActionListener() {
             //TODO
             @Override
-            public void actionPerformed(ActionEvent e){
+            public void actionPerformed(ActionEvent e) {
                 try {
                     out = new ObjectOutputStream(new FileOutputStream("src\\savedSongs.bin"));
-                    if (Library.getSongs().size()!=0)
-                    {
-                        for (File file:Library.getSongs()) {
+                    if (Library.getSongs().size() != 0) {
+                        for (File file : Library.getSongs()) {
                             try {
                                 out.writeObject(file);
                             } catch (IOException ex) {
@@ -42,25 +41,29 @@ public class AddToLibrary extends Library {
                     ex.printStackTrace();
                 }
                 JFileChooser jFileChooser = new JFileChooser();
+                jFileChooser.setMultiSelectionEnabled(true);
                 int res = jFileChooser.showOpenDialog(null);
                 Mp3File mp3File;
                 if (res == JFileChooser.APPROVE_OPTION) {
                     String path = jFileChooser.getSelectedFile().getAbsolutePath();
-                    music = jFileChooser.getSelectedFile();
-                    if (!Library.getSongs().contains(music)) {
-                        System.out.println("writing");
-                        try {
-                            out.writeObject(music);
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
+                    File[] files = jFileChooser.getSelectedFiles();
+                    for (int i = 0; i < files.length; i++) {
+                        music = files[i];
+                        if (!Library.getSongs().contains(music)) {
+                            System.out.println("writing");
+                            try {
+                                out.writeObject(music);
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                            }
+                            System.out.println("done");
+                            try {
+                                out.close();
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                            }
+                            addSong(music);
                         }
-                        System.out.println("done");
-                        try {
-                            out.close();
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                        }
-                        addSong(music);
                     }
                 }
             }

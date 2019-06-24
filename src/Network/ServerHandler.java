@@ -19,17 +19,17 @@ public class ServerHandler implements Runnable {
     @Override
     public void run() {
         while (true){
-           /* try {
+            try {
 
                 try {
-                    String ip = reader.readObject();
+                    Object object = reader.readObject();
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
 
             } catch (IOException e) {
                 e.printStackTrace();
-            }*/
+            }
         }
     }
 }

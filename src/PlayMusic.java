@@ -40,10 +40,10 @@ public class PlayMusic {
 
 
         this.pausablePlayer = pausablePlayer;
-        ImageIcon pause_Icon = new ImageIcon(new ImageIcon("src\\icons\\pause.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
-        ImageIcon nextSong = new ImageIcon(new ImageIcon("src\\icons\\nextSong.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
-        ImageIcon play = new ImageIcon(new ImageIcon("src\\icons\\play.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
-        ImageIcon previous1 = new ImageIcon(new ImageIcon("src\\icons\\previousSong.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+        ImageIcon pause_Icon = new ImageIcon(new ImageIcon("src\\icons\\pause.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+        ImageIcon nextSong = new ImageIcon(new ImageIcon("src\\icons\\nextSong.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+        ImageIcon play = new ImageIcon(new ImageIcon("src\\icons\\play.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+        ImageIcon previous1 = new ImageIcon(new ImageIcon("src\\icons\\previousSong.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
         playIcons.setLayout(new GridLayout(1, 2));
         //playIcons.setLayout(new GridBagLayout());
         playIcons.setBackground(new Color(58, 58, 58));

@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 
-public  class MainFrame {
+public class MainFrame {
     static JFrame frame = new JFrame();
     private JPanel songsPanel = null;
 
@@ -32,23 +32,21 @@ public  class MainFrame {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(Color.BLACK);
 
-        JPanel userName=new JPanel();
+        JPanel userName = new JPanel();
         userName.setBackground(Color.black);
         userName.setVisible(true);
         userName.setLayout(new BorderLayout());
-        JTextField searchBar=new JTextField("search...");
+        JTextField searchBar = new JTextField("search...");
         searchBar.setBackground(Color.white);
         searchBar.setForeground(Color.pink);
         searchBar.setColumns(10);
-        searchBar.setBorder(BorderFactory.createCompoundBorder(
-                new CustomeBorder(),
-                new EmptyBorder(new Insets(15, 25, 15, 25))));
-        userName.add(searchBar,BorderLayout.WEST);
+        searchBar.setBorder(BorderFactory.createCompoundBorder(new CustomeBorder(), new EmptyBorder(new Insets(15, 25, 15, 25))));
+        userName.add(searchBar, BorderLayout.WEST);
 
-        JLabel account=new JLabel("9731074");
+        JLabel account = new JLabel("9731074");
         account.setForeground(Color.WHITE);
-        account.setFont(new Font("Arial",Font.PLAIN,13));
-        userName.add(account,BorderLayout.EAST);
+        account.setFont(new Font("Arial", Font.PLAIN, 13));
+        userName.add(account, BorderLayout.EAST);
 
         //frame.add(userName,BorderLayout.NORTH);
 
@@ -69,10 +67,10 @@ public  class MainFrame {
         playLists.setPreferredSize(new Dimension(30, 30));
         playLists.setText("Your Playlists");
         playLists.setFont(new Font("Arial", Font.ITALIC, 16));
-        playLists.setForeground( new Color(195,195,195));
+        playLists.setForeground(new Color(195, 195, 195));
         leftPanel.add(playLists);
         try {
-            File file=new File("src\\saveSongs.bin");
+            File file = new File("src\\saveSongs.bin");
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("src\\savedSongs.bin"));
             while (true) {
                 Library.addSong((File) objectInputStream.readObject());
@@ -82,14 +80,14 @@ public  class MainFrame {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        File temp=new File("src\\playlists");
-        if (temp.exists()){
-            for(File file:temp.listFiles()){
+        File temp = new File("src\\playlists");
+        if (temp.exists()) {
+            for (File file : temp.listFiles()) {
 
-                ObjectInputStream in=new ObjectInputStream(new FileInputStream(file));
+                ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
 
-                String name=file.getName().replace(".bin","");
-                PlayList playList=new PlayList(name);
+                String name = file.getName().replace(".bin", "");
+                PlayList playList = new PlayList(name);
                 try {
                     while (true) {
                         System.out.println("-");
@@ -97,9 +95,7 @@ public  class MainFrame {
                     }
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
-                }
-                catch (EOFException e)
-                {
+                } catch (EOFException e) {
                     System.out.println(playList.getPlayListSongs());
                     in.close();
                 }
@@ -141,14 +137,14 @@ public  class MainFrame {
         showAlbum.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (songsPanel!=null){
+                if (songsPanel != null) {
                     frame.remove(songsPanel);
-                    songsPanel= showAlbum.getAlbums();
+                    songsPanel = showAlbum.getAlbums();
                     refresh(songsPanel);
                 }
             }
         });
-        ShowSongsToCreatePlayList showSongsToCreatePlayList=new ShowSongsToCreatePlayList();
+        ShowSongsToCreatePlayList showSongsToCreatePlayList = new ShowSongsToCreatePlayList();
         createPlayList.getNewPlayList().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -167,7 +163,6 @@ public  class MainFrame {
                         refresh(showSongsToCreatePlayList.getPlayList().showSongsInPlayList());
                     }
                 });
-
 
 
             }
@@ -194,42 +189,41 @@ public  class MainFrame {
         DownPanel downPanel = new DownPanel();
         frame.add(downPanel.getDownPanel(), BorderLayout.PAGE_END);
 
-        frame.setMinimumSize(new Dimension(1200,700));
+        frame.setMinimumSize(new Dimension(1200, 700));
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setVisible(true);
-
-
 
 
     }
 
     public static void refresh(JPanel jPanel) {
 
-        if (currentPanel!=null){
+        if (currentPanel != null) {
 
             currentPanel.setVisible(false);
 
-        frame.remove(currentPanel);
+            frame.remove(currentPanel);
 
         }
-        currentPanel=jPanel;
+        currentPanel = jPanel;
 
         frame.add(jPanel, BorderLayout.CENTER);
 
         //this.frame.repaint();
 
         frame.revalidate();
-       // this.frame.validate();
+        // this.frame.validate();
 
 
     }
+
     class CustomeBorder extends AbstractBorder {
         @Override
         public void paintBorder(Component c, Graphics g, int x, int y,
                                 int width, int height) {
             // TODO Auto-generated method stubs
             super.paintBorder(c, g, x, y, width, height);
-            Graphics2D g2d = (Graphics2D)g;
+            Graphics2D g2d = (Graphics2D) g;
             g2d.setStroke(new BasicStroke(12));
             g2d.setColor(Color.black);
             g2d.drawRoundRect(x, y, width - 1, height - 1, 25, 25);
