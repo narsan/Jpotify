@@ -1,6 +1,4 @@
-import com.mpatric.mp3agic.ID3v1;
-import com.mpatric.mp3agic.ID3v2;
-import com.mpatric.mp3agic.Mp3File;
+import com.mpatric.mp3agic.*;
 import javazoom.jl.decoder.JavaLayerException;
 
 import javax.imageio.ImageIO;
@@ -107,12 +105,28 @@ public class ID3VData {
         }
 
 
-        Playing.setFile(temp);
+        try {
+            Playing.setFile(temp);
+        } catch (InvalidDataException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (UnsupportedTagException e) {
+            e.printStackTrace();
+        }
         Playing.setPlayer(player);
         Playing.plaiyingSongs.add(player);
-        PlayMusic playMusic1 = new PlayMusic(temp, player);
+        //PlayMusic playMusic1 = new PlayMusic(temp, player);
         try {
-            Playing.Play();
+            try {
+                Playing.Play();
+            } catch (InvalidDataException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (UnsupportedTagException e) {
+                e.printStackTrace();
+            }
         } catch (JavaLayerException e1) {
             e1.printStackTrace();
         }
