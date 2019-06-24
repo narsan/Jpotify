@@ -337,7 +337,15 @@ public class ShowAlbum extends JButton {
                                 }
                                 //PlayMusic playMusic1 = new PlayMusic(temp, player);
                                 try {
-                                    Playing.Play();
+                                    try {
+                                        Playing.Play();
+                                    } catch (InvalidDataException e1) {
+                                        e1.printStackTrace();
+                                    } catch (IOException e1) {
+                                        e1.printStackTrace();
+                                    } catch (UnsupportedTagException e1) {
+                                        e1.printStackTrace();
+                                    }
                                 } catch (JavaLayerException e1) {
                                     e1.printStackTrace();
                                 }

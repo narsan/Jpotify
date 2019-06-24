@@ -23,6 +23,9 @@ public class DownPanel {
     static PausablePlayer pausablePlayer;
     private BufferedInputStream bufferedInputStream;
     FileInputStream fileInputStream;
+
+   static JSlider currentSlider=null;
+
     static File musicToPlay=null;
      int index;
     static Playing playing=null;
@@ -78,7 +81,6 @@ public class DownPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-               // updateWorker.setIspaused(true);
 
                 Playing.updateWorker.setIspaused(true);
 
@@ -90,7 +92,7 @@ public class DownPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-               // updateWorker.setIspaused(false);
+
                 Playing.updateWorker.setIspaused(false);
                 pausablePlayer.resume();
             }
@@ -137,7 +139,15 @@ public class DownPanel {
                                                         }
                                                         Playing.setPlayer(player);
                                                         Playing.plaiyingSongs.add(player);
-                                                        Playing.Play();
+                                                        try {
+                                                            Playing.Play();
+                                                        } catch (InvalidDataException e1) {
+                                                            e1.printStackTrace();
+                                                        } catch (IOException e1) {
+                                                            e1.printStackTrace();
+                                                        } catch (UnsupportedTagException e1) {
+                                                            e1.printStackTrace();
+                                                        }
                                                         DownPanel.addPlayingSongInfo(showSongs(mp3File));
                                                         try {
                                                             setPausablePlayer(player,file);
@@ -310,6 +320,20 @@ public class DownPanel {
         showPlayingSong.setPreferredSize(new Dimension(318, 0));
 
         return showPlayingSong;
+    }
+
+    public  static void  addNewSlider(JSlider slider){
+
+        if (currentSlider!=null){
+
+            downCenterPanel.remove(currentSlider);
+            downCenterPanel.add(slider,BorderLayout.PAGE_END);
+            currentSlider=slider;
+        }
+
+        downCenterPanel.add(slider,BorderLayout.PAGE_END);
+        currentSlider=slider;
+
     }
 
 }

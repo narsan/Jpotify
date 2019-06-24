@@ -181,15 +181,7 @@ public class ShowSongs extends JButton {
                             e1.printStackTrace();
                         }
                         Playing.setPlayer(player);
-                        try {
-                            Playing playing=new Playing();
-                        } catch (InvalidDataException e1) {
-                            e1.printStackTrace();
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        } catch (UnsupportedTagException e1) {
-                            e1.printStackTrace();
-                        }
+
                         Playing.plaiyingSongs.add(player);
 
 
@@ -204,7 +196,16 @@ public class ShowSongs extends JButton {
                         }
                         // PlayMusic playMusic1 = new PlayMusic(temp, player);
                         try {
-                            Playing.Play();
+                            try {
+                                Playing.Play();
+
+                            } catch (InvalidDataException e1) {
+                                e1.printStackTrace();
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            } catch (UnsupportedTagException e1) {
+                                e1.printStackTrace();
+                            }
                         } catch (JavaLayerException e1) {
                             e1.printStackTrace();
                         }
