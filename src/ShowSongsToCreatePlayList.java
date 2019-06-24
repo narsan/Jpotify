@@ -144,6 +144,7 @@ public class ShowSongsToCreatePlayList implements ItemListener {
         }
 
         System.out.println(playList.getPlayListSongs().size());
+        System.out.println();
     }
 
     public HashSet<File> getSongsInPlaylist() {
