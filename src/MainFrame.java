@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.io.*;
 
 public  class MainFrame {
-   static JFrame frame = new JFrame();
+    static JFrame frame = new JFrame();
     private JPanel songsPanel = null;
 
     public void setCurrentPanel(JPanel currentPanel) {
@@ -56,11 +56,12 @@ public  class MainFrame {
         LeftPanel leftPanel = new LeftPanel();
         frame.add(leftPanel.getjScrollPane(), BorderLayout.WEST);
         ShowSongs showSongs = new ShowSongs();
-        ShowAlbum showAlbum=new ShowAlbum();
+
+        ShowAlbum showAlbum = new ShowAlbum();
+        leftPanel.add(showAlbum);
 
         CreatePlayList createPlayList = new CreatePlayList();
         leftPanel.add(showSongs);
-        leftPanel.add(showAlbum);
         leftPanel.add(createPlayList.getNewPlayList());
 
 
@@ -81,9 +82,8 @@ public  class MainFrame {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        File temp=new File("./src/playlists");
+        File temp=new File("src\\playlists");
         if (temp.exists()){
-
             for(File file:temp.listFiles()){
 
                 ObjectInputStream in=new ObjectInputStream(new FileInputStream(file));
@@ -138,23 +138,14 @@ public  class MainFrame {
 
             }
         });
-
         showAlbum.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-
-                if (songsPanel != null)
+                if (songsPanel!=null){
                     frame.remove(songsPanel);
-
-                    songsPanel = showAlbum.getAlbums();
-
-                   refresh(songsPanel);
-
-
-
-
-
+                    songsPanel= showAlbum.getAlbums();
+                    refresh(songsPanel);
+                }
             }
         });
         ShowSongsToCreatePlayList showSongsToCreatePlayList=new ShowSongsToCreatePlayList();
@@ -182,26 +173,6 @@ public  class MainFrame {
             }
         });
 
-     /*   showAlbum.AlbumImage.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                System.out.println("hii");
-
-
-
-                try {
-                    refresh(showAlbum.showSongsInAlbum());
-                } catch (InvalidDataException e1) {
-                    e1.printStackTrace();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                } catch (UnsupportedTagException e1) {
-                    e1.printStackTrace();
-                }
-            }
-        });
-*/
 
         //FavoriteSong favoriteSong=new FavoriteSong();
         //SharedPlayList sharedPlayList=new SharedPlayList();
@@ -232,7 +203,7 @@ public  class MainFrame {
 
     }
 
-    public  static void refresh(JPanel jPanel) {
+    public static void refresh(JPanel jPanel) {
 
         if (currentPanel!=null){
 

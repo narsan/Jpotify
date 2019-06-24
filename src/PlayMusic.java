@@ -4,6 +4,7 @@ import javazoom.jl.player.Player;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -18,40 +19,32 @@ public class PlayMusic {
 
     private File musicToPlay;
     int index;
-    private JButton pause;
-    private JButton resume;
-    private JButton nextSong1 ;
-    private JButton previousSong ;
+    private JButton pause = new JButton();
+    private JButton resume = new JButton();
+    private JButton nextSong1 = new JButton();
+    private JButton previousSong = new JButton();
     private BufferedInputStream bufferedInputStream;
     FileInputStream fileInputStream;
     Player player;
     private UpdateWorker updateWorker;
     private PausablePlayer pausablePlayer;
-    private newPalyer newPalyer;
 
-
-    public void setPausablePlayer(newPalyer newPalyer) {
-
-        this.newPalyer=newPalyer;
-    }
 
     public PlayMusic(File file, PausablePlayer pausablePlayer) {
-         pause = new JButton();
-         nextSong1 = new JButton();
-         previousSong = new JButton();
-         resume=new JButton();
-         index = Library.getSongs().indexOf(file);
+        JButton pause = new JButton();
+        JButton nextSong1 = new JButton();
+        JButton previousSong = new JButton();
+        index = Library.getSongs().indexOf(file);
 
 
 
 
         this.pausablePlayer = pausablePlayer;
-        this.newPalyer=newPalyer;
-        ImageIcon pause_Icon = new ImageIcon(new ImageIcon("src\\icons\\pause.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
-        ImageIcon nextSong = new ImageIcon(new ImageIcon("src\\icons\\nextSong.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
-        ImageIcon play = new ImageIcon(new ImageIcon("src\\icons\\play.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
-        ImageIcon previous1 = new ImageIcon(new ImageIcon("src\\icons\\previousSong.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
-        playIcons.setLayout(new GridLayout(1, 4));
+        ImageIcon pause_Icon = new ImageIcon(new ImageIcon("src\\icons\\pause.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+        ImageIcon nextSong = new ImageIcon(new ImageIcon("src\\icons\\nextSong.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+        ImageIcon play = new ImageIcon(new ImageIcon("src\\icons\\play.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+        ImageIcon previous1 = new ImageIcon(new ImageIcon("src\\icons\\previousSong.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+        playIcons.setLayout(new GridLayout(1, 2));
         //playIcons.setLayout(new GridBagLayout());
         playIcons.setBackground(new Color(58, 58, 58));
         nextSong1.setIcon(nextSong);
@@ -65,13 +58,15 @@ public class PlayMusic {
         previousSong.setBackground(new Color(58, 58, 58));
         nextSong1.setBorder(null);
         nextSong1.setBackground(new Color(58, 58, 58));
-        previousSong.setIcon(previous1);
 
+        previousSong.setIcon(previous1);
         playIcons.add(previousSong);
         playIcons.add(resume);
         playIcons.add(pause);
         playIcons.add(nextSong1);
 
+        EmptyBorder border = new EmptyBorder(5, 0, 0, 0);
+        downCenterPanel.setBorder(border);
         downCenterPanel.setLayout(new BorderLayout());
         downCenterPanel.setBackground(new Color(58, 58, 58));
         downCenterPanel.add(playIcons, BorderLayout.NORTH);
@@ -103,8 +98,8 @@ public class PlayMusic {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+
                 pausablePlayer.pause();
-                //newPalyer.mp3Paused();
                 updateWorker.setIspaused(true);
 
             }
@@ -117,7 +112,7 @@ public class PlayMusic {
             public void actionPerformed(ActionEvent e) {
 
                 updateWorker.setIspaused(false);
-                //newPalyer.mp3Resume();
+
                 pausablePlayer.resume();
 
 
@@ -131,37 +126,9 @@ public class PlayMusic {
                 System.out.println(index);
                 int temp = index + 1;
 
-                FileInputStream in = null;
-                try {
-                    in = new FileInputStream(Library.getSongs().get(temp));
-                } catch (FileNotFoundException e1) {
-                    e1.printStackTrace();
-                }
-
-                PausablePlayer player = null;
-                try {
-                    player = new PausablePlayer(in);
-                } catch (JavaLayerException e1) {
-                    e1.printStackTrace();
-                }
-
-
-                Playing.setFile(Library.getSongs().get(temp));
-                Playing.setPlayer(player);
-                Playing.plaiyingSongs.add(player);
-                PlayMusic playMusic1 = new PlayMusic(Library.getSongs().get(temp), player);
-                try {
-
-                    Mp3File mp3File = new Mp3File(Library.getSongs().get(temp));
-                    DownPanel.addPlayingSongInfo(showSongs(mp3File));
-                    Playing.Play();
-                } catch (JavaLayerException | IOException | UnsupportedTagException | InvalidDataException e1) {
-                    e1.printStackTrace();
-                }
-
 
                 PausablePlayer player1 = null;
-                /*try {
+                try {
                     FileInputStream in = null;
                     try {
                         in = new FileInputStream(Library.getSongs().get(temp));
@@ -174,11 +141,11 @@ public class PlayMusic {
                 } catch (JavaLayerException e1) {
                     e1.printStackTrace();
                 }
-                pausablePlayer.close();*/
+                pausablePlayer.close();
 
 
 
-                /*try {
+                try {
 
                     try {
                         Mp3File mp3File = new Mp3File(Library.getSongs().get(temp));
@@ -197,7 +164,7 @@ public class PlayMusic {
 
                 } catch (JavaLayerException e1) {
                     e1.printStackTrace();
-                }*/
+                }
             }
         });
 
@@ -212,39 +179,8 @@ public class PlayMusic {
 
 
 
-                FileInputStream in = null;
-                try {
-                    in = new FileInputStream(Library.getSongs().get(temp));
-                } catch (FileNotFoundException e1) {
-                    e1.printStackTrace();
-                }
 
-                PausablePlayer player = null;
-                try {
-                    player = new PausablePlayer(in);
-                } catch (JavaLayerException e1) {
-                    e1.printStackTrace();
-                }
-
-
-                Playing.setFile(Library.getSongs().get(temp));
-                Playing.setPlayer(player);
-                Playing.plaiyingSongs.add(player);
-                PlayMusic playMusic1 = new PlayMusic(Library.getSongs().get(temp), player);
-                try {
-
-                    Mp3File mp3File = new Mp3File(Library.getSongs().get(temp));
-                    DownPanel.addPlayingSongInfo(showSongs(mp3File));
-                    Playing.Play();
-                } catch (JavaLayerException | IOException | UnsupportedTagException | InvalidDataException e1) {
-                    e1.printStackTrace();
-                }
-
-
-
-
-
-                /*PausablePlayer player1 = null;
+                PausablePlayer player1 = null;
                 try {
                     FileInputStream in = null;
                     try {
@@ -275,7 +211,7 @@ public class PlayMusic {
                     player1.play();
                 } catch (JavaLayerException e1) {
                     e1.printStackTrace();
-                }*/
+                }
 
             }
         });

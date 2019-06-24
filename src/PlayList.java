@@ -154,7 +154,7 @@ public class PlayList {
                             e1.printStackTrace();
                         }
 
-                        ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(60, 60, Image.SCALE_DEFAULT));
+                        ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
 
                         showPlayingSong.add(new JLabel(imageIcon), BorderLayout.WEST);
                         if (id3v2.getArtist()!=null){
@@ -241,12 +241,12 @@ public class PlayList {
 
 
                         Thread thread= null;
-                        try {
-                            thread = new Thread( new newPalyer(new Player(in)));
+                       /* try {
+                            //thread = new Thread( new newPalyer(new Player(in)));
                         } catch (JavaLayerException e1) {
                             e1.printStackTrace();
                         }
-                        thread.start();
+                        thread.start();*/
 
 
                         DownPanel.addPlayingSongInfo(showPlayingSong);
@@ -263,7 +263,7 @@ public class PlayList {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+                ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(150, 150, Image.SCALE_SMOOTH));
                 songImage.setIcon(imageIcon);
                 String mimeType = id3v2.getAlbumImageMimeType();
                 System.out.println(mimeType);

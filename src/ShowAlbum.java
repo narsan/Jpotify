@@ -165,7 +165,7 @@ public class ShowAlbum extends JButton {
                 e.printStackTrace();
             }
 
-            ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+            ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(150, 150, Image.SCALE_SMOOTH));
             showAlbumInfo.setBackground(Color.BLACK);
             AlbumImage.setIcon(imageIcon);
             showAlbumInfo.add(AlbumImage);
@@ -255,7 +255,7 @@ public class ShowAlbum extends JButton {
                                     e1.printStackTrace();
                                 }
 
-                                ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(80, 80, Image.SCALE_DEFAULT));
+                                ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
 
                                 showPlayingSong.add(new JLabel(imageIcon), BorderLayout.WEST);
                                 if (id3v2.getArtist() != null) {
@@ -355,7 +355,7 @@ public class ShowAlbum extends JButton {
 
                         byte[] imageData = id3v2.getAlbumImage();
                         BufferedImage img = ImageIO.read(new ByteArrayInputStream(imageData));
-                        ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+                        ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(150, 150, Image.SCALE_SMOOTH));
                         songImage.setIcon(imageIcon);
                         String mimeType = id3v2.getAlbumImageMimeType();
                         System.out.println(mimeType);
@@ -365,7 +365,7 @@ public class ShowAlbum extends JButton {
 
 
                     JPanel songData = new JPanel();
-                    songData.setBackground(Color.orange);
+                    songData.setBackground(Color.BLACK);
                     songData.setLayout(new BoxLayout(songData, BoxLayout.Y_AXIS));
                     songData.add(songImage);
                     songData.add(Title);
