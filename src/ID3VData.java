@@ -107,6 +107,7 @@ public class ID3VData {
 
         try {
             Playing.setFile(temp);
+            System.out.println();
         } catch (InvalidDataException e) {
             e.printStackTrace();
         } catch (IOException e) {
