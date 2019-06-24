@@ -43,6 +43,7 @@ public  class  LeftPanel extends JPanel implements Scrollable {
         // TODO Consider improving
         return 0;
     }
+
     public LeftPanel() throws IOException {
 
         jScrollPane = new JScrollPane(this);
@@ -53,7 +54,7 @@ public  class  LeftPanel extends JPanel implements Scrollable {
 
 
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-        this.setPreferredSize(new Dimension(200,40));
+        this.setPreferredSize(new Dimension(50,10));
 
         JButton home = new JButton();
         home.setText("Home");
@@ -77,7 +78,7 @@ public  class  LeftPanel extends JPanel implements Scrollable {
         this.add(home);
         this.add(yourLibrary);
         this.add(addToLibrary.getSongAdder());
-        this.setBackground(Color.black);
+        this.setBackground(Color.BLACK);
         this.setVisible(true);
 
 

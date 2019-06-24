@@ -171,7 +171,7 @@ public class PlayList {
 
                           JLabel Artist = new JLabel(id3v2.getArtist());
                             Artist.setForeground(Color.WHITE);
-                            showPlayingSong.add(Artist, BorderLayout.CENTER);
+                            showPlayingSong.add(Artist, BorderLayout.PAGE_END);
 
                         }
 
@@ -179,7 +179,7 @@ public class PlayList {
 
                             JLabel Artist = new JLabel(id3v2.getArtist());
                             Artist.setForeground(Color.WHITE);
-                            showPlayingSong.add(Artist, BorderLayout.CENTER);
+                            showPlayingSong.add(Artist, BorderLayout.PAGE_END);
 
                         }
 
@@ -187,14 +187,14 @@ public class PlayList {
 
                             JLabel Title = new JLabel(id3v2.getTitle());
                             Title.setForeground(Color.WHITE);
-                            showPlayingSong.add(Title, BorderLayout.PAGE_END);
+                            showPlayingSong.add(Title, BorderLayout.EAST);
                         }
 
                         else if (id3v1.getTitle()!=null){
 
                             JLabel Title = new JLabel(id3v2.getTitle());
                             Title.setForeground(Color.WHITE);
-                            showPlayingSong.add(Title, BorderLayout.PAGE_END);
+                            showPlayingSong.add(Title, BorderLayout.EAST);
 
                         }
 
@@ -203,17 +203,17 @@ public class PlayList {
 
                             JLabel album = new JLabel(id3v2.getAlbum());
                             album.setForeground(Color.WHITE);
-                            showPlayingSong.add(album, BorderLayout.NORTH);
+                            showPlayingSong.add(album, BorderLayout.SOUTH);
                         }
 
                         else if (id3v1.getAlbum()!=null){
 
                             JLabel album = new JLabel(id3v2.getAlbum());
                             album.setForeground(Color.WHITE);
-                            showPlayingSong.add(album, BorderLayout.NORTH);
+                            showPlayingSong.add(album, BorderLayout.SOUTH);
 
                         }
-                        showPlayingSong.setBackground(Color.DARK_GRAY);
+                        showPlayingSong.setBackground(new Color(58,58,58));
 
 
                         FileInputStream in = null;

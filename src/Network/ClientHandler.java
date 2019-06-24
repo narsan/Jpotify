@@ -6,14 +6,14 @@ import java.util.ArrayList;
 
 public class ClientHandler implements Runnable {
     private Socket client;
-    private BufferedReader reader;
-    private PrintWriter writer;
+    private ObjectInputStream reader;
+    private ObjectOutputStream writer;
 
 
     public ClientHandler(Socket client) throws IOException {
         this.client = client;
-        writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()));
-        reader = new BufferedReader(new InputStreamReader(this.client.getInputStream()));
+        writer = new ObjectOutputStream(client.getOutputStream());
+        reader = new ObjectInputStream(client.getInputStream());
     }
 
 
@@ -23,13 +23,17 @@ public class ClientHandler implements Runnable {
     @Override
     public void run() {
         while (true) {
+
+
             try {
-
-                String ip = reader.readLine();
-
+                Object object= reader.readObject();
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
+
+
         }
 
     }
