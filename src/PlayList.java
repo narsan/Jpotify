@@ -235,7 +235,16 @@ public class PlayList {
                         Playing.setFile(temp1);
                         Playing.setPlayer(player);
                         Playing.plaiyingSongs.add(player);
-                        PlayMusic playMusic1 = new PlayMusic(temp1, player);
+                        try {
+                            DownPanel.setPausablePlayer(player,temp1);
+                        } catch (InvalidDataException e1) {
+                            e1.printStackTrace();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        } catch (UnsupportedTagException e1) {
+                            e1.printStackTrace();
+                        }
+                        //  PlayMusic playMusic1 = new PlayMusic(temp1, player);
                         try {
                             Playing.Play();
                         } catch (JavaLayerException e1) {

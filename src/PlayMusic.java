@@ -14,15 +14,15 @@ import java.io.*;
 
 public class PlayMusic {
 
-    JPanel playIcons = new JPanel();
-    JPanel downCenterPanel = new JPanel();
+   /* JPanel playIcons = new JPanel();
+    JPanel downCenterPanel = new JPanel();*/
 
     private File musicToPlay;
     int index;
-    private JButton pause = new JButton();
-    private JButton resume = new JButton();
-    private JButton nextSong1 = new JButton();
-    private JButton previousSong = new JButton();
+   /* private JButton pause= new JButton();
+    private JButton resume= new JButton();
+    private JButton nextSong1= new JButton() ;
+    private JButton previousSong= new JButton() ;*/
     private BufferedInputStream bufferedInputStream;
     FileInputStream fileInputStream;
     Player player;
@@ -30,17 +30,14 @@ public class PlayMusic {
     private PausablePlayer pausablePlayer;
 
 
-    public PlayMusic(File file, PausablePlayer pausablePlayer) {
-        JButton pause = new JButton();
-        JButton nextSong1 = new JButton();
-        JButton previousSong = new JButton();
-        index = Library.getSongs().indexOf(file);
+    public PlayMusic() {
+
+        //index = Library.getSongs().indexOf(file);
 
 
 
 
-        this.pausablePlayer = pausablePlayer;
-        ImageIcon pause_Icon = new ImageIcon(new ImageIcon("src\\icons\\pause.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+        /*ImageIcon pause_Icon = new ImageIcon(new ImageIcon("src\\icons\\pause.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
         ImageIcon nextSong = new ImageIcon(new ImageIcon("src\\icons\\nextSong.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
         ImageIcon play = new ImageIcon(new ImageIcon("src\\icons\\play.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
         ImageIcon previous1 = new ImageIcon(new ImageIcon("src\\icons\\previousSong.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
@@ -69,45 +66,43 @@ public class PlayMusic {
         downCenterPanel.setBorder(border);
         downCenterPanel.setLayout(new BorderLayout());
         downCenterPanel.setBackground(new Color(58, 58, 58));
-        downCenterPanel.add(playIcons, BorderLayout.NORTH);
+        downCenterPanel.add(playIcons, BorderLayout.NORTH);*/
 
-        try {
+      //  try {
 
-            Mp3File mp3File = new Mp3File(file);
+           /* Mp3File mp3File = new Mp3File(file);
             JLabel totalTime=new JLabel();
             totalTime.setText("Total:"+mp3File.getLengthInSeconds());
             totalTime.setForeground(Color.pink);
             totalTime.setFont(new Font("Arial",Font.PLAIN,13));
             updateWorker = new UpdateWorker((int) mp3File.getLengthInSeconds());
-            downCenterPanel.add(UpdateWorker.getSlider(), BorderLayout.PAGE_END);
-            downCenterPanel.add(totalTime,BorderLayout.CENTER);
-            downCenterPanel.add(updateWorker.getTime(),BorderLayout.EAST);
-            updateWorker.execute();
+            //downCenterPanel.add(UpdateWorker.getSlider(), BorderLayout.PAGE_END);*/
+            //downCenterPanel.add(totalTime,BorderLayout.CENTER);
+            //downCenterPanel.add(updateWorker.getTime(),BorderLayout.EAST);
+            /*updateWorker.execute();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (UnsupportedTagException e) {
             e.printStackTrace();
         } catch (InvalidDataException e) {
             e.printStackTrace();
-        }
+        }*/
 
-        DownPanel.addPauseAndResume(downCenterPanel);
+        //DownPanel.addPauseAndResume(downCenterPanel);
 
 
-        pause.addActionListener(new ActionListener() {
+       /* pause.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-
                 pausablePlayer.pause();
                 updateWorker.setIspaused(true);
 
             }
 
-        });
+        });*/
 
 
-        resume.addActionListener(new ActionListener() {
+       /* resume.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -123,7 +118,7 @@ public class PlayMusic {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                System.out.println(index);
+
                 int temp = index + 1;
 
 
@@ -279,6 +274,6 @@ public class PlayMusic {
         showPlayingSong.setBackground(new Color(58, 58, 58));
         showPlayingSong.setPreferredSize(new Dimension(318, 0));
 
-        return showPlayingSong;
+        return showPlayingSong;*/
     }
 }

@@ -318,7 +318,16 @@ public class ShowAlbum extends JButton {
                                 Playing.setFile(temp);
                                 Playing.setPlayer(player);
                                 Playing.plaiyingSongs.add(player);
-                                PlayMusic playMusic1 = new PlayMusic(temp, player);
+                                try {
+                                    DownPanel.setPausablePlayer(player,temp);
+                                } catch (InvalidDataException e1) {
+                                    e1.printStackTrace();
+                                } catch (IOException e1) {
+                                    e1.printStackTrace();
+                                } catch (UnsupportedTagException e1) {
+                                    e1.printStackTrace();
+                                }
+                                //PlayMusic playMusic1 = new PlayMusic(temp, player);
                                 try {
                                     Playing.Play();
                                 } catch (JavaLayerException e1) {

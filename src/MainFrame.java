@@ -12,18 +12,20 @@ import java.io.*;
 public  class MainFrame {
     static JFrame frame = new JFrame();
     private JPanel songsPanel = null;
+     static CurrentPanel currentPanel;
 
-    public void setCurrentPanel(JPanel currentPanel) {
+ /*   public void setCurrentPanel(JPanel currentPanel) {
         this.currentPanel = currentPanel;
     }
 
     public JPanel getCurrentPanel() {
         return currentPanel;
-    }
+    }*/
 
-    private static JPanel currentPanel;
+    //private static JPanel currentPanel;
 
     public MainFrame() throws IOException {
+       currentPanel=new CurrentPanel();
         frame.setLocation(100, 100);
         frame.setTitle("Jpotify");
         frame.setLayout(new BorderLayout());
@@ -205,14 +207,14 @@ public  class MainFrame {
 
     public static void refresh(JPanel jPanel) {
 
-        if (currentPanel!=null){
+        if (currentPanel.getCurrentPanel()!=null){
 
-            currentPanel.setVisible(false);
+            currentPanel.getCurrentPanel().setVisible(false);
 
-        frame.remove(currentPanel);
+        frame.remove(currentPanel.getCurrentPanel());
 
         }
-        currentPanel=jPanel;
+        currentPanel.setCurrentPanel(jPanel);
 
         frame.add(jPanel, BorderLayout.CENTER);
 
