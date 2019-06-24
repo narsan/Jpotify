@@ -20,6 +20,7 @@ public class ShowSongsToCreatePlayList implements ItemListener {
     private static HashSet<File> songsInPlaylist;
     private ArrayList<JCheckBox> checkBoxes;
     PlayList playList;
+    boolean flag=false;
 
     public PlayList getPlayList() {
         return playList;
@@ -63,7 +64,16 @@ public class ShowSongsToCreatePlayList implements ItemListener {
             e.printStackTrace();
         }
 
+        if (flag==true){
+
+            showSongs.removeAll();
+            System.out.println();
+        }
+
+
+
         for (int i = 0; i < songs.size(); i++) {
+
 
             JCheckBox checkBox = new JCheckBox();
             checkBox.setBorder(null);
@@ -88,7 +98,7 @@ public class ShowSongsToCreatePlayList implements ItemListener {
                         public void itemStateChanged(ItemEvent e) {
 
 
-                                playList.addSongToPlayList(songs.get(finalI));
+                            playList.addSongToPlayList(songs.get(finalI));
 
                             try {
                                 playList.writeSongs();
@@ -116,10 +126,13 @@ public class ShowSongsToCreatePlayList implements ItemListener {
             showSongs.add(checkBox);
 
 
+
         }
 
+        flag=true;
 
         return showSongs;
+
     }
 
     @Override
@@ -132,7 +145,7 @@ public class ShowSongsToCreatePlayList implements ItemListener {
                 // System.out.println("selected");
 
 
-                    playList.addSongToPlayList(Library.getSongs().get(i));
+                playList.addSongToPlayList(Library.getSongs().get(i));
 
                 try {
                     playList.writeSongs();
@@ -161,6 +174,3 @@ public class ShowSongsToCreatePlayList implements ItemListener {
         this.playList = playList;
     }
 }
-
-
-

@@ -30,7 +30,7 @@ public class ShowSongs extends JButton {
         JPanel songsPanel = new JPanel();
         songsPanel.setVisible(true);
         GridBagLayout gridBagLayout=new GridBagLayout();
-       // gridBagLayout.layoutContainer(songsPanel);
+        // gridBagLayout.layoutContainer(songsPanel);
         songsPanel.setLayout(new FlowLayout());
         songsPanel.setPreferredSize(new Dimension(300,100));
         GridBagConstraints gbc = new GridBagConstraints();
@@ -93,9 +93,16 @@ public class ShowSongs extends JButton {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         JPanel showPlayingSong = new JPanel();
+                        showPlayingSong.setLayout(new BorderLayout());
+                        JPanel playingSongImg = new JPanel();
+                        playingSongImg.setBackground(new Color(58,58,58));
+                        playingSongImg.setPreferredSize(new Dimension(100,80));
+                        JPanel playingSonglabel = new JPanel();
+                        playingSonglabel.setLayout(new BoxLayout(playingSonglabel,BoxLayout.Y_AXIS));
+                        playingSonglabel.setBackground(new Color(58,58,58));
                         JPanel cuurentPanel=null;
                         showPlayingSong.setLayout(new BorderLayout());
-                        showPlayingSong.setBackground(Color.black);
+                        showPlayingSong.setBackground(new Color(58,58,58));
                         byte[] imageData = id3v2.getAlbumImage();
                         BufferedImage img = null;
                         try {
@@ -106,18 +113,21 @@ public class ShowSongs extends JButton {
 
                         ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
 
-                        showPlayingSong.add(new JLabel(imageIcon), BorderLayout.WEST);
+                        playingSongImg.add(new JLabel(imageIcon));
+                        EmptyBorder border1 = new EmptyBorder(0, 5, 5, 5);
+                        playingSongImg.setBorder(border1);
                         if(id3v2.getArtist()!=null){
-                        JLabel Artist = new JLabel(id3v2.getArtist());
+                            JLabel Artist = new JLabel(id3v2.getArtist());
                             Artist.setForeground(Color.WHITE);
-                            showPlayingSong.add(Artist, BorderLayout.EAST);
+                            playingSonglabel.add(Artist);
                         }
 
                         else if (mp3File.hasId3v1Tag()&&mp3File.getId3v1Tag().getArtist()!=null){
 
                             JLabel Artist = new JLabel(id3v1.getArtist());
                             Artist.setForeground(Color.WHITE);
-                            showPlayingSong.add(Artist, BorderLayout.EAST);
+                            playingSonglabel.add(Artist);
+
 
                         }
 
@@ -125,14 +135,15 @@ public class ShowSongs extends JButton {
 
                             JLabel Title = new JLabel(id3v2.getTitle());
                             Title.setForeground(Color.WHITE);
-                            showPlayingSong.add(Title, BorderLayout.EAST);
+                            playingSonglabel.add(Title);
                         }
 
                         else if(id3v1.getAlbum()!=null){
 
                             JLabel Title = new JLabel(id3v1.getTitle());
                             Title.setForeground(Color.WHITE);
-                            showPlayingSong.add(Title, BorderLayout.CENTER);
+                            playingSonglabel.add(Title);
+
 
                         }
 
@@ -141,20 +152,24 @@ public class ShowSongs extends JButton {
 
                             JLabel album = new JLabel(id3v2.getAlbum());
                             album.setForeground(Color.WHITE);
-                            showPlayingSong.add(album, BorderLayout.EAST);
+                            playingSonglabel.add(album);
                         }
 
                         else if (id3v1.getAlbum()!=null){
                             JLabel album = new JLabel(id3v1.getAlbum());
                             album.setForeground(Color.WHITE);
-                            showPlayingSong.add(album, BorderLayout.EAST);
+                            playingSonglabel.add(album);
+
 
                         }
-                        EmptyBorder border = new EmptyBorder(5, 5, 5, 80);
+                        EmptyBorder border2 = new EmptyBorder(5, 50, 0, 0);
+                        playingSonglabel.setBorder(border2);
+                        showPlayingSong.add(playingSongImg,BorderLayout.WEST);
+                        showPlayingSong.add(playingSonglabel,BorderLayout.EAST);
+                        EmptyBorder border = new EmptyBorder(0, 0, 0, 80);
                         showPlayingSong.setBorder(border);
                         showPlayingSong.setBackground(new Color(58,58,58));
                         showPlayingSong.setPreferredSize(new Dimension(318,0));
-
 
                         FileInputStream in = null;
                         try {
@@ -181,15 +196,7 @@ public class ShowSongs extends JButton {
                             e1.printStackTrace();
                         }
                         Playing.setPlayer(player);
-                        try {
-                            Playing playing=new Playing();
-                        } catch (InvalidDataException e1) {
-                            e1.printStackTrace();
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        } catch (UnsupportedTagException e1) {
-                            e1.printStackTrace();
-                        }
+
                         Playing.plaiyingSongs.add(player);
 
 
@@ -204,7 +211,16 @@ public class ShowSongs extends JButton {
                         }
                         // PlayMusic playMusic1 = new PlayMusic(temp, player);
                         try {
-                            Playing.Play();
+                            try {
+                                Playing.Play();
+
+                            } catch (InvalidDataException e1) {
+                                e1.printStackTrace();
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            } catch (UnsupportedTagException e1) {
+                                e1.printStackTrace();
+                            }
                         } catch (JavaLayerException e1) {
                             e1.printStackTrace();
                         }
@@ -232,7 +248,6 @@ public class ShowSongs extends JButton {
                         } catch (FileNotFoundException e1) {
                             e1.printStackTrace();
                         }
-
                         PausablePlayer player= null;
                         try {
                             player = new PausablePlayer(in);
@@ -246,12 +261,9 @@ public class ShowSongs extends JButton {
                                 DownPanel.addPlayingSongInfo(showPlayingSong);
                                 DownPanel.downPanel.revalidate();
                             }
-
                             PlayMusic playMusic = new PlayMusic(temp,player);
                             DownPanel.addPlayingSongInfo(showPlayingSong);
                             player.play();
-
-
                             playedSongs.add(player);
                         } catch (JavaLayerException e1) {
                             e1.printStackTrace();
@@ -317,4 +329,3 @@ public class ShowSongs extends JButton {
 
 
 }
-

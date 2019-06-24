@@ -25,11 +25,12 @@ public class AddToLibrary extends Library {
         songAdder.addActionListener(new ActionListener() {
             //TODO
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e){
                 try {
                     out = new ObjectOutputStream(new FileOutputStream("src\\savedSongs.bin"));
-                    if (Library.getSongs().size() != 0) {
-                        for (File file : Library.getSongs()) {
+                    if (Library.getSongs().size()!=0)
+                    {
+                        for (File file:Library.getSongs()) {
                             try {
                                 out.writeObject(file);
                             } catch (IOException ex) {

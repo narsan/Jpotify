@@ -19,10 +19,10 @@ public class PlayMusic {
 
     private File musicToPlay;
     int index;
-   /* private JButton pause= new JButton();
-    private JButton resume= new JButton();
-    private JButton nextSong1= new JButton() ;
-    private JButton previousSong= new JButton() ;*/
+    /* private JButton pause= new JButton();
+     private JButton resume= new JButton();
+     private JButton nextSong1= new JButton() ;
+     private JButton previousSong= new JButton() ;*/
     private BufferedInputStream bufferedInputStream;
     FileInputStream fileInputStream;
     Player player;
@@ -55,20 +55,18 @@ public class PlayMusic {
         previousSong.setBackground(new Color(58, 58, 58));
         nextSong1.setBorder(null);
         nextSong1.setBackground(new Color(58, 58, 58));
-
         previousSong.setIcon(previous1);
         playIcons.add(previousSong);
         playIcons.add(resume);
         playIcons.add(pause);
         playIcons.add(nextSong1);
-
         EmptyBorder border = new EmptyBorder(5, 0, 0, 0);
         downCenterPanel.setBorder(border);
         downCenterPanel.setLayout(new BorderLayout());
         downCenterPanel.setBackground(new Color(58, 58, 58));
         downCenterPanel.add(playIcons, BorderLayout.NORTH);*/
 
-      //  try {
+        //  try {
 
            /* Mp3File mp3File = new Mp3File(file);
             JLabel totalTime=new JLabel();
@@ -77,8 +75,8 @@ public class PlayMusic {
             totalTime.setFont(new Font("Arial",Font.PLAIN,13));
             updateWorker = new UpdateWorker((int) mp3File.getLengthInSeconds());
             //downCenterPanel.add(UpdateWorker.getSlider(), BorderLayout.PAGE_END);*/
-            //downCenterPanel.add(totalTime,BorderLayout.CENTER);
-            //downCenterPanel.add(updateWorker.getTime(),BorderLayout.EAST);
+        //downCenterPanel.add(totalTime,BorderLayout.CENTER);
+        //downCenterPanel.add(updateWorker.getTime(),BorderLayout.EAST);
             /*updateWorker.execute();
         } catch (IOException e) {
             e.printStackTrace();
@@ -96,32 +94,21 @@ public class PlayMusic {
             public void actionPerformed(ActionEvent e) {
                 pausablePlayer.pause();
                 updateWorker.setIspaused(true);
-
             }
-
         });*/
 
 
        /* resume.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 updateWorker.setIspaused(false);
-
                 pausablePlayer.resume();
-
-
             }
         });
-
         nextSong1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-
                 int temp = index + 1;
-
-
                 PausablePlayer player1 = null;
                 try {
                     FileInputStream in = null;
@@ -130,23 +117,16 @@ public class PlayMusic {
                     } catch (FileNotFoundException e1) {
                         e1.printStackTrace();
                     }
-
                     player1 = new PausablePlayer(in);
                     PlayMusic playMusic=new PlayMusic(Library.getSongs().get(temp),player1);
                 } catch (JavaLayerException e1) {
                     e1.printStackTrace();
                 }
                 pausablePlayer.close();
-
-
-
                 try {
-
                     try {
                         Mp3File mp3File = new Mp3File(Library.getSongs().get(temp));
                         DownPanel.addPlayingSongInfo(showSongs(mp3File));
-
-
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     } catch (UnsupportedTagException e1) {
@@ -154,27 +134,17 @@ public class PlayMusic {
                     } catch (InvalidDataException e1) {
                         e1.printStackTrace();
                     }
-
                     player1.play();
-
                 } catch (JavaLayerException e1) {
                     e1.printStackTrace();
                 }
             }
         });
-
         previousSong.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-
                 System.out.println(index);
                 int temp = index - 1;
-
-
-
-
-
                 PausablePlayer player1 = null;
                 try {
                     FileInputStream in = null;
@@ -183,19 +153,15 @@ public class PlayMusic {
                     } catch (FileNotFoundException e1) {
                         e1.printStackTrace();
                     }
-
                     player1 = new PausablePlayer(in);
                 } catch (JavaLayerException e1) {
                     e1.printStackTrace();
                 }
                 pausablePlayer.close();
                 try {
-
                     try {
                         Mp3File mp3File = new Mp3File(Library.getSongs().get(temp));
                         DownPanel.addPlayingSongInfo(showSongs(mp3File));
-
-
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     } catch (UnsupportedTagException e1) {
@@ -207,20 +173,13 @@ public class PlayMusic {
                 } catch (JavaLayerException e1) {
                     e1.printStackTrace();
                 }
-
             }
         });
-
-
     }
-
-
     public JPanel showSongs(Mp3File mp3File) {
         JPanel showPlayingSong = new JPanel();
-
         ID3v2 id3v2 = mp3File.getId3v2Tag();
         ID3v1 id3v1 = mp3File.getId3v1Tag();
-
         showPlayingSong.setLayout(new BorderLayout());
         showPlayingSong.setBackground(Color.black);
         byte[] imageData = id3v2.getAlbumImage();
@@ -230,38 +189,27 @@ public class PlayMusic {
         } catch (IOException e1) {
             e1.printStackTrace();
         }
-
         ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(80, 80, Image.SCALE_DEFAULT));
-
         showPlayingSong.add(new JLabel(imageIcon), BorderLayout.WEST);
         if (id3v2.getArtist() != null) {
             JLabel Artist = new JLabel(id3v2.getArtist());
             Artist.setForeground(Color.WHITE);
             showPlayingSong.add(Artist, BorderLayout.PAGE_END);
         } else if (mp3File.hasId3v1Tag() && mp3File.getId3v1Tag().getArtist() != null) {
-
             JLabel Artist = new JLabel(id3v1.getArtist());
             Artist.setForeground(Color.WHITE);
             showPlayingSong.add(Artist, BorderLayout.PAGE_END);
-
         }
-
         if (id3v2.getTitle() != null) {
-
             JLabel Title = new JLabel(id3v2.getTitle());
             Title.setForeground(Color.WHITE);
             showPlayingSong.add(Title, BorderLayout.CENTER);
         } else if (id3v1.getAlbum() != null) {
-
             JLabel Title = new JLabel(id3v1.getTitle());
             Title.setForeground(Color.WHITE);
             showPlayingSong.add(Title, BorderLayout.CENTER);
-
         }
-
         if (id3v2.getAlbum() != null) {
-
-
             JLabel album = new JLabel(id3v2.getAlbum());
             album.setForeground(Color.WHITE);
             showPlayingSong.add(album, BorderLayout.NORTH);
@@ -269,11 +217,9 @@ public class PlayMusic {
             JLabel album = new JLabel(id3v1.getAlbum());
             album.setForeground(Color.WHITE);
             showPlayingSong.add(album, BorderLayout.NORTH);
-
         }
         showPlayingSong.setBackground(new Color(58, 58, 58));
         showPlayingSong.setPreferredSize(new Dimension(318, 0));
-
         return showPlayingSong;*/
     }
 }

@@ -12,12 +12,11 @@ import java.io.*;
 public  class MainFrame {
     static JFrame frame = new JFrame();
     private JPanel songsPanel = null;
-     static CurrentPanel currentPanel;
+    static CurrentPanel currentPanel;
 
  /*   public void setCurrentPanel(JPanel currentPanel) {
         this.currentPanel = currentPanel;
     }
-
     public JPanel getCurrentPanel() {
         return currentPanel;
     }*/
@@ -25,7 +24,7 @@ public  class MainFrame {
     //private static JPanel currentPanel;
 
     public MainFrame() throws IOException {
-       currentPanel=new CurrentPanel();
+        currentPanel=new CurrentPanel();
         frame.setLocation(100, 100);
         frame.setTitle("Jpotify");
         frame.setLayout(new BorderLayout());
@@ -158,6 +157,7 @@ public  class MainFrame {
 
                 refresh(showSongsToCreatePlayList.songsName());
 
+
                 Library.addNewPlayList(showSongsToCreatePlayList.getPlayList());
 
                 leftPanel.add(showSongsToCreatePlayList.playList.getPlayList());
@@ -183,10 +183,7 @@ public  class MainFrame {
         favoriteSong.playList.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 refresh(favoriteSong.showSongsInPlayList());
-
-
             }
         });*/
 
@@ -211,7 +208,7 @@ public  class MainFrame {
 
             currentPanel.getCurrentPanel().setVisible(false);
 
-        frame.remove(currentPanel.getCurrentPanel());
+            frame.remove(currentPanel.getCurrentPanel());
 
         }
         currentPanel.setCurrentPanel(jPanel);
@@ -221,7 +218,7 @@ public  class MainFrame {
         //this.frame.repaint();
 
         frame.revalidate();
-       // this.frame.validate();
+        // this.frame.validate();
 
 
     }

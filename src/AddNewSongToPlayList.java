@@ -49,7 +49,7 @@ public class AddNewSongToPlayList {
                     try {
                         mp3File = new Mp3File(Library.getSongs().get(i));
                         if (mp3File.hasId3v1Tag()&&mp3File.getId3v1Tag().getTitle()!=null){
-                        songsName.add(mp3File.getId3v1Tag().getTitle());}
+                            songsName.add(mp3File.getId3v1Tag().getTitle());}
                         else if (mp3File.hasId3v2Tag()&&mp3File.getId3v2Tag().getTitle()!=null){
 
                             songsName.add(mp3File.getId3v2Tag().getTitle());
@@ -118,7 +118,4 @@ public class AddNewSongToPlayList {
 
     }
 }
-
-
-
 

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Playing  {
 
-   static UpdateWorker updateWorker=null;
+    static UpdateWorker updateWorker=null;
 
     public static UpdateWorker getUpdateWorker() {
         return updateWorker;
@@ -18,18 +18,13 @@ public class Playing  {
 
     static ArrayList<PausablePlayer >plaiyingSongs=new ArrayList<>();
 
-     static PausablePlayer player;
+    static PausablePlayer player;
 
     public static void setPlayer(PausablePlayer player) {
         Playing.player = player;
 
     }
 
-    public Playing() throws InvalidDataException, IOException, UnsupportedTagException {
-
-        Mp3File mp3File=new Mp3File(file);
-        updateWorker=new UpdateWorker((int)mp3File.getLengthInSeconds());
-    }
 
     public static void setFile(File file) throws InvalidDataException, IOException, UnsupportedTagException {
         Playing.file = file;
@@ -37,13 +32,18 @@ public class Playing  {
 
     static File file;
 
-    public  static void Play() throws JavaLayerException {
+    public  static void Play() throws JavaLayerException, InvalidDataException, IOException, UnsupportedTagException {
+
+
+        Mp3File mp3File=new Mp3File(file);
+        updateWorker=new UpdateWorker((int)mp3File.getLengthInSeconds());
 
         if (plaiyingSongs.size()==1){
 
 
             player.play();
-            DownPanel.downCenterPanel.add(UpdateWorker.getSlider(), BorderLayout.PAGE_END);
+            //DownPanel.downCenterPanel.add(updateWorker.slider, BorderLayout.PAGE_END);
+            DownPanel.addNewSlider(updateWorker.slider);
             DownPanel.downCenterPanel.add(updateWorker.getTime(),BorderLayout.EAST);
             DownPanel.downCenterPanel.add(updateWorker.getTotalTime(),BorderLayout.WEST);
             updateWorker.execute();

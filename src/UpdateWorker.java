@@ -4,7 +4,7 @@ import java.util.List;
 
 public class UpdateWorker  extends SwingWorker<Void, Integer>  {
 
-    static   JSlider slider ;
+    JSlider slider =null;
 
     private int duration;
 
@@ -35,15 +35,15 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
     private boolean ispaused=false;
 
 
-        public UpdateWorker(int duration) {
+    public UpdateWorker(int duration) {
 
-            this.duration = duration;
-            slider=new JSlider();
-            slider.setBackground(new Color(58,58,58));
-            slider.setMinimum(0);
-            slider.setMaximum(duration);
-            slider.setValue(0);
-        }
+        this.duration = duration;
+        slider=new JSlider();
+        slider.setValue(0);
+        slider.setBackground(new Color(58,58,58));
+        slider.setMinimum(0);
+        slider.setMaximum(duration);
+    }
 
     public void setDuration(int duration) {
         this.duration = duration;
@@ -51,42 +51,42 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
     }
 
     @Override
-        protected Void doInBackground() throws Exception {
+    protected Void doInBackground() throws Exception {
 
-            time.setForeground(Color.pink);
+        time.setForeground(Color.pink);
 
-            time.setFont(new Font("Arial",Font.PLAIN,13));
-
-
-            for (int i = 1; i <= duration; i++) {
-
-                if (ispaused==false){
-                    publish(i);
-
-                    time.setText("passed :"+String.valueOf(i));
+        time.setFont(new Font("Arial",Font.PLAIN,13));
 
 
-                }
-                Thread.sleep(1000);
-                if (ispaused==true){
+        for (int i = 1; i <= duration; i++) {
 
-                    while (ispaused){
-                        Thread.sleep(50);
-                        continue;
-                    }
-                }
+            if (ispaused==false){
+                publish(i);
+
+                time.setText("passed :"+String.valueOf(i));
 
 
             }
-            return null;
-        }
+            Thread.sleep(1000);
+            if (ispaused==true){
 
-        @Override
-        protected void process(List<Integer> chunks) {
-            slider.setValue(chunks.get(0));
-        }
+                while (ispaused){
+                    Thread.sleep(50);
+                    continue;
+                }
+            }
 
-    public static JSlider getSlider() {
+
+        }
+        return null;
+    }
+
+    @Override
+    protected void process(List<Integer> chunks) {
+        slider.setValue(chunks.get(0));
+    }
+
+    public  JSlider getSlider() {
         return slider;
     }
 }
