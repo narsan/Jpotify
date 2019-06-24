@@ -13,6 +13,16 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
     }
 
     private JLabel time=new JLabel();
+    private JLabel totalTime=new JLabel();
+
+    public void TotalTime(){
+
+        totalTime.setText(String.valueOf(duration));
+    }
+
+    public JLabel getTotalTime() {
+        return totalTime;
+    }
 
     public boolean isIspaused() {
         return ispaused;

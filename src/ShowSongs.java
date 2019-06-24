@@ -171,9 +171,28 @@ public class ShowSongs extends JButton {
                         }
 
 
-                        Playing.setFile(temp);
+                        try {
+                            Playing.setFile(temp);
+                        } catch (InvalidDataException e1) {
+                            e1.printStackTrace();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        } catch (UnsupportedTagException e1) {
+                            e1.printStackTrace();
+                        }
                         Playing.setPlayer(player);
+                        try {
+                            Playing playing=new Playing();
+                        } catch (InvalidDataException e1) {
+                            e1.printStackTrace();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        } catch (UnsupportedTagException e1) {
+                            e1.printStackTrace();
+                        }
                         Playing.plaiyingSongs.add(player);
+
+
                         try {
                             DownPanel.setPausablePlayer(player,temp);
                         } catch (InvalidDataException e1) {

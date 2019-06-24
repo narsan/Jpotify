@@ -25,6 +25,12 @@ public class DownPanel {
     FileInputStream fileInputStream;
     static File musicToPlay=null;
      int index;
+    static Playing playing=null;
+
+
+    public  static void setPlaying(Playing playing1) {
+        playing = playing1;
+    }
 
 
     public static void setPausablePlayer(PausablePlayer Player,File music) throws InvalidDataException, IOException, UnsupportedTagException {
@@ -74,6 +80,8 @@ public class DownPanel {
 
                // updateWorker.setIspaused(true);
 
+                Playing.updateWorker.setIspaused(true);
+
                 pausablePlayer.pause();
             }
         });
@@ -83,6 +91,7 @@ public class DownPanel {
             public void actionPerformed(ActionEvent e) {
 
                // updateWorker.setIspaused(false);
+                Playing.updateWorker.setIspaused(false);
                 pausablePlayer.resume();
             }
         });
@@ -117,7 +126,15 @@ public class DownPanel {
                                                         PausablePlayer player=new PausablePlayer(fileInputStream);
 
 
-                                                        Playing.setFile(file);
+                                                        try {
+                                                            Playing.setFile(file);
+                                                        } catch (InvalidDataException e1) {
+                                                            e1.printStackTrace();
+                                                        } catch (IOException e1) {
+                                                            e1.printStackTrace();
+                                                        } catch (UnsupportedTagException e1) {
+                                                            e1.printStackTrace();
+                                                        }
                                                         Playing.setPlayer(player);
                                                         Playing.plaiyingSongs.add(player);
                                                         Playing.Play();

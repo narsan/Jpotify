@@ -232,7 +232,15 @@ public class PlayList {
                         }
 
 
-                        Playing.setFile(temp1);
+                        try {
+                            Playing.setFile(temp1);
+                        } catch (InvalidDataException e1) {
+                            e1.printStackTrace();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        } catch (UnsupportedTagException e1) {
+                            e1.printStackTrace();
+                        }
                         Playing.setPlayer(player);
                         Playing.plaiyingSongs.add(player);
                         try {
