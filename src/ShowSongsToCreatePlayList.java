@@ -20,7 +20,6 @@ public class ShowSongsToCreatePlayList implements ItemListener {
     private static HashSet<File> songsInPlaylist;
     private ArrayList<JCheckBox> checkBoxes;
     PlayList playList;
-    boolean flag=false;
 
     public PlayList getPlayList() {
         return playList;
@@ -64,16 +63,7 @@ public class ShowSongsToCreatePlayList implements ItemListener {
             e.printStackTrace();
         }
 
-        if (flag==true){
-
-            showSongs.removeAll();
-            System.out.println();
-        }
-
-
-
         for (int i = 0; i < songs.size(); i++) {
-
 
             JCheckBox checkBox = new JCheckBox();
             checkBox.setBorder(null);
@@ -126,13 +116,10 @@ public class ShowSongsToCreatePlayList implements ItemListener {
             showSongs.add(checkBox);
 
 
-
         }
 
-        flag=true;
 
         return showSongs;
-
     }
 
     @Override

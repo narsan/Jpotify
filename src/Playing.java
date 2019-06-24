@@ -25,6 +25,11 @@ public class Playing  {
 
     }
 
+    public Playing() throws InvalidDataException, IOException, UnsupportedTagException {
+
+        Mp3File mp3File=new Mp3File(file);
+        updateWorker=new UpdateWorker((int)mp3File.getLengthInSeconds());
+    }
 
     public static void setFile(File file) throws InvalidDataException, IOException, UnsupportedTagException {
         Playing.file = file;
@@ -32,18 +37,13 @@ public class Playing  {
 
     static File file;
 
-    public  static void Play() throws JavaLayerException, InvalidDataException, IOException, UnsupportedTagException {
-
-
-        Mp3File mp3File=new Mp3File(file);
-        updateWorker=new UpdateWorker((int)mp3File.getLengthInSeconds());
+    public  static void Play() throws JavaLayerException {
 
         if (plaiyingSongs.size()==1){
 
 
             player.play();
-            //DownPanel.downCenterPanel.add(updateWorker.slider, BorderLayout.PAGE_END);
-            DownPanel.addNewSlider(updateWorker.slider);
+            DownPanel.downCenterPanel.add(UpdateWorker.getSlider(), BorderLayout.PAGE_END);
             DownPanel.downCenterPanel.add(updateWorker.getTime(),BorderLayout.EAST);
             DownPanel.downCenterPanel.add(updateWorker.getTotalTime(),BorderLayout.WEST);
             updateWorker.execute();

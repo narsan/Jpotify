@@ -4,6 +4,7 @@ import javazoom.jl.player.Player;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -155,7 +156,14 @@ public class PlayList {
                     public void actionPerformed(ActionEvent e) {
                         JPanel showPlayingSong = new JPanel();
                         showPlayingSong.setLayout(new BorderLayout());
-                        showPlayingSong.setBackground(Color.black);
+                        showPlayingSong.setBackground(new Color(58,58,58));
+                        showPlayingSong.setLayout(new BorderLayout());
+                        JPanel playingSongImg = new JPanel();
+                        playingSongImg.setBackground(new Color(58,58,58));
+                        playingSongImg.setPreferredSize(new Dimension(100,80));
+                        JPanel playingSonglabel = new JPanel();
+                        playingSonglabel.setLayout(new BoxLayout(playingSonglabel,BoxLayout.Y_AXIS));
+                        playingSonglabel.setBackground(new Color(58,58,58));
                         byte[] imageData = id3v2.getAlbumImage();
                         BufferedImage img = null;
                         try {
@@ -166,12 +174,13 @@ public class PlayList {
 
                         ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
 
-                        showPlayingSong.add(new JLabel(imageIcon), BorderLayout.WEST);
+                        playingSongImg.add(new JLabel(imageIcon));
                         if (id3v2.getArtist()!=null){
 
                           JLabel Artist = new JLabel(id3v2.getArtist());
                             Artist.setForeground(Color.WHITE);
-                            showPlayingSong.add(Artist, BorderLayout.PAGE_END);
+                            playingSonglabel.add(Artist);
+
 
                         }
 
@@ -179,7 +188,8 @@ public class PlayList {
 
                             JLabel Artist = new JLabel(id3v2.getArtist());
                             Artist.setForeground(Color.WHITE);
-                            showPlayingSong.add(Artist, BorderLayout.PAGE_END);
+                            playingSonglabel.add(Artist);
+
 
                         }
 
@@ -187,14 +197,14 @@ public class PlayList {
 
                             JLabel Title = new JLabel(id3v2.getTitle());
                             Title.setForeground(Color.WHITE);
-                            showPlayingSong.add(Title, BorderLayout.EAST);
+                            playingSonglabel.add(Title);
                         }
 
                         else if (id3v1.getTitle()!=null){
 
                             JLabel Title = new JLabel(id3v2.getTitle());
                             Title.setForeground(Color.WHITE);
-                            showPlayingSong.add(Title, BorderLayout.EAST);
+                            playingSonglabel.add(Title);
 
                         }
 
@@ -203,17 +213,25 @@ public class PlayList {
 
                             JLabel album = new JLabel(id3v2.getAlbum());
                             album.setForeground(Color.WHITE);
-                            showPlayingSong.add(album, BorderLayout.SOUTH);
+                            playingSonglabel.add(album);
                         }
 
                         else if (id3v1.getAlbum()!=null){
 
                             JLabel album = new JLabel(id3v2.getAlbum());
                             album.setForeground(Color.WHITE);
-                            showPlayingSong.add(album, BorderLayout.SOUTH);
+                            playingSonglabel.add(album);
 
                         }
+                        EmptyBorder border2 = new EmptyBorder(5, 30, 0, 0);
+                        playingSonglabel.setBorder(border2);
+                        showPlayingSong.add(playingSongImg,BorderLayout.WEST);
+                        showPlayingSong.add(playingSonglabel,BorderLayout.EAST);
+                        EmptyBorder border = new EmptyBorder(0, 0, 0, 80);
+                        showPlayingSong.setBorder(border);
                         showPlayingSong.setBackground(new Color(58,58,58));
+                        showPlayingSong.setPreferredSize(new Dimension(318,0));
+
 
 
                         FileInputStream in = null;
@@ -254,15 +272,7 @@ public class PlayList {
                         }
                         //  PlayMusic playMusic1 = new PlayMusic(temp1, player);
                         try {
-                            try {
-                                Playing.Play();
-                            } catch (InvalidDataException e1) {
-                                e1.printStackTrace();
-                            } catch (IOException e1) {
-                                e1.printStackTrace();
-                            } catch (UnsupportedTagException e1) {
-                                e1.printStackTrace();
-                            }
+                            Playing.Play();
                         } catch (JavaLayerException e1) {
                             e1.printStackTrace();
                         }

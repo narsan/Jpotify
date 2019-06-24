@@ -4,7 +4,7 @@ import java.util.List;
 
 public class UpdateWorker  extends SwingWorker<Void, Integer>  {
 
-       JSlider slider =null;
+    static   JSlider slider ;
 
     private int duration;
 
@@ -39,10 +39,10 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
 
             this.duration = duration;
             slider=new JSlider();
-            slider.setValue(0);
             slider.setBackground(new Color(58,58,58));
             slider.setMinimum(0);
             slider.setMaximum(duration);
+            slider.setValue(0);
         }
 
     public void setDuration(int duration) {
@@ -86,7 +86,7 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
             slider.setValue(chunks.get(0));
         }
 
-    public  JSlider getSlider() {
+    public static JSlider getSlider() {
         return slider;
     }
 }

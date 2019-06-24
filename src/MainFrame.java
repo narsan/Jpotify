@@ -158,7 +158,6 @@ public  class MainFrame {
 
                 refresh(showSongsToCreatePlayList.songsName());
 
-
                 Library.addNewPlayList(showSongsToCreatePlayList.getPlayList());
 
                 leftPanel.add(showSongsToCreatePlayList.playList.getPlayList());
