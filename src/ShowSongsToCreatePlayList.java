@@ -87,11 +87,9 @@ public class ShowSongsToCreatePlayList implements ItemListener {
                         @Override
                         public void itemStateChanged(ItemEvent e) {
 
-                            try {
+
                                 playList.addSongToPlayList(songs.get(finalI));
-                            } catch (IOException e1) {
-                                e1.printStackTrace();
-                            }
+
                             try {
                                 playList.writeSongs();
                             } catch (IOException ex) {
@@ -133,11 +131,9 @@ public class ShowSongsToCreatePlayList implements ItemListener {
 
                 // System.out.println("selected");
 
-                try {
+
                     playList.addSongToPlayList(Library.getSongs().get(i));
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+
                 try {
                     playList.writeSongs();
                 } catch (IOException ex) {

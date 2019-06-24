@@ -19,7 +19,7 @@ public class PlayList {
     protected String playListName;
     protected HashSet<File> playListSongs=new HashSet<>();
     private ObjectOutputStream out;
-    File path;
+
 
 
     JButton deleteSong = new JButton();
@@ -31,9 +31,24 @@ public class PlayList {
         return playListSongs;
     }
 
-    public void setPlayListSongs(HashSet<File> playListSongs) {
-        this.playListSongs = playListSongs;
-        System.out.println(playListSongs.size());
+    public void setPlayListSongs(HashSet<File> songs) {
+
+        ArrayList<File> temp=new ArrayList<>(songs);
+        for (int i = 0; i <temp.size() ; i++) {
+
+            //System.out.println(temp.get(i));
+
+        }
+        this.playListSongs = songs;
+
+        temp=new ArrayList<>(songs);
+
+        for (int i = 0; i <temp.size() ; i++) {
+
+            //System.out.println(temp.get(i));
+
+        }
+
     }
 
     public JButton getPlayList() {
@@ -44,11 +59,6 @@ public class PlayList {
     public PlayList(String playListName) throws IOException {
 
         this.playListName = playListName;
-
-        path=new File("src\\playlists\\"+playListName+".bin");
-        out = new ObjectOutputStream(new FileOutputStream(path));
-
-
         playList.setText(playListName);
         playList.setFont(new Font("Arial", Font.PLAIN, 20));
         playList.setBackground(Color.BLACK);
@@ -65,7 +75,7 @@ public class PlayList {
         JPanel songsPanel = new JPanel();
         JPanel option=new JPanel();
         option.setBackground(Color.BLACK);
-        option.setLayout(new GridLayout(4,0));
+        option.setLayout(new GridLayout(5,0));
         songsPanel.setBackground(Color.black);
         songsPanel.setVisible(true);
         songsPanel.setLayout( new FlowLayout());
@@ -204,7 +214,41 @@ public class PlayList {
 
                         }
                         showPlayingSong.setBackground(Color.DARK_GRAY);
+
+
                         FileInputStream in = null;
+                        try {
+                            in = new FileInputStream(temp1);
+                        } catch (FileNotFoundException e1) {
+                            e1.printStackTrace();
+                        }
+
+                        PausablePlayer player = null;
+
+                        try {
+                            player=new PausablePlayer(in);
+                        } catch (JavaLayerException e1) {
+                            e1.printStackTrace();
+                        }
+
+
+                        Playing.setFile(temp1);
+                        Playing.setPlayer(player);
+                        Playing.plaiyingSongs.add(player);
+                        PlayMusic playMusic1 = new PlayMusic(temp1, player);
+                        try {
+                            Playing.Play();
+                        } catch (JavaLayerException e1) {
+                            e1.printStackTrace();
+                        }
+                        Player player1= null;
+                        try {
+                            player1 = new Player(in);
+                        } catch (JavaLayerException e1) {
+                            e1.printStackTrace();
+                        }
+
+                        /*FileInputStream in = null;
                         try {
                             in = new FileInputStream(temp1);
                         } catch (FileNotFoundException e1) {
@@ -217,27 +261,6 @@ public class PlayList {
                         } catch (JavaLayerException e1) {
                             e1.printStackTrace();
                         }
-                        /*try {
-                            if (playedSongs.size() != 0) {
-                                playedSongs.get(playedSongs.size() - 1).close();
-                            }
-                            player.play();
-                            playedSongs.add(player);
-                        } catch (JavaLayerException e1) {
-                            e1.printStackTrace();
-                        }*/
-
-
-
-                        /*Playing.setFile(temp1);
-                        Playing.setPlayer(player);
-                        Playing.plaiyingSongs.add(player);
-                        PlayMusic playMusic1=new PlayMusic(temp1,player);
-                        try {
-                            Playing.Play();
-                        } catch (JavaLayerException e1) {
-                            e1.printStackTrace();
-                        }*/
 
 
                         Thread thread= null;
@@ -294,7 +317,7 @@ public class PlayList {
 
         AddNewSongToPlayList addNewSongToPlayList=new AddNewSongToPlayList(this);
         DeleteSongFromPlayList deleteSongFromPlayList=new DeleteSongFromPlayList(this);
-     //   ModifySongsOrderInPlayList modify=new ModifySongsOrderInPlayList(this);
+        ModifySongsOrderInPlayList modify=new ModifySongsOrderInPlayList(this);
 
 
         delete.setText("delete this playList");
@@ -317,6 +340,7 @@ public class PlayList {
         option.add(setNewName);
         option.add(addNewSongToPlayList.getAddNewSong());
         option.add(deleteSongFromPlayList.getDeleteSong());
+        option.add(modify.getModify());
 
         songsPanel.add(option);
 
@@ -360,21 +384,14 @@ public class PlayList {
 
     }
 
-    public void addSongToPlayList(File file) throws IOException {
+    public void addSongToPlayList(File file)  {
 
-        System.out.println("here adding");
         playListSongs.add(file);
-        try {
-            out.writeObject(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
 
     }
     public void writeSongs() throws IOException {
 
-        path=new File("./src/playlists/"+playListName+".bin");
+       File path=new File("./src/playlists/"+playListName+".bin");
         out = new ObjectOutputStream(new FileOutputStream(path));
 
 
@@ -394,28 +411,28 @@ public class PlayList {
 
         this.playListName = playListName;
         //./src/playlists/
-        File file2=new File("./src/playlists/"+playListName+".bin");
+       // File file2=new File("./src/playlists/"+playListName+".bin");
 
-        if ( path.renameTo(file2)){
+        /*if ( path.renameTo(file2)){
 
             System.out.println("renamed");
-        }
+        }*/
 
     }
 
     public void removeSongFromPlayList(File file) throws IOException, ClassNotFoundException {
 
-        ObjectInputStream in=new ObjectInputStream(new FileInputStream(path));
+        /*ObjectInputStream in=new ObjectInputStream(new FileInputStream(path));
         File file1= (File) in.readObject();
         if (file1.equals(file)){
 
             System.out.println("equal");
-        }
+        }*/
 
         playListSongs.remove(file);
-        path.delete();
+       // path.delete();
 
-        writeSongs();
+        //writeSongs();
     }
 
 
