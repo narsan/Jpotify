@@ -67,6 +67,7 @@ public class ShowSongsToCreatePlayList implements ItemListener {
         if (flag==true){
 
             showSongs.removeAll();
+            System.out.println();
         }
 
 
