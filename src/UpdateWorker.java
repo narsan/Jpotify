@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 
 public class UpdateWorker  extends SwingWorker<Void, Integer>  {
@@ -43,7 +45,38 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
         slider.setBackground(new Color(58,58,58));
         slider.setMinimum(0);
         slider.setMaximum(duration);
+
     }
+    public void addMouslistenr() {
+        slider.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                Playing.player.pause();
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                //seekTo
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+    }
+
+
 
     public void setDuration(int duration) {
         this.duration = duration;
@@ -61,9 +94,10 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
         for (int i = 1; i <= duration; i++) {
 
             if (ispaused==false){
+
                 publish(i);
 
-                time.setText("passed :"+String.valueOf(i));
+                time.setText("passed :"+ String.valueOf(i));
 
 
             }
@@ -89,4 +123,5 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
     public  JSlider getSlider() {
         return slider;
     }
+
 }

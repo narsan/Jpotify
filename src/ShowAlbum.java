@@ -271,6 +271,7 @@ public class ShowAlbum extends JButton {
                         if(id3v2.getArtist()!=null){
                             JLabel Artist = new JLabel(id3v2.getArtist());
                             Artist.setForeground(Color.WHITE);
+                            Artist.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(Artist);
                         }
 
@@ -278,6 +279,7 @@ public class ShowAlbum extends JButton {
 
                             JLabel Artist = new JLabel(id3v1.getArtist());
                             Artist.setForeground(Color.WHITE);
+                            Artist.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(Artist);
 
 
@@ -287,6 +289,7 @@ public class ShowAlbum extends JButton {
 
                             JLabel Title = new JLabel(id3v2.getTitle());
                             Title.setForeground(Color.WHITE);
+                            Title.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(Title);
                         }
 
@@ -294,6 +297,7 @@ public class ShowAlbum extends JButton {
 
                             JLabel Title = new JLabel(id3v1.getTitle());
                             Title.setForeground(Color.WHITE);
+                            Title.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(Title);
 
 
@@ -304,12 +308,14 @@ public class ShowAlbum extends JButton {
 
                             JLabel album = new JLabel(id3v2.getAlbum());
                             album.setForeground(Color.WHITE);
+                            album.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(album);
                         }
 
                         else if (id3v1.getAlbum()!=null){
                             JLabel album = new JLabel(id3v1.getAlbum());
                             album.setForeground(Color.WHITE);
+                            album.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(album);
 
 
@@ -349,7 +355,7 @@ public class ShowAlbum extends JButton {
                             e1.printStackTrace();
                         }
                         Playing.setPlayer(player);
-                        Playing.plaiyingSongs.add(player);
+                        Playing.playingSongs.add(player);
                         try {
                             DownPanel.setPausablePlayer(player,temp);
                         } catch (InvalidDataException e1) {

@@ -16,9 +16,10 @@ public class Playing  {
         return updateWorker;
     }
 
-    static ArrayList<PausablePlayer >plaiyingSongs=new ArrayList<>();
+    static ArrayList<PausablePlayer > playingSongs =new ArrayList<>();
 
     static PausablePlayer player;
+
 
     public static void setPlayer(PausablePlayer player) {
         Playing.player = player;
@@ -32,13 +33,14 @@ public class Playing  {
 
     static File file;
 
+
     public  static void Play() throws JavaLayerException, InvalidDataException, IOException, UnsupportedTagException {
 
 
         Mp3File mp3File=new Mp3File(file);
         updateWorker=new UpdateWorker((int)mp3File.getLengthInSeconds());
 
-        if (plaiyingSongs.size()==1){
+        if (playingSongs.size()==1){
 
 
             player.play();
@@ -46,13 +48,14 @@ public class Playing  {
             DownPanel.addNewSlider(updateWorker.slider);
             DownPanel.downCenterPanel.add(updateWorker.getTime(),BorderLayout.EAST);
             DownPanel.downCenterPanel.add(updateWorker.getTotalTime(),BorderLayout.WEST);
+            updateWorker.addMouslistenr();
             updateWorker.execute();
         }
 
-        else if (plaiyingSongs.size()!=1){
+        else if (playingSongs.size()!=1){
 
 
-            plaiyingSongs.get(plaiyingSongs.size()-2).stop();
+            playingSongs.get(playingSongs.size()-2).stop();
             player.play();
             updateWorker.execute();
         }
@@ -63,7 +66,7 @@ public class Playing  {
 
     public void addTopalying(PausablePlayer player){
 
-        plaiyingSongs.add(player);
+        playingSongs.add(player);
 
     }
 

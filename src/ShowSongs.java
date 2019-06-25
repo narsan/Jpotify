@@ -4,14 +4,12 @@ import javazoom.jl.decoder.JavaLayerException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.html.HTMLDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class ShowSongs extends JButton {
 
@@ -114,11 +112,12 @@ public class ShowSongs extends JButton {
                         ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
 
                         playingSongImg.add(new JLabel(imageIcon));
-                        EmptyBorder border1 = new EmptyBorder(0, 5, 5, 5);
+                        EmptyBorder border1 = new EmptyBorder(0, 2, 5, 2);
                         playingSongImg.setBorder(border1);
                         if(id3v2.getArtist()!=null){
                             JLabel Artist = new JLabel(id3v2.getArtist());
                             Artist.setForeground(Color.WHITE);
+                            Artist.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(Artist);
                         }
 
@@ -126,6 +125,7 @@ public class ShowSongs extends JButton {
 
                             JLabel Artist = new JLabel(id3v1.getArtist());
                             Artist.setForeground(Color.WHITE);
+                            Artist.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(Artist);
 
 
@@ -135,6 +135,7 @@ public class ShowSongs extends JButton {
 
                             JLabel Title = new JLabel(id3v2.getTitle());
                             Title.setForeground(Color.WHITE);
+                            Title.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(Title);
                         }
 
@@ -142,6 +143,7 @@ public class ShowSongs extends JButton {
 
                             JLabel Title = new JLabel(id3v1.getTitle());
                             Title.setForeground(Color.WHITE);
+                            Title.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(Title);
 
 
@@ -152,24 +154,24 @@ public class ShowSongs extends JButton {
 
                             JLabel album = new JLabel(id3v2.getAlbum());
                             album.setForeground(Color.WHITE);
+                            album.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(album);
                         }
 
                         else if (id3v1.getAlbum()!=null){
                             JLabel album = new JLabel(id3v1.getAlbum());
                             album.setForeground(Color.WHITE);
+                            album.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(album);
 
 
                         }
-                        EmptyBorder border2 = new EmptyBorder(5, 50, 0, 0);
-                        playingSonglabel.setBorder(border2);
                         showPlayingSong.add(playingSongImg,BorderLayout.WEST);
                         showPlayingSong.add(playingSonglabel,BorderLayout.EAST);
                         EmptyBorder border = new EmptyBorder(0, 0, 0, 80);
                         showPlayingSong.setBorder(border);
                         showPlayingSong.setBackground(new Color(58,58,58));
-                        showPlayingSong.setPreferredSize(new Dimension(318,0));
+                        showPlayingSong.setPreferredSize(new Dimension(360,0));
 
                         FileInputStream in = null;
                         try {
@@ -197,7 +199,7 @@ public class ShowSongs extends JButton {
                         }
                         Playing.setPlayer(player);
 
-                        Playing.plaiyingSongs.add(player);
+                        Playing.playingSongs.add(player);
 
 
                         try {

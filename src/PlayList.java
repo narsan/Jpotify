@@ -61,7 +61,7 @@ public class PlayList {
 
         this.playListName = playListName;
         playList.setText(playListName);
-        playList.setFont(new Font("Arial", Font.PLAIN, 20));
+        playList.setFont(new Font("Arial", Font.PLAIN, 16));
         playList.setBackground(Color.BLACK);
         playList.setForeground(Color.white);
         playList.setBorder(null);
@@ -180,6 +180,7 @@ public class PlayList {
 
                             JLabel Artist = new JLabel(id3v2.getArtist());
                             Artist.setForeground(Color.WHITE);
+                            Artist.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(Artist);
 
                         }
@@ -188,6 +189,7 @@ public class PlayList {
 
                             JLabel Artist = new JLabel(id3v2.getArtist());
                             Artist.setForeground(Color.WHITE);
+                            Artist.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(Artist);
 
 
@@ -197,6 +199,7 @@ public class PlayList {
 
                             JLabel Title = new JLabel(id3v2.getTitle());
                             Title.setForeground(Color.WHITE);
+                            Title.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(Title);
 
                         }
@@ -205,6 +208,7 @@ public class PlayList {
 
                             JLabel Title = new JLabel(id3v2.getTitle());
                             Title.setForeground(Color.WHITE);
+                            Title.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(Title);
 
 
@@ -215,6 +219,7 @@ public class PlayList {
 
                             JLabel album = new JLabel(id3v2.getAlbum());
                             album.setForeground(Color.WHITE);
+                            album.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(album);
                         }
 
@@ -222,6 +227,7 @@ public class PlayList {
 
                             JLabel album = new JLabel(id3v2.getAlbum());
                             album.setForeground(Color.WHITE);
+                            album.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(album);
 
 
@@ -261,7 +267,7 @@ public class PlayList {
                             e1.printStackTrace();
                         }
                         Playing.setPlayer(player);
-                        Playing.plaiyingSongs.add(player);
+                        Playing.playingSongs.add(player);
                         try {
                             DownPanel.setPausablePlayer(player,temp1);
                         } catch (InvalidDataException e1) {

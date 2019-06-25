@@ -15,6 +15,7 @@ public  class MainFrame {
     static CurrentPanel currentPanel;
     PlaylistPanel playlistPanel = new PlaylistPanel();
 
+
  /*   public void setCurrentPanel(JPanel currentPanel) {
         this.currentPanel = currentPanel;
     }
@@ -34,25 +35,18 @@ public  class MainFrame {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(Color.BLACK);
 
-        JPanel userName=new JPanel();
-        userName.setBackground(Color.black);
-        userName.setVisible(true);
-        userName.setLayout(new BorderLayout());
-        JTextField searchBar=new JTextField("search...");
-        searchBar.setBackground(Color.white);
-        searchBar.setForeground(Color.pink);
-        searchBar.setColumns(10);
-        searchBar.setBorder(BorderFactory.createCompoundBorder(
-                new CustomeBorder(),
-                new EmptyBorder(new Insets(15, 25, 15, 25))));
-        userName.add(searchBar,BorderLayout.WEST);
 
-        JLabel account=new JLabel("9731074");
-        account.setForeground(Color.WHITE);
-        account.setFont(new Font("Arial",Font.PLAIN,13));
-        userName.add(account,BorderLayout.EAST);
+//        JTextField searchBar=new JTextField("search...");
+//        searchBar.setBackground(Color.white);
+//        searchBar.setForeground(Color.pink);
+//        searchBar.setColumns(10);
+//        searchBar.setBorder(BorderFactory.createCompoundBorder(
+//                new CustomeBorder(),
+//                new EmptyBorder(new Insets(15, 25, 15, 25))));
+        UserPanel userPanel = new UserPanel();
+        frame.add(userPanel,BorderLayout.NORTH);
 
-        //frame.add(userName,BorderLayout.NORTH);
+
 
 
         LeftPanel leftPanel = new LeftPanel();
@@ -110,7 +104,7 @@ public  class MainFrame {
                 showSongsToCreatePlayList.setPlayList(playList);
                 Library.addNewPlayList(showSongsToCreatePlayList.getPlayList());
 
-                leftPanel.add(showSongsToCreatePlayList.playList.getPlayList());
+                playlistPanel.add(showSongsToCreatePlayList.playList.getPlayList());
 
                 showSongsToCreatePlayList.getPlayList().getPlayList().addActionListener(new ActionListener() {
                     @Override
