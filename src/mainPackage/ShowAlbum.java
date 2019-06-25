@@ -83,6 +83,8 @@ public class ShowAlbum extends JButton {
                     if (mp3File.hasId3v2Tag()) {
 
                         ID3v1 id3v1 = mp3File.getId3v2Tag();
+                        ID3v1 id3v2 = mp3File.getId3v2Tag();
+
                         if (id3v1.getAlbum().equals(albumName)) {
 
                             if (!AlbumNames.contains(albumName)&&i!=j) {

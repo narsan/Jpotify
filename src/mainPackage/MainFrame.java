@@ -74,6 +74,11 @@ public  class MainFrame {
         playLists.setForeground( new Color(195,195,195));
         leftPanel.add(playLists);
         leftPanel.add(playlistPanel.getjScrollPane());
+
+        FavoriteSong favoriteSong=new FavoriteSong();
+        SharedPlayList sharedPlayList=new SharedPlayList();
+        playlistPanel.add(favoriteSong.playList);
+        playlistPanel.add(sharedPlayList.playList);
         try {
             File file=new File("src\\sorted.bin");
             //File file=new File("src\\sorted.bin");
@@ -81,8 +86,8 @@ public  class MainFrame {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("src\\sorted.bin"));
             while (true) {
 
-                    Library.addSong((File) objectInputStream.readObject());
-                }
+                Library.addSong((File) objectInputStream.readObject());
+            }
 
         } catch (EOFException e) {
         } catch (ClassNotFoundException e) {
@@ -180,11 +185,6 @@ public  class MainFrame {
             }
         });
 
-
-        FavoriteSong favoriteSong=new FavoriteSong();
-        SharedPlayList sharedPlayList=new SharedPlayList();
-        leftPanel.add(favoriteSong.playList);
-        leftPanel.add(sharedPlayList.playList);
         favoriteSong.playList.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
