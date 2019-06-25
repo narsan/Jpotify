@@ -358,7 +358,7 @@ public class ShowAlbum extends JButton {
                             e1.printStackTrace();
                         }
                         Playing.setPlayer(player);
-                        Playing.playingSongs.add(player);
+                        Playing.addTopalying(player);
                         try {
                             DownPanel.setPausablePlayer(player,temp);
                         } catch (InvalidDataException e1) {

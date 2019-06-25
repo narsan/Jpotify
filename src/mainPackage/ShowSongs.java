@@ -201,7 +201,7 @@ public class ShowSongs extends JButton {
                         }
                         Playing.setPlayer(player);
 
-                        Playing.playingSongs.add(player);
+                        Playing.addTopalying(player);
 
 
                         try {

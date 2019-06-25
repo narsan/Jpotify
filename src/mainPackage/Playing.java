@@ -70,75 +70,98 @@ public class Playing {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
             LocalDateTime now = LocalDateTime.now();
             sortByTime.put(file, now);
-            sortByTime = sortByValue(sortByTime);
+
+            ArrayList<File> sortedSong = new ArrayList<>(sortByTime.keySet());
+
 
             for (int i = 0; i < Library.getSongs().size(); i++) {
 
-                if (!sortByTime.containsKey(Library.getSongs().get(i))) {
+                if (!sortedSong.contains(Library.getSongs().get(i))) {
+
 
                     sortByTime.put(Library.getSongs().get(i), LocalDateTime.MIN);
                 }
+            }
 
-                ArrayList<File> sortedSong = new ArrayList<>(sortByTime.keySet());
+            sortByTime=sortByValue(sortByTime);
 
+            sortedSong = new ArrayList<>(sortByTime.keySet());
 
-                out = new ObjectOutputStream(new FileOutputStream("src\\sorted.bin"));
+              out = new ObjectOutputStream(new FileOutputStream("src\\sorted.bin"));
 
-                for (int j = 0; j < sortedSong.size(); j++) {
+                for (int j = sortedSong.size()-1; j>=0; j--) {
 
                     out.writeObject(sortedSong.get(j));
 
                 }
 
 
-            }
+        }
 
 
-            DownPanel.downCenterPanel.add(updateWorker.slider, BorderLayout.PAGE_END);
-            // mainPackage.DownPanel.addNewSlider(updateWorker.slider);
-            DownPanel.downCenterPanel.add(updateWorker.getTime(), BorderLayout.EAST);
-            DownPanel.downCenterPanel.add(updateWorker.getTotalTime(), BorderLayout.WEST);
-            updateWorker.execute();
-        } else if (plaiyingSongs.size() != 1) {
+
+        DownPanel.downCenterPanel.add(updateWorker.slider, BorderLayout.PAGE_END);
+        // mainPackage.DownPanel.addNewSlider(updateWorker.slider);
+        DownPanel.downCenterPanel.add(updateWorker.getTime(), BorderLayout.EAST);
+        DownPanel.downCenterPanel.add(updateWorker.getTotalTime(), BorderLayout.WEST);
+        updateWorker.execute();
+      if (plaiyingSongs.size() != 1) {
 
 
             plaiyingSongs.get(plaiyingSongs.size() - 2).stop();
-            player.play();
+            try {
+                player.play();
+            } catch (JavaLayerException e) {
+                e.printStackTrace();
+            }
 
 
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
             LocalDateTime now = LocalDateTime.now();
-            sortByTime.put(file, now);
+          sortByTime.put(file, now);
+
+          ArrayList<File> sortedSong = new ArrayList<>(sortByTime.keySet());
 
 
-            for (int i = 0; i < Library.getSongs().size(); i++) {
+          for (int i = 0; i < Library.getSongs().size(); i++) {
 
-                if (!sortByTime.containsKey(Library.getSongs().get(i))) {
-
-                    sortByTime.put(Library.getSongs().get(i), LocalDateTime.MIN);
-                }
-
-                ArrayList<File> sortedSong = new ArrayList<>(sortByTime.keySet());
+              if (!sortedSong.contains(Library.getSongs().get(i))) {
 
 
-                out = new ObjectOutputStream(new FileOutputStream("src\\sorted.bin"));
+                  sortByTime.put(Library.getSongs().get(i), LocalDateTime.MIN);
+              }
+          }
 
-                for (int j = 0; j < sortedSong.size(); j++) {
+          sortByTime=sortByValue(sortByTime);
 
-                    out.writeObject(sortedSong.get(j));
-
-                }
+          sortedSong = new ArrayList<>(sortByTime.keySet());
 
 
-                updateWorker.execute();
+          out = new ObjectOutputStream(new FileOutputStream("src\\sorted.bin"));
+
+          for (int j = sortedSong.size()-1; j>=0; j--) {
+
+              System.out.println(sortedSong.get(j));
+
+              out.writeObject(sortedSong.get(j));
+
+
+
+              updateWorker.execute();
             }
-
-
         }
     }
 
 
-        public void addTopalying (PausablePlayer player){
+
+
+
+
+
+
+
+
+        public static void addTopalying(PausablePlayer player){
 
             plaiyingSongs.add(player);
 
@@ -175,6 +198,7 @@ public class Playing {
         }*/
             return sortedMap;}
         }
+
 
 
 

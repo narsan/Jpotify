@@ -75,10 +75,10 @@ public  class MainFrame {
         leftPanel.add(playLists);
         leftPanel.add(playlistPanel.getjScrollPane());
         try {
-            File file=new File("src\\savedSongs.bin");
+            File file=new File("src\\sorted.bin");
             //File file=new File("src\\sorted.bin");
 
-            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("src\\savedSongs.bin"));
+            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("src\\sorted.bin"));
             while (true) {
 
                     Library.addSong((File) objectInputStream.readObject());
