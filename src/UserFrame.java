@@ -10,9 +10,9 @@ public class UserFrame {
     public UserFrame() {
 
 
-        newName = JOptionPane.showInputDialog(Uframe, "enter new name");
-        System.out.println(newName);
-        userPanel.setName(newName);
+//        newName = JOptionPane.showInputDialog(Uframe, "enter new name");
+//        System.out.println(newName);
+//        userPanel.setName(newName);
         try {
             MainFrame mainFrame=new MainFrame();
         } catch (IOException e) {

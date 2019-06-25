@@ -6,11 +6,12 @@ import java.awt.*;
 public class UserPanel extends JPanel {
 
     private JLabel userAccount = new JLabel();
-    protected String name = "narges";
+    protected String name ;
 
     @Override
     public void setName(String name) {
         this.name = name;
+        userAccount.setText(name);
     }
 
     class CustomeBorder extends AbstractBorder {
@@ -33,20 +34,20 @@ public class UserPanel extends JPanel {
 
         this.setBackground(Color.BLACK);
         this.setPreferredSize(new Dimension(200, 40));
-        JTextField searchBar = new JTextField("search...");
-        searchBar.setEditable(true);
-        searchBar.setBackground(Color.white);
-        searchBar.setForeground(Color.pink);
+        JTextField searchBar = new JTextField();
         searchBar.setColumns(10);
         searchBar.setBorder(BorderFactory.createCompoundBorder(
                 new CustomeBorder(),
                 new EmptyBorder(new Insets(15, 25, 15, 25))));
-
+        searchBar.setText("search...");
+        searchBar.setEditable(true);
+        searchBar.setBackground(Color.white);
+        searchBar.setForeground(Color.pink);
 
         userAccount.setText(name);
         userAccount.setFont(new Font("Arial", Font.PLAIN, 16));
-        userAccount.setBackground(Color.green);
-        userAccount.setForeground(Color.pink);
+        userAccount.setBackground(Color.BLACK);
+        userAccount.setForeground(Color.white);
         userAccount.setBorder(null);
         userAccount.setVisible(true);
         EmptyBorder border = new EmptyBorder(5, 250, 5, 250);

@@ -44,6 +44,10 @@ public  class MainFrame {
 //                new CustomeBorder(),
 //                new EmptyBorder(new Insets(15, 25, 15, 25))));
         UserPanel userPanel = new UserPanel();
+        JFrame Uframe = new JFrame();
+        String newName = JOptionPane.showInputDialog(Uframe, "enter new name");
+        System.out.println(newName);
+        userPanel.setName(newName);
         frame.add(userPanel,BorderLayout.NORTH);
 
 
@@ -231,9 +235,5 @@ public  class MainFrame {
         }
     }
 
-    public static void main(String[] args) throws IOException {
 
-        new MainFrame();
-
-    }
 }
