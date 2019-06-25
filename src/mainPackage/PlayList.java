@@ -1,3 +1,5 @@
+package mainPackage;
+
 import com.mpatric.mp3agic.*;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
@@ -10,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -61,7 +64,7 @@ public class PlayList {
 
         this.playListName = playListName;
         playList.setText(playListName);
-        playList.setFont(new Font("Arial", Font.PLAIN, 16));
+        playList.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
         playList.setBackground(Color.BLACK);
         playList.setForeground(Color.white);
         playList.setBorder(null);
@@ -94,7 +97,7 @@ public class PlayList {
         }
 
 
-//            Iterator iterator=Library.getSongs().iterator();
+//            Iterator iterator=mainPackage.Library.getSongs().iterator();
         for (int i = 0; i < temp.size(); i++) {
 
 
@@ -180,7 +183,6 @@ public class PlayList {
 
                             JLabel Artist = new JLabel(id3v2.getArtist());
                             Artist.setForeground(Color.WHITE);
-                            Artist.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(Artist);
 
                         }
@@ -189,7 +191,6 @@ public class PlayList {
 
                             JLabel Artist = new JLabel(id3v2.getArtist());
                             Artist.setForeground(Color.WHITE);
-                            Artist.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(Artist);
 
 
@@ -199,7 +200,6 @@ public class PlayList {
 
                             JLabel Title = new JLabel(id3v2.getTitle());
                             Title.setForeground(Color.WHITE);
-                            Title.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(Title);
 
                         }
@@ -208,7 +208,6 @@ public class PlayList {
 
                             JLabel Title = new JLabel(id3v2.getTitle());
                             Title.setForeground(Color.WHITE);
-                            Title.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(Title);
 
 
@@ -219,7 +218,6 @@ public class PlayList {
 
                             JLabel album = new JLabel(id3v2.getAlbum());
                             album.setForeground(Color.WHITE);
-                            album.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(album);
                         }
 
@@ -227,7 +225,6 @@ public class PlayList {
 
                             JLabel album = new JLabel(id3v2.getAlbum());
                             album.setForeground(Color.WHITE);
-                            album.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(album);
 
 
@@ -267,7 +264,7 @@ public class PlayList {
                             e1.printStackTrace();
                         }
                         Playing.setPlayer(player);
-                        Playing.playingSongs.add(player);
+                        Playing.plaiyingSongs.add(player);
                         try {
                             DownPanel.setPausablePlayer(player,temp1);
                         } catch (InvalidDataException e1) {
@@ -277,10 +274,14 @@ public class PlayList {
                         } catch (UnsupportedTagException e1) {
                             e1.printStackTrace();
                         }
-                        //  PlayMusic playMusic1 = new PlayMusic(temp1, player);
+                        //  mainPackage.PlayMusic playMusic1 = new mainPackage.PlayMusic(temp1, player);
                         try {
                             try {
-                                Playing.Play();
+                                try {
+                                    Playing.Play();
+                                } catch (ParseException e1) {
+                                    e1.printStackTrace();
+                                }
                             } catch (InvalidDataException e1) {
                                 e1.printStackTrace();
                             } catch (IOException e1) {
@@ -304,15 +305,15 @@ public class PlayList {
                         } catch (FileNotFoundException e1) {
                             e1.printStackTrace();
                         }
-                        PausablePlayer player = null;
+                        mainPackage.PausablePlayer player = null;
                         try {
-                            player = new PausablePlayer(in);
+                            player = new mainPackage.PausablePlayer(in);
                         } catch (JavaLayerException e1) {
                             e1.printStackTrace();
                         }
                         Thread thread= null;
                        /* try {
-                            //thread = new Thread( new newPalyer(new Player(in)));
+                            //thread = new Thread( new mainPackage.newPalyer(new Player(in)));
                         } catch (JavaLayerException e1) {
                             e1.printStackTrace();
                         }

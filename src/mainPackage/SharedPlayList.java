@@ -1,3 +1,5 @@
+package mainPackage;
+
 import java.io.IOException;
 
 public class SharedPlayList extends PlayList {

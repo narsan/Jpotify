@@ -1,15 +1,7 @@
-import com.mpatric.mp3agic.*;
-import javazoom.jl.decoder.JavaLayerException;
+package mainPackage;
+
 import javazoom.jl.player.Player;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionListener;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.*;
 
 public class PlayMusic {
@@ -32,7 +24,7 @@ public class PlayMusic {
 
     public PlayMusic() {
 
-        //index = Library.getSongs().indexOf(file);
+        //index = mainPackage.Library.getSongs().indexOf(file);
 
 
 
@@ -73,8 +65,8 @@ public class PlayMusic {
             totalTime.setText("Total:"+mp3File.getLengthInSeconds());
             totalTime.setForeground(Color.pink);
             totalTime.setFont(new Font("Arial",Font.PLAIN,13));
-            updateWorker = new UpdateWorker((int) mp3File.getLengthInSeconds());
-            //downCenterPanel.add(UpdateWorker.getSlider(), BorderLayout.PAGE_END);*/
+            updateWorker = new mainPackage.UpdateWorker((int) mp3File.getLengthInSeconds());
+            //downCenterPanel.add(mainPackage.UpdateWorker.getSlider(), BorderLayout.PAGE_END);*/
         //downCenterPanel.add(totalTime,BorderLayout.CENTER);
         //downCenterPanel.add(updateWorker.getTime(),BorderLayout.EAST);
             /*updateWorker.execute();
@@ -86,7 +78,7 @@ public class PlayMusic {
             e.printStackTrace();
         }*/
 
-        //DownPanel.addPauseAndResume(downCenterPanel);
+        //mainPackage.DownPanel.addPauseAndResume(downCenterPanel);
 
 
        /* pause.addActionListener(new ActionListener() {
@@ -109,24 +101,24 @@ public class PlayMusic {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int temp = index + 1;
-                PausablePlayer player1 = null;
+                mainPackage.PausablePlayer player1 = null;
                 try {
                     FileInputStream in = null;
                     try {
-                        in = new FileInputStream(Library.getSongs().get(temp));
+                        in = new FileInputStream(mainPackage.Library.getSongs().get(temp));
                     } catch (FileNotFoundException e1) {
                         e1.printStackTrace();
                     }
-                    player1 = new PausablePlayer(in);
-                    PlayMusic playMusic=new PlayMusic(Library.getSongs().get(temp),player1);
+                    player1 = new mainPackage.PausablePlayer(in);
+                    mainPackage.PlayMusic playMusic=new mainPackage.PlayMusic(mainPackage.Library.getSongs().get(temp),player1);
                 } catch (JavaLayerException e1) {
                     e1.printStackTrace();
                 }
                 pausablePlayer.close();
                 try {
                     try {
-                        Mp3File mp3File = new Mp3File(Library.getSongs().get(temp));
-                        DownPanel.addPlayingSongInfo(showSongs(mp3File));
+                        Mp3File mp3File = new Mp3File(mainPackage.Library.getSongs().get(temp));
+                        mainPackage.DownPanel.addPlayingSongInfo(showSongs(mp3File));
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     } catch (UnsupportedTagException e1) {
@@ -145,23 +137,23 @@ public class PlayMusic {
             public void actionPerformed(ActionEvent e) {
                 System.out.println(index);
                 int temp = index - 1;
-                PausablePlayer player1 = null;
+                mainPackage.PausablePlayer player1 = null;
                 try {
                     FileInputStream in = null;
                     try {
-                        in = new FileInputStream(Library.getSongs().get(temp));
+                        in = new FileInputStream(mainPackage.Library.getSongs().get(temp));
                     } catch (FileNotFoundException e1) {
                         e1.printStackTrace();
                     }
-                    player1 = new PausablePlayer(in);
+                    player1 = new mainPackage.PausablePlayer(in);
                 } catch (JavaLayerException e1) {
                     e1.printStackTrace();
                 }
                 pausablePlayer.close();
                 try {
                     try {
-                        Mp3File mp3File = new Mp3File(Library.getSongs().get(temp));
-                        DownPanel.addPlayingSongInfo(showSongs(mp3File));
+                        Mp3File mp3File = new Mp3File(mainPackage.Library.getSongs().get(temp));
+                        mainPackage.DownPanel.addPlayingSongInfo(showSongs(mp3File));
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     } catch (UnsupportedTagException e1) {

@@ -8,9 +8,11 @@ public class ClientHandler implements Runnable {
     private Socket client;
     private ObjectInputStream reader;
     private ObjectOutputStream writer;
+    private ArrayList<File> songs=null;
 
 
-    public ClientHandler(Socket client) throws IOException {
+    public ClientHandler(Socket client, ArrayList<File> songs) throws IOException {
+        this.songs=songs;
         this.client = client;
         writer = new ObjectOutputStream(client.getOutputStream());
         reader = new ObjectInputStream(client.getInputStream());
@@ -23,17 +25,15 @@ public class ClientHandler implements Runnable {
     @Override
     public void run() {
         while (true) {
-
-
             try {
-                Object object= reader.readObject();
+
+                for (int i = 0; i <songs.size() ; i++) {
+
+                    writer.writeObject(songs.get(i));
+                }
             } catch (IOException e) {
                 e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
             }
-
-
         }
 
     }

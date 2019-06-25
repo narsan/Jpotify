@@ -1,3 +1,5 @@
+package mainPackage;
+
 import com.mpatric.mp3agic.*;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
@@ -10,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -365,10 +368,14 @@ public class ShowAlbum extends JButton {
                         } catch (UnsupportedTagException e1) {
                             e1.printStackTrace();
                         }
-                        //PlayMusic playMusic1 = new PlayMusic(temp, player);
+                        //mainPackage.PlayMusic playMusic1 = new mainPackage.PlayMusic(temp, player);
                         try {
                             try {
-                                Playing.Play();
+                                try {
+                                    Playing.Play();
+                                } catch (ParseException e1) {
+                                    e1.printStackTrace();
+                                }
                             } catch (InvalidDataException e1) {
                                 e1.printStackTrace();
                             } catch (IOException e1) {

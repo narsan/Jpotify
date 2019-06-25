@@ -1,3 +1,5 @@
+package mainPackage;
+
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
@@ -6,39 +8,28 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class AddNewSongToPlayList {
-    public JButton getAddNewSong() {
-        return addNewSong;
-    }
+public class DeleteSongFromPlayList {
 
-    private JButton addNewSong = new JButton();
+    private JButton deleteSong = new JButton();
     private PlayList playList;
 
-    public PlayList getPlayList() {
-        return playList;
-    }
-
-    public AddNewSongToPlayList(PlayList playList) {
-
+    public DeleteSongFromPlayList(PlayList playList) {
         this.playList = playList;
-
         ArrayList<String> songsName=new ArrayList<>();
 
 
-        addNewSong.setText("Add new Song..");
-        addNewSong.setBorder(null);
-        addNewSong.setBackground(Color.black);
-        addNewSong.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
-        addNewSong.setForeground(Color.WHITE);
+        deleteSong.setText("delete a song");
+        deleteSong.setBorder(null);
+        deleteSong.setBackground(Color.black);
+        deleteSong.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+        deleteSong.setForeground(Color.WHITE);
 
 
 
-        addNewSong.addActionListener(new ActionListener() {
+        deleteSong.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -49,8 +40,12 @@ public class AddNewSongToPlayList {
                     try {
                         mp3File = new Mp3File(Library.getSongs().get(i));
                         if (mp3File.hasId3v1Tag()&&mp3File.getId3v1Tag().getTitle()!=null){
-                            songsName.add(mp3File.getId3v1Tag().getTitle());}
+
+                            songsName.add(mp3File.getId3v1Tag().getTitle());
+                        }
+
                         else if (mp3File.hasId3v2Tag()&&mp3File.getId3v2Tag().getTitle()!=null){
+
 
                             songsName.add(mp3File.getId3v2Tag().getTitle());
                         }
@@ -75,30 +70,41 @@ public class AddNewSongToPlayList {
 
                     try {
                         mp3File = new Mp3File(Library.getSongs().get(i));
+
                         if (mp3File.hasId3v1Tag()&&mp3File.getId3v1Tag().getTitle()!=null){
 
                             if (mp3File.getId3v1Tag().getTitle().equals(input)){
-                                //System.out.println("here");
 
-                                playList.addSongToPlayList(Library.getSongs().get(i));
+                                if (playList.getPlayListSongs().contains(Library.getSongs().get(i))){
+
+
+                                    playList.removeSongFromPlayList(Library.getSongs().get(i));
+
+                                }
+
+
                             }
-
-
                         }
 
                         else if (mp3File.hasId3v2Tag()&&mp3File.getId3v2Tag().getTitle()!=null){
 
                             if (mp3File.getId3v2Tag().getTitle().equals(input)){
-                                //System.out.println("here");
-                                playList.addSongToPlayList(Library.getSongs().get(i));
+
+                                if (playList.getPlayListSongs().contains(Library.getSongs().get(i))){
+
+
+                                    playList.removeSongFromPlayList(Library.getSongs().get(i));
+
+                                }
+
+
                             }
 
 
                         }
 
 
-
-                    } catch (IOException e1) {
+                    } catch (IOException | ClassNotFoundException e1) {
                         e1.printStackTrace();
                     } catch (UnsupportedTagException e2) {
                         e2.printStackTrace();
@@ -110,12 +116,9 @@ public class AddNewSongToPlayList {
 
             }
         });
+    }
 
-
-
-
-
-
+    public JButton getDeleteSong() {
+        return deleteSong;
     }
 }
-

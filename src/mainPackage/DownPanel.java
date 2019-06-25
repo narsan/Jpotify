@@ -1,3 +1,5 @@
+package mainPackage;
+
 import com.mpatric.mp3agic.*;
 import javazoom.jl.decoder.JavaLayerException;
 
@@ -9,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.text.ParseException;
 
 public class DownPanel {
 
@@ -18,7 +21,6 @@ public class DownPanel {
     private JButton resume = new JButton();
     private JButton nextSong1 = new JButton();
     private JButton previousSong = new JButton();
-    private JButton shuffle1 = new JButton();
     JPanel playIcons = new JPanel();
     static JPanel downCenterPanel = new JPanel();
     static PausablePlayer pausablePlayer;
@@ -51,8 +53,7 @@ public class DownPanel {
         ImageIcon nextSong = new ImageIcon(new ImageIcon("src\\icons\\nextSong.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
         ImageIcon play = new ImageIcon(new ImageIcon("src\\icons\\play.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
         ImageIcon previous1 = new ImageIcon(new ImageIcon("src\\icons\\previousSong.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
-        ImageIcon shuffle = new ImageIcon(new ImageIcon("src\\icons\\shuffle.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
-        playIcons.setLayout(new GridLayout(1, 4));
+        playIcons.setLayout(new GridLayout(1, 2));
         //playIcons.setLayout(new GridBagLayout());
         playIcons.setBackground(new Color(58, 58, 58));
         nextSong1.setIcon(nextSong);
@@ -66,12 +67,8 @@ public class DownPanel {
         previousSong.setBackground(new Color(58, 58, 58));
         nextSong1.setBorder(null);
         nextSong1.setBackground(new Color(58, 58, 58));
-        shuffle1.setBorder(null);
-        shuffle1.setBackground(new Color(58,58,58));
 
-        shuffle1.setIcon(shuffle);
         previousSong.setIcon(previous1);
-        playIcons.add(shuffle1);
         playIcons.add(previousSong);
         playIcons.add(resume);
         playIcons.add(pause);
@@ -144,10 +141,15 @@ public class DownPanel {
                                 e1.printStackTrace();
                             }
                             Playing.setPlayer(player);
-                            Playing.playingSongs.add(player);
+                            Playing.updateWorker=new UpdateWorker((int) mp3File.getLengthInSeconds());
+                            Playing.plaiyingSongs.add(player);
 
                             try {
-                                Playing.Play();
+                                try {
+                                    Playing.Play();
+                                } catch (ParseException e1) {
+                                    e1.printStackTrace();
+                                }
                             } catch (InvalidDataException ex) {
                                 ex.printStackTrace();
                             } catch (IOException ex) {
@@ -205,8 +207,12 @@ public class DownPanel {
                                 Mp3File mp3File = new Mp3File(file);
                                 Playing.setFile(file);
                                 Playing.setPlayer(player);
-                                Playing.playingSongs.add(player);
-                                Playing.Play();
+                                Playing.plaiyingSongs.add(player);
+                                try {
+                                    Playing.Play();
+                                } catch (ParseException e1) {
+                                    e1.printStackTrace();
+                                }
                                 DownPanel.addPlayingSongInfo(showSongs(mp3File));
                                 setPausablePlayer(player, file);
                             } catch (IOException e1) {
@@ -232,17 +238,17 @@ public class DownPanel {
 
 
         downPanel.setVisible(true);
-        downPanel.setLayout( new BorderLayout());
+        downPanel.setLayout(new BorderLayout());
         downPanel.setBackground(new Color(58,58,58));
         volume.setBackground(new Color(58, 58, 58));
-        volume.setPreferredSize(new Dimension(200, 0));
-        downPanel.setPreferredSize(new Dimension(200, 85));
+        volume.setPreferredSize(new Dimension(225, 0));
+        downPanel.setPreferredSize(new Dimension(300, 85));
         JSlider jSlider = new JSlider();
         jSlider.setPreferredSize(new Dimension(100, 50));
         jSlider.setBackground(new Color(58, 58, 58));
         volume.add(jSlider, BorderLayout.PAGE_END);
-        downPanel.add(downCenterPanel,BorderLayout.CENTER);
-        downPanel.add(volume,BorderLayout.EAST);
+        downPanel.add(volume, BorderLayout.EAST);
+        downPanel.add(downCenterPanel, BorderLayout.CENTER);
 
     }
 
@@ -252,7 +258,7 @@ public class DownPanel {
 
     public static void addPlayingSongInfo(JPanel jPanel) {
 
-        downPanel.add(jPanel,BorderLayout.WEST);
+        downPanel.add(jPanel, BorderLayout.WEST);
         downPanel.revalidate();
         //downPanel.repaint();
     }
@@ -325,7 +331,6 @@ public class DownPanel {
 
         }
 
-
         if (id3v2.getAlbum()!=null){
 
 
@@ -352,17 +357,4 @@ public class DownPanel {
         return showPlayingSong;
     }
 
-    public static void addNewSlider(JSlider slider) {
-
-        if (currentSlider != null) {
-
-            downCenterPanel.remove(currentSlider);
-            downCenterPanel.add(slider, BorderLayout.PAGE_END);
-            currentSlider = slider;
-        }
-
-        downCenterPanel.add(slider, BorderLayout.PAGE_END);
-        currentSlider = slider;
-
-    }
 }

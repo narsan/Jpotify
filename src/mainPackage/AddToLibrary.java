@@ -1,3 +1,5 @@
+package mainPackage;
+
 import com.mpatric.mp3agic.Mp3File;
 
 import javax.swing.*;
@@ -30,9 +32,9 @@ public class AddToLibrary extends Library {
                     out = new ObjectOutputStream(new FileOutputStream("src\\savedSongs.bin"));
                     if (Library.getSongs().size()!=0)
                     {
-                        for (File file:Library.getSongs()) {
+                        for (int i=0;i<=Library.getSongs().size()-1;i++) {
                             try {
-                                out.writeObject(file);
+                                out.writeObject(Library.getSongs().get(i));
                             } catch (IOException ex) {
                                 ex.printStackTrace();
                             }

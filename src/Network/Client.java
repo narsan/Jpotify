@@ -1,16 +1,21 @@
 package Network;
 
+import mainPackage.Library;
+
 import java.net.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Vector;
 
-public class Client implements Runnable {
+
+public class Client  {
     private Socket socket;
     private ObjectInputStream reader;
     private ObjectOutputStream writer;
     private ArrayList<String> ips = new ArrayList<>();
+    private File file =null;
+    ArrayList<File> songs=null;
     protected static Vector<Socket> sockets = new Vector<>();
 
     public void addIP(String ip) {
@@ -21,47 +26,32 @@ public class Client implements Runnable {
         ips.remove(ip);
     }
 
+    public void reciveSongs (){
 
-   /* public void sendRequestToServer(ClientRequest clientRequest) {
         try {
-            writer.writeObject(clientRequest);
-            writer.flush();
-        } catch (Exception e) {
-
+            file = (File)reader.readObject();
+            System.out.println("file = " + file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
-    }*/
-
-    @Override
-    public void run() {
-
-      /*  while (true) {
-            try {
-                try {
-                  //  = reader.readObject();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }*/
-
     }
+
+
 
     public Client() {
 
+        this.songs=songs;
+
         try {
-            for (String str : ips) {
-                socket = new Socket(str, 3504);
+           // for (String str : ips) {
+                socket = new Socket("localhost", 3504);
                 sockets.add(socket);
-                ServerHandler serverHandler = new ServerHandler(socket);
-                Thread thread = new Thread(serverHandler);
-                thread.start();
 
                 reader = new ObjectInputStream(socket.getInputStream());
                 writer = new ObjectOutputStream(socket.getOutputStream());
-            }
+           // }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -69,13 +59,8 @@ public class Client implements Runnable {
 
     public static void main(String[] args) {
         Client client = new Client();
-        Thread tr = new Thread(client);
-        tr.start();
-        while (true) {
-            Scanner in = new Scanner(System.in);
-            String input = in.next();
-           // client.sendRequestToServer(input);
-        }
+        client.reciveSongs();
+
     }
 
 }

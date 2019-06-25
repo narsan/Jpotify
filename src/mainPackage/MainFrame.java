@@ -1,3 +1,5 @@
+package mainPackage;
+
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.UnsupportedTagException;
 
@@ -73,12 +75,15 @@ public  class MainFrame {
         leftPanel.add(playLists);
         leftPanel.add(playlistPanel.getjScrollPane());
         try {
-            File file=new File("src\\saveSongs.bin");
+            File file=new File("src\\savedSongs.bin");
+            //File file=new File("src\\sorted.bin");
+
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("src\\savedSongs.bin"));
             while (true) {
-                Library.addSong((File) objectInputStream.readObject());
 
-            }
+                    Library.addSong((File) objectInputStream.readObject());
+                }
+
         } catch (EOFException e) {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -176,16 +181,26 @@ public  class MainFrame {
         });
 
 
-        //FavoriteSong favoriteSong=new FavoriteSong();
-        //SharedPlayList sharedPlayList=new SharedPlayList();
-        /*leftPanel.add(favoriteSong.playList);
+        FavoriteSong favoriteSong=new FavoriteSong();
+        SharedPlayList sharedPlayList=new SharedPlayList();
+        leftPanel.add(favoriteSong.playList);
         leftPanel.add(sharedPlayList.playList);
         favoriteSong.playList.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 refresh(favoriteSong.showSongsInPlayList());
             }
-        });*/
+        });
+
+
+
+
+        sharedPlayList.playList.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                refresh(favoriteSong.showSongsInPlayList());
+            }
+        });
 
         RightPanel rightPanel = new RightPanel();
         frame.add(rightPanel.getJScrollPane(), BorderLayout.EAST);

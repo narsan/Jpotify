@@ -1,3 +1,5 @@
+package mainPackage;
+
 import com.mpatric.mp3agic.*;
 import javazoom.jl.decoder.JavaLayerException;
 
@@ -44,7 +46,7 @@ public class ShowSongs extends JButton {
 
 
 
-//            Iterator iterator=Library.getSongs().iterator();
+//            Iterator iterator=mainPackage.Library.getSongs().iterator();
         for (int i = 0; i < Library.getSongs().size(); i++) {
             File temp = Library.getSongs().get(i);
             Mp3File mp3File = new Mp3File(temp);
@@ -211,21 +213,15 @@ public class ShowSongs extends JButton {
                         } catch (UnsupportedTagException e1) {
                             e1.printStackTrace();
                         }
-                        // PlayMusic playMusic1 = new PlayMusic(temp, player);
-                        try {
-                            try {
-                                Playing.Play();
+                        // mainPackage.PlayMusic playMusic1 = new mainPackage.PlayMusic(temp, player);
 
-                            } catch (InvalidDataException e1) {
-                                e1.printStackTrace();
-                            } catch (IOException e1) {
-                                e1.printStackTrace();
-                            } catch (UnsupportedTagException e1) {
-                                e1.printStackTrace();
-                            }
-                        } catch (JavaLayerException e1) {
-                            e1.printStackTrace();
-                        }
+
+                                try {
+                                    Playing.Play();
+                                } catch (Exception e1) {
+                                    e1.printStackTrace();
+                                }
+
 
                         if (cuurentPanel != null) {
 
@@ -250,21 +246,21 @@ public class ShowSongs extends JButton {
                         } catch (FileNotFoundException e1) {
                             e1.printStackTrace();
                         }
-                        PausablePlayer player= null;
+                        mainPackage.PausablePlayer player= null;
                         try {
-                            player = new PausablePlayer(in);
+                            player = new mainPackage.PausablePlayer(in);
                         } catch (JavaLayerException e1) {
                             e1.printStackTrace();
                         }
                         try {
                             if (playedSongs.size()!=0){
                                 playedSongs.get(playedSongs.size()-1).close();
-                                PlayMusic playMusic = new PlayMusic(temp,player);
-                                DownPanel.addPlayingSongInfo(showPlayingSong);
-                                DownPanel.downPanel.revalidate();
+                                mainPackage.PlayMusic playMusic = new mainPackage.PlayMusic(temp,player);
+                                mainPackage.DownPanel.addPlayingSongInfo(showPlayingSong);
+                                mainPackage.DownPanel.downPanel.revalidate();
                             }
-                            PlayMusic playMusic = new PlayMusic(temp,player);
-                            DownPanel.addPlayingSongInfo(showPlayingSong);
+                            mainPackage.PlayMusic playMusic = new mainPackage.PlayMusic(temp,player);
+                            mainPackage.DownPanel.addPlayingSongInfo(showPlayingSong);
                             player.play();
                             playedSongs.add(player);
                         } catch (JavaLayerException e1) {

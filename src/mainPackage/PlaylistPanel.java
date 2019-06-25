@@ -1,3 +1,5 @@
+package mainPackage;
+
 import javax.swing.*;
 import java.awt.*;
 

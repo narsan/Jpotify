@@ -22,7 +22,7 @@ public class ServerHandler implements Runnable {
             try {
 
                 try {
-                    Object object = reader.readObject();
+                    Object o = reader.readObject();
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
