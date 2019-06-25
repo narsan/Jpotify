@@ -13,6 +13,7 @@ public  class MainFrame {
     static JFrame frame = new JFrame();
     private JPanel songsPanel = null;
     static CurrentPanel currentPanel;
+    PlaylistPanel playlistPanel = new PlaylistPanel();
 
  /*   public void setCurrentPanel(JPanel currentPanel) {
         this.currentPanel = currentPanel;
@@ -55,7 +56,7 @@ public  class MainFrame {
 
 
         LeftPanel leftPanel = new LeftPanel();
-        frame.add(leftPanel.getjScrollPane(), BorderLayout.WEST);
+        frame.add(leftPanel, BorderLayout.WEST);
         ShowSongs showSongs = new ShowSongs();
 
         ShowAlbum showAlbum = new ShowAlbum();
@@ -72,6 +73,7 @@ public  class MainFrame {
         playLists.setFont(new Font("Arial", Font.ITALIC, 16));
         playLists.setForeground( new Color(195,195,195));
         leftPanel.add(playLists);
+        leftPanel.add(playlistPanel.getjScrollPane());
         try {
             File file=new File("src\\saveSongs.bin");
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("src\\savedSongs.bin"));
@@ -160,7 +162,7 @@ public  class MainFrame {
 
                 Library.addNewPlayList(showSongsToCreatePlayList.getPlayList());
 
-                leftPanel.add(showSongsToCreatePlayList.playList.getPlayList());
+                playlistPanel.add(showSongsToCreatePlayList.playList.getPlayList());
 
                 showSongsToCreatePlayList.getPlayList().getPlayList().addActionListener(new ActionListener() {
                     @Override
