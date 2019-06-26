@@ -37,12 +37,12 @@ public class ShowAlbum extends JButton {
         AlbumImage=new JButton();
     }
 
-    public JPanel getAlbums() {
+    public CenterPanelScroller getAlbums() {
 
         //ArrayList<File> sameAlbum = new ArrayList<>();
         ArrayList<String> AlbumNames = new ArrayList<>();
         boolean[] check = new boolean[Library.getSongs().size()];
-        JPanel Albums = new JPanel();
+        CenterPanelScroller Albums = new CenterPanelScroller();
         boolean flag = false;
         Albums.setBackground(Color.BLACK);
         Albums.setLayout(new GridLayout(0, Library.getSongs().size()));
@@ -182,9 +182,9 @@ public class ShowAlbum extends JButton {
         return showAlbumInfo;
     }
 
-    public JPanel showSongsInAlbum(ArrayList<File> songs) throws InvalidDataException, IOException, UnsupportedTagException {
+    public CenterPanelScroller showSongsInAlbum(ArrayList<File> songs) throws InvalidDataException, IOException, UnsupportedTagException {
 
-        JPanel songsPanel = new JPanel();
+        CenterPanelScroller songsPanel = new CenterPanelScroller();
         songsPanel.setVisible(true);
         GridBagLayout gridBagLayout = new GridBagLayout();
         // gridBagLayout.layoutContainer(songsPanel);

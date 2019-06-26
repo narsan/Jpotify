@@ -73,10 +73,10 @@ public class PlayList {
     }
 
 
-    public JPanel showSongsInPlayList() {
+    public CenterPanelScroller showSongsInPlayList() {
 
 
-        JPanel songsPanel = new JPanel();
+        CenterPanelScroller songsPanel = new CenterPanelScroller();
         JPanel option=new JPanel();
         option.setBackground(Color.BLACK);
         option.setLayout(new GridLayout(5,0));
