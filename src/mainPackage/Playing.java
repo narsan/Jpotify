@@ -48,7 +48,8 @@ public class Playing {
     static File file;
 
     public static void Play() throws JavaLayerException, InvalidDataException, IOException, UnsupportedTagException, ParseException {
-
+        if (updateWorker!=null)
+            updateWorker.cancel(true);
 
         Mp3File mp3File = new Mp3File(file);
         updateWorker = new UpdateWorker((int) mp3File.getLengthInSeconds());

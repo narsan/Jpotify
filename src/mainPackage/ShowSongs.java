@@ -26,18 +26,20 @@ public class ShowSongs extends JButton {
 
     }
 
-    public JPanel CreatButtonFromSongs() throws InvalidDataException, IOException, UnsupportedTagException {
-        JPanel songsPanel = new JPanel();
-        songsPanel.setVisible(true);
+    public CenterPanelScroller CreatButtonFromSongs () throws InvalidDataException, IOException, UnsupportedTagException  {
+
+        CenterPanelScroller centerPanel=new CenterPanelScroller();
+        centerPanel.setVisible(true);
+
         GridBagLayout gridBagLayout=new GridBagLayout();
         // gridBagLayout.layoutContainer(songsPanel);
-        songsPanel.setLayout(new FlowLayout());
-        songsPanel.setPreferredSize(new Dimension(300,100));
+        centerPanel.setLayout(new FlowLayout());
+        centerPanel.setPreferredSize(new Dimension(300,100));
         GridBagConstraints gbc = new GridBagConstraints();
         ArrayList<PausablePlayer> playedSongs=new ArrayList<PausablePlayer>();
 
         // songsPanel.setLayout(new FlowLayout());
-        songsPanel.setBackground(new Color(58,58,58));
+        centerPanel.setBackground(new Color(58,58,58));
         JLabel Title = null;
         JButton songImage = null;
         int x=0;
@@ -216,6 +218,7 @@ public class ShowSongs extends JButton {
 
                                 try {
                                     Playing.Play();
+
                                 } catch (Exception e1) {
                                     e1.printStackTrace();
                                 }
@@ -311,14 +314,14 @@ public class ShowSongs extends JButton {
 
 
 
-            songsPanel.add(songData,gbc);
+            centerPanel.add(songData,gbc);
 
 
         }
 
-        songsPanel.setBackground(Color.BLACK);
+        centerPanel.setBackground(Color.BLACK);
 
-        return songsPanel;
+        return centerPanel;
         // return mainPackage.test;
 
     }

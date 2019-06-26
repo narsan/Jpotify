@@ -106,86 +106,94 @@ public class DownPanel {
             }
         });
 
+//        nextSong1.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//
+//                for (int i = 0; i < Library.getSongs().size(); i++) {
+//
+//                    if (Library.getSongs().get(i).equals(musicToPlay)) {
+//
+//                        int temp = i += 1;
+//                        File file = Library.getSongs().get(temp);
+//                        Mp3File mp3File = null;
+//                        try {
+//                            mp3File = new Mp3File(file);
+//                        } catch (IOException e1) {
+//                            e1.printStackTrace();
+//                        } catch (UnsupportedTagException e1) {
+//                            e1.printStackTrace();
+//                        } catch (InvalidDataException e1) {
+//                            e1.printStackTrace();
+//                        }
+//                        try {
+//                            fileInputStream = new FileInputStream(file);
+//                        } catch (FileNotFoundException e1) {
+//                            e1.printStackTrace();
+//                        }
+//
+//                        try {
+//                            PausablePlayer player = new PausablePlayer(fileInputStream);
+//
+//
+//                            try {
+//                                Playing.setFile(file);
+//                            } catch (InvalidDataException e1) {
+//                                e1.printStackTrace();
+//                            } catch (IOException e1) {
+//                                e1.printStackTrace();
+//                            } catch (UnsupportedTagException e1) {
+//                                e1.printStackTrace();
+//                            }
+//                            Playing.setPlayer(player);
+//                            Playing.plaiyingSongs.add(player);
+//
+//                            try {
+//                                try {
+//                                    Playing.Play();
+//                                } catch (ParseException ex) {
+//                                    ex.printStackTrace();
+//                                }
+//                            } catch (InvalidDataException ex) {
+//                                ex.printStackTrace();
+//                            } catch (IOException ex) {
+//                                ex.printStackTrace();
+//                            } catch (UnsupportedTagException ex) {
+//                                ex.printStackTrace();
+//                            }
+//
+//                            DownPanel.addPlayingSongInfo(showSongs(mp3File));
+//                            try {
+//                                setPausablePlayer(player, file);
+//                            } catch (InvalidDataException e1) {
+//                                e1.printStackTrace();
+//                            } catch (IOException e1) {
+//                                e1.printStackTrace();
+//                            } catch (UnsupportedTagException e1) {
+//                                e1.printStackTrace();
+//                            }
+//                        } catch (JavaLayerException e1) {
+//                            e1.printStackTrace();
+//                        }
+//                    }
+//
+//
+//                }
+//
+//
+//            }
+//
+//
+//        });
+        System.out.println("here");
+
         nextSong1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                for (int i = 0; i < Library.getSongs().size(); i++) {
-
-                    if (Library.getSongs().get(i).equals(musicToPlay)) {
-
-                        int temp = i += 1;
-                        File file = Library.getSongs().get(temp);
-                        Mp3File mp3File = null;
-                        try {
-                            mp3File = new Mp3File(file);
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        } catch (UnsupportedTagException e1) {
-                            e1.printStackTrace();
-                        } catch (InvalidDataException e1) {
-                            e1.printStackTrace();
-                        }
-                        try {
-                            fileInputStream = new FileInputStream(file);
-                        } catch (FileNotFoundException e1) {
-                            e1.printStackTrace();
-                        }
-
-                        try {
-                            PausablePlayer player = new PausablePlayer(fileInputStream);
-
-
-                            try {
-                                Playing.setFile(file);
-                            } catch (InvalidDataException e1) {
-                                e1.printStackTrace();
-                            } catch (IOException e1) {
-                                e1.printStackTrace();
-                            } catch (UnsupportedTagException e1) {
-                                e1.printStackTrace();
-                            }
-                            Playing.setPlayer(player);
-                            Playing.plaiyingSongs.add(player);
-
-                            try {
-                                try {
-                                    Playing.Play();
-                                } catch (ParseException ex) {
-                                    ex.printStackTrace();
-                                }
-                            } catch (InvalidDataException ex) {
-                                ex.printStackTrace();
-                            } catch (IOException ex) {
-                                ex.printStackTrace();
-                            } catch (UnsupportedTagException ex) {
-                                ex.printStackTrace();
-                            }
-
-                            DownPanel.addPlayingSongInfo(showSongs(mp3File));
-                            try {
-                                setPausablePlayer(player, file);
-                            } catch (InvalidDataException e1) {
-                                e1.printStackTrace();
-                            } catch (IOException e1) {
-                                e1.printStackTrace();
-                            } catch (UnsupportedTagException e1) {
-                                e1.printStackTrace();
-                            }
-                        } catch (JavaLayerException e1) {
-                            e1.printStackTrace();
-                        }
-                    }
-
-
-                }
-
-
+                new PlayingActionListener();
             }
-
-
         });
-
+        System.out.println("here");
         previousSong.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -196,6 +204,15 @@ public class DownPanel {
                     if (Library.getSongs().get(i).equals(musicToPlay)) {
 
                         int temp = i -= 1;
+                        if (temp<0) {
+                            System.out.println(temp);
+                            System.out.println(Library.getSongs().size());
+                            temp += Library.getSongs().size();
+                            System.out.println(temp);
+                            System.out.println(Library.getSongs());
+                        }
+                        System.out.println(temp);
+                        System.out.println(Library.getSongs().get(temp));
                         File file = Library.getSongs().get(temp);
 
                         try {
@@ -278,7 +295,7 @@ public class DownPanel {
     }
 
 
-    public JPanel showSongs(Mp3File mp3File) {
+    static JPanel showSongs(Mp3File mp3File) {
         JPanel showPlayingSong = new JPanel();
 
         ID3v2 id3v2 = mp3File.getId3v2Tag();

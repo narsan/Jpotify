@@ -49,13 +49,17 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
         slider.setBackground(new Color(58,58,58));
         slider.setMinimum(0);
         slider.setMaximum(duration);
-
+        addMouslistenr();
     }
     public void addMouslistenr() {
         slider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                slider.getValue();
+                if(slider.getValue()==slider.getMaximum())
+                {
+                    slider.setValue(0);
+                    new PlayingActionListener();
+                }
             }
         });
     }

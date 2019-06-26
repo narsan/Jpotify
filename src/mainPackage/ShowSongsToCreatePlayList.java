@@ -17,7 +17,7 @@ import java.util.HashSet;
 
 public class ShowSongsToCreatePlayList implements ItemListener {
 
-    static JPanel showSongs = new JPanel();
+    static CenterPanelScroller showSongs = new CenterPanelScroller();
 
     private static HashSet<File> songsInPlaylist;
     private ArrayList<JCheckBox> checkBoxes;
@@ -28,11 +28,11 @@ public class ShowSongsToCreatePlayList implements ItemListener {
         return playList;
     }
 
-    public JPanel getShowSongs() {
+    /*public JPanel getShowSongs() {
         return showSongs;
-    }
+    }*/
 
-    public JPanel songsName() {
+    public CenterPanelScroller songsName() {
 
         HashSet<Mp3File> songsInPlaylist1 = new HashSet<Mp3File>();
         ArrayList<File> songs = new ArrayList<>();

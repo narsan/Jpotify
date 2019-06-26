@@ -11,10 +11,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 
-public  class MainFrame {
+public class MainFrame {
     static JFrame frame = new JFrame();
-    private JPanel songsPanel = null;
-    static CurrentPanel currentPanel;
+    private CenterPanelScroller songsPanel = null;
+    static CenterPanelScroller currentPanel;
     PlaylistPanel playlistPanel = new PlaylistPanel();
 
 
@@ -28,7 +28,7 @@ public  class MainFrame {
     //private static JPanel currentPanel;
 
     public MainFrame() throws IOException {
-        currentPanel=new CurrentPanel();
+//        currentPanel = new CurrentPanel();
         frame.setLocation(100, 100);
         frame.setTitle("Jpotify");
         frame.setLayout(new BorderLayout());
@@ -50,9 +50,7 @@ public  class MainFrame {
         String newName = JOptionPane.showInputDialog(Uframe, "enter new name");
         System.out.println(newName);
         userPanel.setName(newName);
-        frame.add(userPanel,BorderLayout.NORTH);
-
-
+        frame.add(userPanel, BorderLayout.NORTH);
 
 
         LeftPanel leftPanel = new LeftPanel();
@@ -71,16 +69,17 @@ public  class MainFrame {
         playLists.setPreferredSize(new Dimension(30, 30));
         playLists.setText("Your Playlists");
         playLists.setFont(new Font("Arial", Font.ITALIC, 16));
-        playLists.setForeground( new Color(195,195,195));
+        playLists.setForeground(new Color(195, 195, 195));
         leftPanel.add(playLists);
         leftPanel.add(playlistPanel.getjScrollPane());
 
-        FavoriteSong favoriteSong=new FavoriteSong();
-        SharedPlayList sharedPlayList=new SharedPlayList();
+        FavoriteSong favoriteSong = new FavoriteSong();
+        SharedPlayList sharedPlayList = new SharedPlayList();
         playlistPanel.add(favoriteSong.playList);
         playlistPanel.add(sharedPlayList.playList);
-        /*try {
-            File file=new File("src\\sorted.bin");
+
+        try {
+            File file = new File("src\\sorted.bin");
             //File file=new File("src\\sorted.bin");
 
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("src\\sorted.bin"));
@@ -92,27 +91,26 @@ public  class MainFrame {
         } catch (EOFException e) {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }*/
-        File temp=new File("src\\playlists");
-        if (temp.exists()){
-            for(File file:temp.listFiles()){
+        }
 
-                ObjectInputStream in=new ObjectInputStream(new FileInputStream(file));
+        System.out.println(Library.getSongs().size() + "  size");
+        File temp = new File("src\\playlists");
+        if (temp.exists()) {
+            for (File file : temp.listFiles()) {
 
-                String name=file.getName().replace(".bin","");
-                PlayList playList=new PlayList(name);
+                ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
+
+                String name = file.getName().replace(".bin", "");
+                PlayList playList = new PlayList(name);
                 try {
                     while (true) {
-
+                        System.out.println("-");
                         playList.addSongToPlayList((File) in.readObject());
-
                     }
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
-                }
-                catch (EOFException e)
-                {
-                    //System.out.println(playList.getPlayListSongs());
+                } catch (EOFException e) {
+                    System.out.println(playList.getPlayListSongs());
                     in.close();
                 }
                 ShowSongsToCreatePlayList showSongsToCreatePlayList = new ShowSongsToCreatePlayList();
@@ -145,6 +143,7 @@ public  class MainFrame {
                 } catch (UnsupportedTagException ex) {
                     ex.printStackTrace();
                 }
+
                 refresh(songsPanel);
 
 
@@ -153,14 +152,14 @@ public  class MainFrame {
         showAlbum.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (songsPanel!=null){
+                if (songsPanel != null) {
                     frame.remove(songsPanel);
-                    songsPanel= showAlbum.getAlbums();
+                    songsPanel = showAlbum.getAlbums();
                     refresh(songsPanel);
                 }
             }
         });
-        ShowSongsToCreatePlayList showSongsToCreatePlayList=new ShowSongsToCreatePlayList();
+        ShowSongsToCreatePlayList showSongsToCreatePlayList = new ShowSongsToCreatePlayList();
         createPlayList.getNewPlayList().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -182,7 +181,6 @@ public  class MainFrame {
                 });
 
 
-
             }
         });
 
@@ -192,8 +190,6 @@ public  class MainFrame {
                 refresh(favoriteSong.showSongsInPlayList());
             }
         });
-
-
 
 
         sharedPlayList.playList.addActionListener(new ActionListener() {
@@ -209,27 +205,25 @@ public  class MainFrame {
         DownPanel downPanel = new DownPanel();
         frame.add(downPanel.getDownPanel(), BorderLayout.PAGE_END);
 
-        frame.setMinimumSize(new Dimension(1200,700));
+        frame.setMinimumSize(new Dimension(1200, 700));
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setVisible(true);
 
 
-
-
     }
 
-    public static void refresh(JPanel jPanel) {
+    public static void refresh(CenterPanelScroller jPanel) {
 
-        if (currentPanel.getCurrentPanel()!=null){
+        if (currentPanel != null) {
 
-            currentPanel.getCurrentPanel().setVisible(false);
-
-            frame.remove(currentPanel.getCurrentPanel());
-
+//            currentPanel.getCurrentPanel().setVisible(false);
+            currentPanel.setVisible(false);
+            frame.remove(currentPanel.getjScrollPane());
         }
-        currentPanel.setCurrentPanel(jPanel);
+        currentPanel=(jPanel);
+//        frame.setContentPane(currentPanel.getCurrentPanel());
 
-        frame.add(jPanel, BorderLayout.CENTER);
+        frame.add(jPanel.getjScrollPane(), BorderLayout.CENTER);
 
         //this.frame.repaint();
 
@@ -238,18 +232,5 @@ public  class MainFrame {
 
 
     }
-    class CustomeBorder extends AbstractBorder {
-        @Override
-        public void paintBorder(Component c, Graphics g, int x, int y,
-                                int width, int height) {
-            // TODO Auto-generated method stubs
-            super.paintBorder(c, g, x, y, width, height);
-            Graphics2D g2d = (Graphics2D)g;
-            g2d.setStroke(new BasicStroke(12));
-            g2d.setColor(Color.black);
-            g2d.drawRoundRect(x, y, width - 1, height - 1, 25, 25);
-        }
-    }
-
 
 }
