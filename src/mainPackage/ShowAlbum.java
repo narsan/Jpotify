@@ -329,10 +329,8 @@ public class ShowAlbum extends JButton {
                         playingSonglabel.setBorder(border2);
                         showPlayingSong.add(playingSongImg,BorderLayout.WEST);
                         showPlayingSong.add(playingSonglabel,BorderLayout.EAST);
-                        EmptyBorder border = new EmptyBorder(0, 0, 0, 80);
-                        showPlayingSong.setBorder(border);
                         showPlayingSong.setBackground(new Color(58,58,58));
-                        showPlayingSong.setPreferredSize(new Dimension(318,0));
+                        showPlayingSong.setPreferredSize(new Dimension(250,0));
 
                         FileInputStream in = null;
                         try {

@@ -1,17 +1,16 @@
 package mainPackage;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 
 public class UpdateWorker  extends SwingWorker<Void, Integer>  {
 
-     static JSlider slider=new JSlider();
-     boolean flag=true;
-
-    public void setFlag(boolean flag) {
-        this.flag = flag;
-    }
+    JSlider slider =null;
 
     private int duration;
 
@@ -45,53 +44,58 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
     public UpdateWorker(int duration) {
 
         this.duration = duration;
-       // slider=new JSlider();
+        slider=new JSlider();
         slider.setValue(0);
         slider.setBackground(new Color(58,58,58));
         slider.setMinimum(0);
         slider.setMaximum(duration);
 
     }
+    public void addMouslistenr() {
+        slider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                slider.getValue();
+            }
+        });
+    }
+
+
 
     public void setDuration(int duration) {
         this.duration = duration;
-
 
     }
 
     @Override
     protected Void doInBackground() throws Exception {
 
-
         time.setForeground(Color.pink);
 
         time.setFont(new Font("Arial",Font.PLAIN,13));
 
+
         for (int i = 1; i <= duration; i++) {
 
+            if (ispaused==false){
+
+                publish(i);
+
+                time.setText("passed :"+ String.valueOf(i));
 
 
-                if (ispaused == false) {
-                    publish(i);
+            }
+            Thread.sleep(1000);
+            if (ispaused==true){
 
-                    time.setText("passed :" + String.valueOf(i));
+                while (ispaused){
+                    Thread.sleep(50);
+                    continue;
                 }
-                Thread.sleep(1000);
-
-                if (ispaused == true) {
-
-                    while (ispaused) {
-                        Thread.sleep(50);
-                        continue;
-                    }
-                }
-
-
+            }
 
 
         }
-
-        time.removeAll();
         return null;
     }
 
@@ -103,4 +107,5 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
     public  JSlider getSlider() {
         return slider;
     }
+
 }
