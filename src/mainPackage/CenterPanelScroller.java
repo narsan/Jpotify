@@ -43,8 +43,8 @@ public class CenterPanelScroller extends JPanel implements Scrollable {
 
     public CenterPanelScroller() {
         jScrollPane = new JScrollPane(this);
-        jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         jScrollPane.setBounds(50, 30, 300, 50);
         jScrollPane.setBorder(null);
         this.setBackground(Color.BLACK);

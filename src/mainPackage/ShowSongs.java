@@ -218,6 +218,7 @@ public class ShowSongs extends JButton {
 
                                 try {
                                     Playing.Play();
+
                                 } catch (Exception e1) {
                                     e1.printStackTrace();
                                 }
