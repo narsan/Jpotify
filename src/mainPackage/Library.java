@@ -15,6 +15,7 @@ public class Library {
 
 
     public static void addSong(File file){
+
         songs.add(file);
 
     }
@@ -37,8 +38,5 @@ public class Library {
         return songs;
     }
 
-    public static  void addToSortedHashMap(String file,String date){
 
-        sortByTime.put(file,date);
-    }
 }

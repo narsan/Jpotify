@@ -1,5 +1,7 @@
 package mainPackage;
 
+import Network2.Client;
+
 import javax.swing.*;
 import java.io.IOException;
 
@@ -28,5 +30,6 @@ public class UserFrame {
 
     public static void main(String[] args) {
         new UserFrame();
+        new Client();
     }
 }

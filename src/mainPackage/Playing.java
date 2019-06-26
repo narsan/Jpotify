@@ -74,6 +74,7 @@ public class Playing {
             ArrayList<File> sortedSong = new ArrayList<>(sortByTime.keySet());
 
 
+
             for (int i = 0; i < Library.getSongs().size(); i++) {
 
                 if (!sortedSong.contains(Library.getSongs().get(i))) {

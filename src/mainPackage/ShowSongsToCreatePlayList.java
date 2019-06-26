@@ -99,8 +99,12 @@ public class ShowSongsToCreatePlayList implements ItemListener {
                         @Override
                         public void itemStateChanged(ItemEvent e) {
 
+                            try {
+                                playList.addSongToPlayList(songs.get(finalI));
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
 
-                            playList.addSongToPlayList(songs.get(finalI));
 
                             try {
                                 playList.writeSongs();
@@ -140,14 +144,21 @@ public class ShowSongsToCreatePlayList implements ItemListener {
     @Override
     public void itemStateChanged(ItemEvent e) {
 
+
+
         for (int i = 0; i < checkBoxes.size(); i++) {
 
             if (checkBoxes.get(i).isSelected()) {
 
-                // System.out.println("selected");
+                System.out.println("here");
 
 
-                playList.addSongToPlayList(Library.getSongs().get(i));
+                try {
+                    playList.addSongToPlayList(Library.getSongs().get(i));
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+
 
                 try {
                     playList.writeSongs();
@@ -158,7 +169,6 @@ public class ShowSongsToCreatePlayList implements ItemListener {
 
         }
 
-        System.out.println(playList.getPlayListSongs().size());
 
     }
 

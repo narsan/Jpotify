@@ -79,7 +79,7 @@ public  class MainFrame {
         SharedPlayList sharedPlayList=new SharedPlayList();
         playlistPanel.add(favoriteSong.playList);
         playlistPanel.add(sharedPlayList.playList);
-        try {
+        /*try {
             File file=new File("src\\sorted.bin");
             //File file=new File("src\\sorted.bin");
 
@@ -92,7 +92,7 @@ public  class MainFrame {
         } catch (EOFException e) {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }
+        }*/
         File temp=new File("src\\playlists");
         if (temp.exists()){
             for(File file:temp.listFiles()){
@@ -103,15 +103,16 @@ public  class MainFrame {
                 PlayList playList=new PlayList(name);
                 try {
                     while (true) {
-                        System.out.println("-");
+
                         playList.addSongToPlayList((File) in.readObject());
+
                     }
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
                 catch (EOFException e)
                 {
-                    System.out.println(playList.getPlayListSongs());
+                    //System.out.println(playList.getPlayListSongs());
                     in.close();
                 }
                 ShowSongsToCreatePlayList showSongsToCreatePlayList = new ShowSongsToCreatePlayList();

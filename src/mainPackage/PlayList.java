@@ -1,3 +1,4 @@
+
 package mainPackage;
 
 import com.mpatric.mp3agic.*;
@@ -431,9 +432,11 @@ public class PlayList {
 
     }
 
-    public void addSongToPlayList(File file)  {
+    public void addSongToPlayList(File file) throws IOException {
 
-        playListSongs.add(file);
+      playListSongs.add(file);
+        System.out.println(playListSongs.size());
+        writeSongs();
 
     }
     public void writeSongs() throws IOException {
@@ -446,6 +449,8 @@ public class PlayList {
 
         try {
             for (File f:playListSongs) {
+
+
                 out.writeObject(f);
             }
             //out.close();
@@ -456,13 +461,14 @@ public class PlayList {
 
     public void setPlayListName(String playListName) {
 
+        File path=new File("./src/playlists/"+this.playListName+".bin");
         this.playListName = playListName;
         //./src/playlists/
-        // File file2=new File("./src/playlists/"+playListName+".bin");
+         File file2=new File("./src/playlists/"+playListName+".bin");
 
-        /*if ( path.renameTo(file2)){
+        if ( path.renameTo(file2)){
             System.out.println("renamed");
-        }*/
+        }
 
     }
 
