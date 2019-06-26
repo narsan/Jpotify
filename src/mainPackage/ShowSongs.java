@@ -319,7 +319,7 @@ public class ShowSongs extends JButton {
         songsPanel.setBackground(Color.BLACK);
 
         return songsPanel;
-        // return test;
+        // return mainPackage.test;
 
     }
 

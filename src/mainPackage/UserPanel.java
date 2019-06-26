@@ -36,15 +36,17 @@ public class UserPanel extends JPanel {
 
         this.setBackground(Color.BLACK);
         this.setPreferredSize(new Dimension(200, 40));
-        JTextField searchBar = new JTextField();
-        searchBar.setColumns(10);
-        searchBar.setBorder(BorderFactory.createCompoundBorder(
+        JTextField field = new RoundJTextField(15);
+
+
+       /* searchBar.setColumns(10);
+        searchBar.setText("search...");
+        /*searchBar.setBorder(BorderFactory.createCompoundBorder(
                 new CustomeBorder(),
                 new EmptyBorder(new Insets(15, 25, 15, 25))));
-        searchBar.setText("search...");
         searchBar.setEditable(true);
         searchBar.setBackground(Color.white);
-        searchBar.setForeground(Color.pink);
+        searchBar.setForeground(Color.pink);*/
 
         userAccount.setText(name);
         userAccount.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -54,8 +56,9 @@ public class UserPanel extends JPanel {
         userAccount.setVisible(true);
         EmptyBorder border = new EmptyBorder(5, 250, 5, 250);
         this.setBorder(border);
+        this.add(field,BorderLayout.WEST);
         this.add(userAccount, BorderLayout.EAST);
-        this.add(searchBar, BorderLayout.WEST);
+       // this.add(searchBar, BorderLayout.WEST);
 
     }
 
