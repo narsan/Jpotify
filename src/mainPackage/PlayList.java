@@ -22,7 +22,7 @@ public class PlayList {
 
     protected JButton playList = new JButton();
     protected String playListName;
-    protected HashSet<File> playListSongs=new HashSet<>();
+    protected static HashSet<File> playListSongs=new HashSet<>();
     private ObjectOutputStream out;
 
 
@@ -38,22 +38,7 @@ public class PlayList {
 
     public void setPlayListSongs(HashSet<File> songs) {
 
-        ArrayList<File> temp=new ArrayList<>(songs);
-        for (int i = 0; i <temp.size() ; i++) {
-
-            //System.out.println(temp.get(i));
-
-        }
-        this.playListSongs = songs;
-
-        temp=new ArrayList<>(songs);
-
-        for (int i = 0; i <temp.size() ; i++) {
-
-            //System.out.println(temp.get(i));
-
-        }
-
+        this.playListSongs=songs;
     }
 
     public JButton getPlayList() {
@@ -92,9 +77,13 @@ public class PlayList {
         JButton songImage = null;
         ArrayList<File> temp = new ArrayList<>();
         Iterator iterator = playListSongs.iterator();
+
+
+
         while (iterator.hasNext()) {
 
             temp.add((File) iterator.next());
+
         }
 
 

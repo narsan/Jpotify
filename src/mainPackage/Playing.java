@@ -34,6 +34,11 @@ public class Playing {
     static ArrayList<PausablePlayer> plaiyingSongs = new ArrayList<>();
 
     static PausablePlayer player;
+    static  String title="";
+
+    public static String getTitle() {
+        return title;
+    }
 
     public static void setPlayer(PausablePlayer player) {
         Playing.player = player;
@@ -46,6 +51,10 @@ public class Playing {
     }
 
     static File file;
+
+    public static void setTitle(String title) {
+        Playing.title = title;
+    }
 
     public static void Play() throws JavaLayerException, InvalidDataException, IOException, UnsupportedTagException, ParseException {
         if (updateWorker!=null)
@@ -96,6 +105,8 @@ public class Playing {
                     out.writeObject(sortedSong.get(j));
 
                 }
+
+                setTitle(file.getName());
 
 
         }

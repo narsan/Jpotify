@@ -1,6 +1,7 @@
 package Network2;
 
-import mainPackage.Library;
+import Network2.ServerMessagesManager;
+import mainPackage.Playing;
 
 import java.io.DataInputStream;
 import java.io.File;
@@ -30,7 +31,7 @@ public class Client {
     public Client() {
         try {
 
-            mSocket = new Socket(serverAddress, port);
+            mSocket = new Socket("localhost", port);
 
             System.out.println("connect to server ....");
 
@@ -86,32 +87,30 @@ public class Client {
 
                     break;
                 case 4:
+                    Scanner scanner=new Scanner(System.in);
                     System.out.println("Enter receiver name");
-                    String to = sc.nextLine();
+                    String to = scanner.nextLine();
 
-                    System.out.println("Enter your message");
-                    String text = sc.nextLine();
+                    //System.out.println("Enter your message");
+                    //String text=scanner.next();
 
-                    sendSingleCht(to, text);
+                    sendSingleCht(to, Playing.getTitle());
+                    System.out.println(Playing.getTitle());
                     break;
-                case 5:
+            /*    case 5:
                     System.out.println("Enter your message");
                     text = sc.nextLine();
 
                     sendGroupCht(text);
-                    break;
+                    break;*/
                 case 6:
                     System.out.println("Enter receiver name");
                     to = sc.nextLine();
 
-                    for (int i = 0; i < Library.getSongs().size(); i++) {
+                    System.out.println("Enter file name(Full Path)");
+                    String fileName = sc.nextLine();
 
-                        sendFile(to, Library.getSongs().get(i).getPath());
-                    }
-
-                    // System.out.println("Enter file name(Full Path)");
-                    //String fileName = sc.nextLine();
-
+                    sendFile(to, fileName);
                     break;
                 case 7:
 
@@ -134,6 +133,7 @@ public class Client {
     }
 
     private void sendSingleCht(String to, String text) {
+
         writer.println("SCHT");
         writer.println(to);
         writer.println(text);
@@ -167,7 +167,6 @@ public class Client {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            System.out.println();
         }
     }
 
@@ -175,7 +174,7 @@ public class Client {
         writer.println("BYE");
     }
 
-    /*public static void main(String[] args) {
+   /* public static void main(String[] args) {
 
         new Client();
     }*/

@@ -22,10 +22,10 @@ public class ServerMessagesManager implements Runnable {
                     String text = readerHolder.readLine();
 
                     System.out.println(from + " : [" + text + "]");
-                } /*else if (command.equals("RESULT")) {
+                } else if (command.equals("RESULT")) {
                     String result = readerHolder.readLine();
                     System.out.println("ans :" + result);
-                } */else if (command.equals("FILE")) {
+                } else if (command.equals("FILE")) {
                     String from = readerHolder.readLine();
                     String fileName = readerHolder.readLine();
                     int fileLength = Integer.parseInt(readerHolder.readLine());

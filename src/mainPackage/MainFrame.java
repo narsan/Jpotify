@@ -79,10 +79,10 @@ public class MainFrame {
         playlistPanel.add(sharedPlayList.playList);
 
         try {
-            File file = new File("src\\sorted.bin");
+            File file = new File("src\\savedSongs.bin");
             //File file=new File("src\\sorted.bin");
 
-            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("src\\sorted.bin"));
+            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("src\\savedSongs.bin"));
             while (true) {
 
                 Library.addSong((File) objectInputStream.readObject());

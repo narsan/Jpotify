@@ -60,7 +60,7 @@ public class ClientManager implements Runnable {
                     System.out.println("Good Bye " + name);
                     break;
 
-                } /*else if (command.equals("ADD")) {
+                } else if (command.equals("ADD")) {
 
                     // read operands a,b from client
                     String a = reader.readLine();
@@ -71,7 +71,7 @@ public class ClientManager implements Runnable {
                     writer.println("RESULT");
                     writer.println(add(a, b));
 
-                }*/  /*else if (command.equals("EVAL")) {
+                }  else if (command.equals("EVAL")) {
                     // read expression
                     String expression = reader.readLine();
                     // evaluate the expression
@@ -82,8 +82,8 @@ public class ClientManager implements Runnable {
                     writer.println("RESULT");
                     writer.println(ans);
 
-                } */
-                /*else if (command.equals("ECHO")) {
+                }
+                else if (command.equals("ECHO")) {
                     // read message from client
                     String msg = reader.readLine();
 
@@ -94,6 +94,8 @@ public class ClientManager implements Runnable {
                     writer.println("[" + msg + "]");
 
                 } else if (command.equals("SCHT")) {
+
+
                     String to = reader.readLine();
                     String text = reader.readLine();
 
@@ -102,7 +104,7 @@ public class ClientManager implements Runnable {
                     String text = reader.readLine();
 
                     sendTextToAllClients(text);
-                }*/ else if (command.equals("SFILE")) {
+                } else if (command.equals("SFILE")) {
                     String fileName = reader.readLine();
                     String to = reader.readLine();
 
@@ -119,11 +121,11 @@ public class ClientManager implements Runnable {
         }
     }
 
-    /*private String add(String a, String b) {
+    private String add(String a, String b) {
         return "" + (Integer.parseInt(a) + Integer.parseInt(b));
-    }*/
+    }
 
-   /* private String eval(String expression) {
+    private String eval(String expression) {
         // evaluate mathematical expression by java script ;-)
 
         ScriptEngineManager mgr = new ScriptEngineManager();
@@ -137,6 +139,8 @@ public class ClientManager implements Runnable {
     }
 
     private void sendTextToAnotherClient(String to, String text) {
+
+
         // first find another client ("to") ClientManager object
         ClientManager anotherClient = serverHolder.findClientManager(to);
         if (anotherClient == null)
@@ -145,6 +149,8 @@ public class ClientManager implements Runnable {
     }
 
     private void sendText(String from, String text) {
+
+
         writer.println("CHT");
         writer.println(from);
         writer.println(text);
@@ -156,7 +162,7 @@ public class ClientManager implements Runnable {
         for (ClientManager cm : serverHolder.findAllClientManagers()) {
             cm.sendText(name, text);
         }
-    }*/
+    }
 
     private void sendFileToAnotherClient(String fileName, String to, byte[] fileData) {
 

@@ -30,6 +30,6 @@ public class UserFrame {
 
     public static void main(String[] args) {
         new UserFrame();
-        //new Client();
+        new Client();
     }
 }
