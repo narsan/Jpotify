@@ -15,30 +15,88 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 
-public class PlayList {
+public class PlayList implements ActionListener {
 
     protected JButton playList = new JButton();
     protected String playListName;
-    protected static HashSet<File> playListSongs=new HashSet<>();
+    //protected  HashSet<File> playListSongs;
+    protected ArrayList<File> playListSongs=new ArrayList<>();
     private ObjectOutputStream out;
-
-
-
     JButton deleteSong = new JButton();
     JButton addNewSong = new JButton();
     JButton delete = new JButton();
     JButton setNewName = new JButton();
 
-    public HashSet<File> getPlayListSongs() {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        ArrayList<String> songsName = new ArrayList<>();
+
+        Iterator iterator = playListSongs.iterator();
+        Mp3File mp3File;
+        while (iterator.hasNext())
+
+            try {
+                mp3File = new Mp3File((File) iterator.next());
+                songsName.add(mp3File.getId3v2Tag().getTitle());
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            } catch (UnsupportedTagException e1) {
+                e1.printStackTrace();
+            } catch (InvalidDataException e1) {
+                e1.printStackTrace();
+            }
+
+
+        JFrame modify = new JFrame();
+
+        JList list = new JList(songsName.toArray());
+        JOptionPane.showMessageDialog(modify, list, "modify order", JOptionPane.PLAIN_MESSAGE);
+        int[] selected;
+        selected = list.getSelectedIndices();
+        ArrayList<File> temp = new ArrayList<>(playListSongs);
+        File file1 = temp.get(selected[0]);
+        File file2 = temp.get(selected[1]);
+        int index1 = temp.indexOf(file1);
+        int index2 = temp.indexOf(file2);
+
+
+        Collections.swap(temp,index1,index2);
+        setPlayListSongs(temp);
+
+        //HashSet<File> modified = new HashSet<>(temp);
+       // Iterator iterator1=modified.iterator();
+
+
+       /* for (int i = 0; i <temp.size() ; i++) {
+
+            System.out.println(temp.get(i));
+
+            modified.add(temp.get(i));
+        }*/
+
+        //setPlayListSongs(modified);
+
+    }
+
+    public ArrayList<File> getPlayListSongs() {
         return playListSongs;
     }
 
-    public void setPlayListSongs(HashSet<File> songs) {
+    public void setPlayListSongs(ArrayList<File> songs) {
 
-        this.playListSongs=songs;
+        playListSongs.clear();
+
+        for (int i = 0; i <songs.size() ; i++) {
+
+            playListSongs.add(songs.get(i));
+
+        }
+
     }
 
     public JButton getPlayList() {
@@ -47,6 +105,8 @@ public class PlayList {
 
 
     public PlayList(String playListName) throws IOException {
+
+       // playListSongs=new HashSet<>();
 
         this.playListName = playListName;
         playList.setText(playListName);
@@ -75,21 +135,9 @@ public class PlayList {
         //songsPanel.setBackground(Color.DARK_GRAY);
         JLabel Title = null;
         JButton songImage = null;
-        ArrayList<File> temp = new ArrayList<>();
-        Iterator iterator = playListSongs.iterator();
+        ArrayList<File> temp = new ArrayList<>(playListSongs);
 
-
-
-        while (iterator.hasNext()) {
-
-            temp.add((File) iterator.next());
-
-        }
-
-
-//            Iterator iterator=mainPackage.Library.getSongs().iterator();
         for (int i = 0; i < temp.size(); i++) {
-
 
             File temp1 = temp.get(i);
             Mp3File mp3File = null;
@@ -378,6 +426,8 @@ public class PlayList {
         option.add(addNewSongToPlayList.getAddNewSong());
         option.add(deleteSongFromPlayList.getDeleteSong());
         option.add(modify.getModify());
+        modify.getModify().addActionListener(this);
+
 
         songsPanel.add(option);
 
