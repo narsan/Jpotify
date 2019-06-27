@@ -167,12 +167,14 @@ public class PlayList {
                         }
 
                         ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
-
+                        EmptyBorder border1 = new EmptyBorder(0, 2, 5, 2);
+                        playingSongImg.setBorder(border1);
                         playingSongImg.add(new JLabel(imageIcon));
                         if (id3v2.getArtist()!=null){
 
                             JLabel Artist = new JLabel(id3v2.getArtist());
                             Artist.setForeground(Color.WHITE);
+                            Artist.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(Artist);
 
                         }
@@ -181,6 +183,7 @@ public class PlayList {
 
                             JLabel Artist = new JLabel(id3v2.getArtist());
                             Artist.setForeground(Color.WHITE);
+                            Artist.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(Artist);
 
 
@@ -190,6 +193,7 @@ public class PlayList {
 
                             JLabel Title = new JLabel(id3v2.getTitle());
                             Title.setForeground(Color.WHITE);
+                            Title.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(Title);
 
                         }
@@ -198,6 +202,7 @@ public class PlayList {
 
                             JLabel Title = new JLabel(id3v2.getTitle());
                             Title.setForeground(Color.WHITE);
+                            Title.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(Title);
 
 
@@ -208,6 +213,7 @@ public class PlayList {
 
                             JLabel album = new JLabel(id3v2.getAlbum());
                             album.setForeground(Color.WHITE);
+                            album.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(album);
                         }
 
@@ -215,6 +221,7 @@ public class PlayList {
 
                             JLabel album = new JLabel(id3v2.getAlbum());
                             album.setForeground(Color.WHITE);
+                            album.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(album);
 
 
@@ -326,7 +333,6 @@ public class PlayList {
                 ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(150, 150, Image.SCALE_SMOOTH));
                 songImage.setIcon(imageIcon);
                 String mimeType = id3v2.getAlbumImageMimeType();
-                System.out.println(mimeType);
                 if (mp3File.hasId3v1Tag()&&mp3File.getId3v1Tag().getTitle()!=null){
 
                     Title.setText(id3v1.getTitle());
@@ -401,7 +407,7 @@ public class PlayList {
                 Library.deletePlayList(thisPlayList);
                 thisPlayList.playList.setVisible(false);
                 songsPanel.setVisible(false);
-                System.out.println();
+
 
             }
         });
@@ -432,7 +438,6 @@ public class PlayList {
 
     public void addSongToPlayList2(File file) throws IOException {
 
-        System.out.println("here....");
 
         File path=new File("./src/playlists/"+playListName+".bin");
         playListSongs.add(file);

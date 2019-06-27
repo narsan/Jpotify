@@ -181,7 +181,7 @@ public class Playing {
         }
 
 
-        private static HashMap<File, LocalDateTime> sortByValue (HashMap < File, LocalDateTime > unsortMap){
+        public static HashMap<File, LocalDateTime> sortByValue (HashMap < File, LocalDateTime > unsortMap){
 
 
             // 1. Convert Map to List of Map
