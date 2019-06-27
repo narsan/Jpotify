@@ -29,7 +29,7 @@ public class AddToLibrary extends Library {
             @Override
             public void actionPerformed(ActionEvent e){
                 try {
-                    out = new ObjectOutputStream(new FileOutputStream("src\\savedSongs.bin"));
+                    out = new ObjectOutputStream(new FileOutputStream("src\\sorted.bin"));
                     if (Library.getSongs().size()!=0)
                     {
                         for (int i=0;i<=Library.getSongs().size()-1;i++) {
