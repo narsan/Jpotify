@@ -139,8 +139,6 @@ public class ShowSongsToCreatePlayList implements ItemListener   {
 
         }
 
-
-
         flag=true;
 
 
@@ -158,8 +156,14 @@ public class ShowSongsToCreatePlayList implements ItemListener   {
             if (checkBoxes.get(i).isSelected()) {
 
 
+
+
                 try {
+
+                    if (!playList.playListSongs.contains(Library.getSongs().get(i))){
                     playList.addSongToPlayList(Library.getSongs().get(i));
+
+                    }
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
