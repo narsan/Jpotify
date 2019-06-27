@@ -80,7 +80,7 @@ public class AddNewSongToPlayList {
                             if (mp3File.getId3v1Tag().getTitle().equals(input)){
                                 //System.out.println("here");
 
-                                playList.addSongToPlayList(Library.getSongs().get(i));
+                                playList.addSongToPlayList2(Library.getSongs().get(i));
                             }
 
 
@@ -90,7 +90,7 @@ public class AddNewSongToPlayList {
 
                             if (mp3File.getId3v2Tag().getTitle().equals(input)){
                                 //System.out.println("here");
-                                playList.addSongToPlayList(Library.getSongs().get(i));
+                                playList.addSongToPlayList2(Library.getSongs().get(i));
                             }
 
 

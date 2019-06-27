@@ -434,8 +434,20 @@ public class PlayList {
 
     public void addSongToPlayList(File file) throws IOException {
 
-      playListSongs.add(file);
-        System.out.println(playListSongs.size());
+        File path=new File("./src/playlists/"+playListName+".bin");
+        playListSongs.add(file);
+        //path.delete();
+        //writeSongs();
+
+    }
+
+    public void addSongToPlayList2(File file) throws IOException {
+
+        System.out.println("here....");
+
+        File path=new File("./src/playlists/"+playListName+".bin");
+        playListSongs.add(file);
+        path.delete();
         writeSongs();
 
     }
@@ -443,9 +455,6 @@ public class PlayList {
 
         File path=new File("./src/playlists/"+playListName+".bin");
         out = new ObjectOutputStream(new FileOutputStream(path));
-
-
-
 
         try {
             for (File f:playListSongs) {
@@ -474,16 +483,30 @@ public class PlayList {
 
     public void removeSongFromPlayList(File file) throws IOException, ClassNotFoundException {
 
-        /*ObjectInputStream in=new ObjectInputStream(new FileInputStream(path));
-        File file1= (File) in.readObject();
-        if (file1.equals(file)){
-            System.out.println("equal");
-        }*/
+        File path=new File("./src/playlists/"+this.playListName+".bin");
 
-        playListSongs.remove(file);
-        // path.delete();
+        if (path.exists()){
+            System.out.println("exists");
+            ObjectInputStream in=new ObjectInputStream(new FileInputStream(path));
+            for (int i = 0; i <playListSongs.size() ; i++) {
 
-        //writeSongs();
+                File file1= (File) in.readObject();
+
+                   if (file1.equals(file)){
+                       System.out.println("equal");
+                       playListSongs.remove(file);
+                        path.delete();
+
+                       writeSongs();
+                   }
+
+
+            }
+
+        }
+
+
+
     }
 
 

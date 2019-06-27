@@ -38,6 +38,7 @@ public class ModifySongsOrderInPlayList {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+
                 Iterator iterator = playList.playListSongs.iterator();
                 Mp3File mp3File;
                 while (iterator.hasNext())
@@ -66,8 +67,10 @@ public class ModifySongsOrderInPlayList {
                 int index1 = temp.indexOf(file1);
                 int index2 = temp.indexOf(file2);
 
-                temp.add(index1, file2);
-                temp.add(index2, file1);
+                //temp.add(index1, file2);
+                //temp.add(index2, file1);
+                Collections.swap(temp,index1,index2);
+
                 //playList.playListSongs.clear();
                 HashSet<File> modified = new HashSet<>(temp);
                 playList.setPlayListSongs(modified);
