@@ -201,36 +201,20 @@ public class MainFrame {
 
         RightPanel rightPanel = new RightPanel();
         frame.add(rightPanel.getJScrollPane(), BorderLayout.EAST);
-
         DownPanel downPanel = new DownPanel();
         frame.add(downPanel.getDownPanel(), BorderLayout.PAGE_END);
-
         frame.setMinimumSize(new Dimension(1200, 700));
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setVisible(true);
-
-
     }
 
     public static void refresh(CenterPanelScroller jPanel) {
-
         if (currentPanel != null) {
-
-//            currentPanel.getCurrentPanel().setVisible(false);
             currentPanel.setVisible(false);
             frame.remove(currentPanel.getjScrollPane());
         }
         currentPanel=(jPanel);
-//        frame.setContentPane(currentPanel.getCurrentPanel());
-
         frame.add(jPanel.getjScrollPane(), BorderLayout.CENTER);
-
-        //this.frame.repaint();
-
         frame.revalidate();
-        // this.frame.validate();
-
-
     }
-
 }

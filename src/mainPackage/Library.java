@@ -2,10 +2,12 @@ package mainPackage;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class Library {
     private static ArrayList<File> songs=new ArrayList<>();
+    private static ArrayList<File> shuffleArrey = new ArrayList<>();
 
     private static HashMap<String,String> sortByTime=new HashMap<>();
     private static ArrayList<PlayList> playLists=new ArrayList<>();
@@ -17,6 +19,14 @@ public class Library {
     public static void addSong(File file){
 
         songs.add(file);
+
+    }
+    public static void  shuffle(){
+        shuffleArrey = (ArrayList<File>) songs.clone();
+        System.out.println("songs" + songs);
+        Collections.shuffle(shuffleArrey);
+        System.out.println("what "+shuffleArrey);
+
 
     }
 
@@ -33,10 +43,12 @@ public class Library {
 
         playLists.remove(playList);
     }
+    public  static ArrayList<File> getShuffledSings(){
+        return shuffleArrey;
+    }
 
     public static ArrayList<File> getSongs() {
         return songs;
     }
-
 
 }

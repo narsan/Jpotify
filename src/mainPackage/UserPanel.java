@@ -4,11 +4,16 @@ import javax.swing.*;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class UserPanel extends JPanel {
 
     private JLabel userAccount = new JLabel();
     protected String name ;
+    private String search;
 
     @Override
     public void setName(String name) {
@@ -30,23 +35,26 @@ public class UserPanel extends JPanel {
     }
 
     public UserPanel() {
-
+        JPanel searchPanel = new JPanel();
+        searchPanel.setBackground(Color.BLACK);
+        searchPanel.setLayout(new BoxLayout(searchPanel,BoxLayout.X_AXIS));
         this.setVisible(true);
         this.setLayout(new BorderLayout());
-
         this.setBackground(Color.BLACK);
         this.setPreferredSize(new Dimension(200, 40));
         JTextField field = new RoundJTextField(15);
-
-
-       /* searchBar.setColumns(10);
-        searchBar.setText("search...");
-        /*searchBar.setBorder(BorderFactory.createCompoundBorder(
-                new CustomeBorder(),
-                new EmptyBorder(new Insets(15, 25, 15, 25))));
-        searchBar.setEditable(true);
-        searchBar.setBackground(Color.white);
-        searchBar.setForeground(Color.pink);*/
+        JButton searchBtn = new JButton();
+        ImageIcon searchIcon = new ImageIcon(new ImageIcon("src\\icons\\search.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+        searchBtn.setIcon(searchIcon);
+        searchBtn.setBackground(Color.BLACK);
+        searchBtn.setBorder(null);
+        searchBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                search = field.getText();
+                System.out.println(search);
+            }
+        });
 
         userAccount.setText(name);
         userAccount.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -55,10 +63,11 @@ public class UserPanel extends JPanel {
         userAccount.setBorder(null);
         userAccount.setVisible(true);
         EmptyBorder border = new EmptyBorder(5, 250, 5, 250);
+        searchPanel.add(field);
+        searchPanel.add(searchBtn);
+        this.add(searchPanel,BorderLayout.WEST);
         this.setBorder(border);
-        this.add(field,BorderLayout.WEST);
         this.add(userAccount, BorderLayout.EAST);
-       // this.add(searchBar, BorderLayout.WEST);
 
     }
 

@@ -18,7 +18,7 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
         return time;
     }
 
-    private JLabel time=new JLabel();
+    private static JLabel time=new JLabel();
     private JLabel totalTime=new JLabel();
 
     public void TotalTime(){
@@ -49,9 +49,9 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
         slider.setBackground(new Color(58,58,58));
         slider.setMinimum(0);
         slider.setMaximum(duration);
-        addMouslistenr();
+        addchangelistener();
     }
-    public void addMouslistenr() {
+    public void addchangelistener() {
         slider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -60,6 +60,34 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
                     slider.setValue(0);
                     new PlayingActionListener();
                 }
+            }
+        });
+    }
+    public void AddMouslistener(){
+        slider.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
             }
         });
     }
