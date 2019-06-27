@@ -81,7 +81,7 @@ public class ShowSongs extends JButton {
 
 
 
-            if (mp3File.hasId3v2Tag()) {
+           // if (mp3File.hasId3v2Tag()) {
 
 
                 ID3v2 id3v2 = mp3File.getId3v2Tag();
@@ -155,7 +155,6 @@ public class ShowSongs extends JButton {
 
                         if (id3v2.getAlbum()!=null){
 
-
                             JLabel album = new JLabel(id3v2.getAlbum());
                             album.setForeground(Color.WHITE);
                             album.setFont(new Font("Arial",Font.PLAIN,10));
@@ -163,11 +162,11 @@ public class ShowSongs extends JButton {
                         }
 
                         else if (id3v1.getAlbum()!=null){
+
                             JLabel album = new JLabel(id3v1.getAlbum());
                             album.setForeground(Color.WHITE);
                             album.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(album);
-
 
                         }
                         showPlayingSong.add(playingSongImg,BorderLayout.WEST);
@@ -281,9 +280,16 @@ public class ShowSongs extends JButton {
                 songImage.setIcon(imageIcon);
                 String mimeType = id3v2.getAlbumImageMimeType();
                 System.out.println(mimeType);
-                Title.setText(id3v2.getTitle());
+                if (id3v2.getTitle()!=null){
 
-            }
+                    Title.setText(id3v2.getTitle());
+                }
+                else if (id3v1.getTitle()!=null){
+
+                    Title.setText(id3v1.getTitle());
+                }
+
+        //    }
 
 
             JPanel songData = new JPanel();
@@ -292,28 +298,6 @@ public class ShowSongs extends JButton {
             songData.add(songImage);
             songData.add(Title);
             songData.setMinimumSize(new Dimension(200, 200));
-
-
-            /*double[][] weights = gridBagLayout.getLayoutWeights();
-            for (int k = 0; k < 2; k++) {
-                for (int j = 0; j < weights[k].length; j++) {
-                    weights[k][j] = 1;
-                }
-            }
-            gridBagLayout.columnWeights = weights[0];
-            gridBagLayout.rowWeights = weights[1];*/
-
-/*            int top = 20;
-            int left = 20;
-            int bottom = 2;
-            int right = 40;
-            gbc.insets = new Insets(top, left, bottom, right);
-            gridBagLayout.setConstraints(songData,gbc);*/
-
-
-
-
-
 
             centerPanel.add(songData,gbc);
 

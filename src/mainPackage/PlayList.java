@@ -231,7 +231,7 @@ public class PlayList implements ActionListener {
 
                         else if (id3v1.getArtist()!=null){
 
-                            JLabel Artist = new JLabel(id3v2.getArtist());
+                            JLabel Artist = new JLabel(id3v1.getArtist());
                             Artist.setForeground(Color.WHITE);
                             Artist.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(Artist);
@@ -250,7 +250,7 @@ public class PlayList implements ActionListener {
 
                         else if (id3v1.getTitle()!=null){
 
-                            JLabel Title = new JLabel(id3v2.getTitle());
+                            JLabel Title = new JLabel(id3v1.getTitle());
                             Title.setForeground(Color.WHITE);
                             Title.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(Title);
@@ -269,7 +269,7 @@ public class PlayList implements ActionListener {
 
                         else if (id3v1.getAlbum()!=null){
 
-                            JLabel album = new JLabel(id3v2.getAlbum());
+                            JLabel album = new JLabel(id3v1.getAlbum());
                             album.setForeground(Color.WHITE);
                             album.setFont(new Font("Arial",Font.PLAIN,10));
                             playingSonglabel.add(album);

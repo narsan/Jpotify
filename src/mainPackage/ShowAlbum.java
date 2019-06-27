@@ -60,10 +60,17 @@ public class ShowAlbum extends JButton {
 
                 try {
                     Mp3File mp3File = new Mp3File(file);
-                    if (mp3File.hasId3v2Tag()) {
+                    if (mp3File.hasId3v2Tag()&&mp3File.getId3v2Tag().getAlbum()!=null) {
                         ID3v2 id3v2 = mp3File.getId3v2Tag();
 
                         albumName = id3v2.getAlbum();
+
+                    }
+                    else if (mp3File.hasId3v1Tag()&&mp3File.getId3v1Tag().getAlbum()!=null){
+
+                        ID3v1 id3v1 = mp3File.getId3v1Tag();
+
+                        albumName = id3v1.getAlbum();
 
                     }
 
@@ -80,17 +87,33 @@ public class ShowAlbum extends JButton {
 
                 try {
                     Mp3File mp3File = new Mp3File(checkIfSame);
-                    if (mp3File.hasId3v2Tag()) {
+                    if (mp3File.hasId3v2Tag()&&mp3File.getId3v2Tag().getAlbum()!=null) {
+
+                        ID3v1 id3v1 = mp3File.getId3v2Tag();
+                        ID3v1 id3v2 = mp3File.getId3v2Tag();
+
+                        if (id3v2.getAlbum().equals(albumName)) {
+
+                            if (!AlbumNames.contains(albumName)&&i!=j) {
+
+                                same.add(checkIfSame);
+                            }
+
+                        }
+                    }
+
+                    else if (mp3File.hasId3v1Tag()&&mp3File.getId3v1Tag().getAlbum()!=null) {
 
                         ID3v1 id3v1 = mp3File.getId3v2Tag();
                         ID3v1 id3v2 = mp3File.getId3v2Tag();
 
                         if (id3v1.getAlbum().equals(albumName)) {
 
-                            if (!AlbumNames.contains(albumName)&&i!=j) {
+                            if (!AlbumNames.contains(albumName) && i != j) {
 
                                 same.add(checkIfSame);
                             }
+
 
                         }
                     }
@@ -140,7 +163,7 @@ public class ShowAlbum extends JButton {
         } catch (InvalidDataException e) {
             e.printStackTrace();
         }
-        if (mp3File.hasId3v2Tag()) {
+        if (mp3File.hasId3v2Tag()&&mp3File.getId3v2Tag().getAlbum()!=null) {
 
             ID3v2 id3v2 = mp3File.getId3v2Tag();
             String AlbumName = id3v2.getAlbum();
@@ -176,6 +199,47 @@ public class ShowAlbum extends JButton {
             AlbumImage.setIcon(imageIcon);
             showAlbumInfo.add(AlbumImage);
             showAlbumInfo.add(AlbumTitle);
+
+        }
+
+        else if (mp3File.hasId3v1Tag()&&mp3File.getId3v1Tag().getAlbum()!=null){
+
+            ID3v1 id3v1 = mp3File.getId3v1Tag();
+            ID3v2 id3v2 = mp3File.getId3v2Tag();
+            String AlbumName = id3v1.getAlbum();
+            JLabel AlbumTitle = new JLabel(AlbumName);
+            AlbumTitle.setForeground(Color.WHITE);
+            // AlbumImage=new JButton();
+            AlbumImage.setBorder(null);
+            AlbumImage.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    ArrayList<File> songs= (ArrayList<File>) getKeyFromValue(albumsAndSongs,AlbumName);
+                    try {
+                        showSongsInAlbum(songs);
+                    } catch (InvalidDataException e1) {
+                        e1.printStackTrace();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    } catch (UnsupportedTagException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            });
+            byte[] imageData = id3v2.getAlbumImage();
+            BufferedImage img = null;
+            try {
+                img = ImageIO.read(new ByteArrayInputStream(imageData));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(150, 150, Image.SCALE_SMOOTH));
+            showAlbumInfo.setBackground(Color.BLACK);
+            AlbumImage.setIcon(imageIcon);
+            showAlbumInfo.add(AlbumImage);
+            showAlbumInfo.add(AlbumTitle);
+
 
         }
 
@@ -236,7 +300,7 @@ public class ShowAlbum extends JButton {
             }
 
 
-            if (mp3File.hasId3v2Tag()) {
+            //if (mp3File.hasId3v2Tag()) {
 
 
                 ID3v2 id3v2 = mp3File.getId3v2Tag();
@@ -421,9 +485,18 @@ public class ShowAlbum extends JButton {
                 songImage.setIcon(imageIcon);
                 String mimeType = id3v2.getAlbumImageMimeType();
                 System.out.println(mimeType);
-                Title.setText(id3v2.getTitle());
+                if (id3v2.getTitle()!=null){
 
-            }
+                    Title.setText(id3v2.getTitle());
+                }
+
+                else if (id3v1.getTitle()!=null){
+
+                    Title.setText(id3v1.getTitle());
+
+                }
+
+            //}
 
 
             JPanel songData = new JPanel();

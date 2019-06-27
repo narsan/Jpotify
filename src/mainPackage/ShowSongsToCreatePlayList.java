@@ -93,6 +93,10 @@ public class ShowSongsToCreatePlayList implements ItemListener   {
                     checkBox.addItemListener(this);
                 } else if (mp3File.hasId3v2Tag() && mp3File.getId3v2Tag().getTitle() != null) {
 
+                    checkBox.setText(mp3File.getId3v2Tag().getTitle());
+                    checkBox.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+                    checkBox.addItemListener(this);
+
 
                     /*checkBox.setText(mp3File.getId3v2Tag().getTitle());
                     //checkBox.addItemListener(this);
@@ -154,8 +158,6 @@ public class ShowSongsToCreatePlayList implements ItemListener   {
         for (int i = 0; i < checkBoxes.size(); i++) {
 
             if (checkBoxes.get(i).isSelected()) {
-
-
 
 
                 try {
