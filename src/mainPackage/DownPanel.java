@@ -297,6 +297,7 @@ public class DownPanel {
 
             }
         });
+        VolumeContoroller volumeContoroller= new VolumeContoroller();
 
 
         downPanel.setVisible(true);
@@ -311,9 +312,10 @@ public class DownPanel {
         JSlider jSlider = new JSlider();
         jSlider.setPreferredSize(new Dimension(100, 50));
         jSlider.setBackground(new Color(58, 58, 58));
-        volume.add(jSlider, BorderLayout.PAGE_END);
+        volume.add(volumeContoroller, BorderLayout.PAGE_END);
         downPanel.add(downCenterPanel, BorderLayout.CENTER);
         downPanel.add(volume, BorderLayout.EAST);
+        //downPanel.add(volumeContoroller, BorderLayout.EAST);
 
     }
 
