@@ -347,8 +347,10 @@ public class PlayList implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 JFrame enterName=new JFrame();
                 String newName=JOptionPane.showInputDialog(enterName,"enter new name");
+                if (newName!=null&newName.length()>0){
                 thisPlayList.playList.setText(newName);
                 thisPlayList.setPlayListName(newName);
+                }
             }
         });
         return songsPanel;

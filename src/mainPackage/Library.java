@@ -15,9 +15,13 @@ public class Library {
 
     public static void addSong(File file){
 
+        if (!songs.contains(file)){
+
         songs.add(file);
 
+        }
     }
+
     public static void  shuffle(){
         shuffleArrey = (ArrayList<File>) songs.clone();
         System.out.println("songs" + songs);

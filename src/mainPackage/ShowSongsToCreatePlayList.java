@@ -17,7 +17,7 @@ import java.util.HashSet;
 
 public class ShowSongsToCreatePlayList implements ItemListener   {
 
-    static CenterPanelScroller showSongs = new CenterPanelScroller();
+     CenterPanelScroller showSongs =null;
 
     private static HashSet<File> songsInPlaylist;
     private ArrayList<JCheckBox> checkBoxes;
@@ -35,6 +35,8 @@ public class ShowSongsToCreatePlayList implements ItemListener   {
     }*/
 
     public CenterPanelScroller songsName() {
+
+        showSongs=new CenterPanelScroller();
 
         HashSet<Mp3File> songsInPlaylist1 = new HashSet<Mp3File>();
         ArrayList<File> songs = new ArrayList<>();

@@ -233,7 +233,6 @@ public class MainFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-
                 refresh(showSongsToCreatePlayList.songsName());
 
 
