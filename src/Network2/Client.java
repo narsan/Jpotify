@@ -3,6 +3,8 @@ package Network2;
 import Network2.ServerMessagesManager;
 import mainPackage.Library;
 import mainPackage.Playing;
+import mainPackage.SharedPlayList;
+import mainPackage.UserPanel;
 
 import java.io.DataInputStream;
 import java.io.File;
@@ -22,7 +24,7 @@ import java.util.Scanner;
 public class Client {
     Socket mSocket;
     int port = 9093;
-    String serverAddress = "172.20.10.10";
+    String serverAddress = "192.168.43.200";
 
     InputStream fromServerStream;
     OutputStream toServerStream;
@@ -82,7 +84,7 @@ public class Client {
 
         String name = sc.nextLine();
 
-        sendName(name);
+        sendName(UserPanel.getName1());
 
         while (true) {
             System.out.println("-----------");
@@ -126,18 +128,16 @@ public class Client {
                 case 6:
                     Scanner scanner1=new Scanner(System.in);
 
-                    System.out.println("Enter your friend number");
+                  /*  System.out.println("Enter your friend number");
                     int number=scanner1.nextInt();
-                    String name1="";
+                    String name1="";*/
 
-                    for (int i = 0; i <number ; i++) {
+                    for (int i = 0; i <friends.size() ; i++) {
 
-                        System.out.println("Enter your friend name");
-                        name1=scanner1.next();
 
-                        for (int j = 0; j < Library.getSongs().size(); j++) {
+                        for (int j = 0; j < SharedPlayList.getPlayListSongs().size(); j++) {
 
-                            sendFile(name1, Library.getSongs().get(i).getPath());
+                            sendFile(friends.get(i), SharedPlayList.getPlayListSongs().get(j).getPath());
 
 
                         }

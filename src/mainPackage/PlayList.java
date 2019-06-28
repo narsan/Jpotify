@@ -25,7 +25,7 @@ public class PlayList implements ActionListener {
     protected JButton playList = new JButton();
     protected String playListName;
     //protected  HashSet<File> playListSongs;
-    protected ArrayList<File> playListSongs=new ArrayList<>();
+    protected static ArrayList<File> playListSongs=new ArrayList<>();
     private ObjectOutputStream out;
     JButton deleteSong = new JButton();
     JButton addNewSong = new JButton();
@@ -84,7 +84,7 @@ public class PlayList implements ActionListener {
 
     }
 
-    public ArrayList<File> getPlayListSongs() {
+    public static ArrayList<File> getPlayListSongs() {
         return playListSongs;
     }
 

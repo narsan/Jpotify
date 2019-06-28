@@ -39,7 +39,7 @@ public class ServerMessagesManager implements Runnable {
                     readerHolder.readFully(fileData);
 
                     // save file to "Files" Folder
-                    File filesFolder = new File("Files");
+                    File filesFolder = new File(from);
                     if (!filesFolder.exists()) {
                         filesFolder.mkdir();
                     }

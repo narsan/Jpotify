@@ -18,14 +18,20 @@ import java.io.*;
 public class UserPanel extends JPanel {
 
     private JLabel userAccount = new JLabel();
-    protected String name ;
+    protected static String name ;
     private String search;
 
-    @Override
-    public void setName(String name) {
+
+    public  void setName(String name) {
         this.name = name;
         userAccount.setText(name);
     }
+
+
+   public static String getName1(){
+
+        return name;
+   }
 
     class CustomeBorder extends AbstractBorder {
         @Override
