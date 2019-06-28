@@ -16,23 +16,20 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 
 public class UserPanel extends JPanel {
-
     private JLabel userAccount = new JLabel();
     protected static String name ;
     private String search;
+    private JButton shareBtn = new JButton();
 
-
-    public  void setName(String name) {
+    @Override
+    public void setName(String name) {
         this.name = name;
         userAccount.setText(name);
     }
 
-
-   public static String getName1(){
-
+   public static String geName1(){
         return name;
    }
-
     class CustomeBorder extends AbstractBorder {
         @Override
         public void paintBorder(Component c, Graphics g, int x, int y,
@@ -47,6 +44,9 @@ public class UserPanel extends JPanel {
     }
 
     public UserPanel() {
+        JPanel namePanel = new JPanel();
+        namePanel.setBackground(Color.BLACK);
+        namePanel.setLayout(new BoxLayout(namePanel, BoxLayout.X_AXIS));
         JPanel searchPanel = new JPanel();
         searchPanel.setBackground(Color.BLACK);
         searchPanel.setLayout(new BoxLayout(searchPanel, BoxLayout.X_AXIS));
@@ -348,19 +348,24 @@ public class UserPanel extends JPanel {
 
 
 
-
         userAccount.setText(name);
         userAccount.setFont(new Font("Arial", Font.PLAIN, 16));
         userAccount.setBackground(Color.BLACK);
         userAccount.setForeground(Color.white);
         userAccount.setBorder(null);
         userAccount.setVisible(true);
+        shareBtn.setBackground(Color.BLACK);
+        shareBtn.setBorder(null);
+        ImageIcon shareIcon = new ImageIcon(new ImageIcon("src\\icons\\share.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+        shareBtn.setIcon(shareIcon);
+        namePanel.add(userAccount);
+        namePanel.add(shareBtn);
         EmptyBorder border = new EmptyBorder(5, 250, 5, 250);
         searchPanel.add(field);
         searchPanel.add(searchBtn);
         this.add(searchPanel,BorderLayout.WEST);
         this.setBorder(border);
-        this.add(userAccount, BorderLayout.EAST);
+        this.add(namePanel, BorderLayout.EAST);
 
     }
 

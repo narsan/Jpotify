@@ -84,7 +84,7 @@ public class Client {
 
         String name = sc.nextLine();
 
-        sendName(UserPanel.getName1());
+        sendName(UserPanel.geName1());
 
         while (true) {
             System.out.println("-----------");

@@ -20,8 +20,13 @@ public class RightPanel extends JPanel implements Scrollable {
     static ArrayList<String> friendsName=new ArrayList<>();
     static String playingMusic;
 
-    public static void setPlayingMusic(String playingMusic) {
-        RightPanel.playingMusic = playingMusic;
+    public static void setPlayingMusic(String playing) {
+        playingMusic = playing;
+        System.out.println(playingMusic+"&&&&");
+    }
+
+    public static String getPlayingMusic() {
+        return playingMusic;
     }
 
     @Override
@@ -59,15 +64,15 @@ public class RightPanel extends JPanel implements Scrollable {
     public RightPanel() {
 
         jScrollPane = new JScrollPane(this);
-        jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        jScrollPane.setBounds(50, 30, 300, 50);
+        jScrollPane.setBounds(50, 30, 500, 50);
         jScrollPane.setBorder(null);
 
 
-        this.setPreferredSize(new Dimension(250, 40));
+        this.setPreferredSize(new Dimension(210, 40));
         this.setVisible(true);
-        this.setBackground(Color.BLACK);
+        this.setBackground(Color.black);
         this.setLayout( new BorderLayout());
 
 
@@ -76,10 +81,11 @@ public class RightPanel extends JPanel implements Scrollable {
         JLabel friends = new JLabel();
         JPanel panel = new JPanel();
         JPanel activityPanel = new JPanel();
-        activityPanel.setBackground(Color.BLACK);
+        activityPanel.setBackground(Color.black);
         panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
         panel.setBackground(Color.black);
-      //  panel.setPreferredSize(new Dimension(210,40));
+        //panel.setPreferredSize(new Dimension(500,40));
+        //activityPanel.setPreferredSize(new Dimension(500,40));
 
         this.setBorder(border);
         ImageIcon friendIcon = new ImageIcon(new ImageIcon("src\\icons\\friend.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
@@ -126,13 +132,21 @@ public class RightPanel extends JPanel implements Scrollable {
                 activityPanel.setLayout(new GridLayout(RightPanel.friendsName.size(),1));
                 for (String str:RightPanel.friendsName) {
                     JButton button = new JButton();
+                    button.setBorder(null);
                     activityPanel.add(button);
-                    button.setBackground(Color.cyan);
+                    button.setBackground(Color.black);
                     JLabel label=new JLabel(str);
-                    JLabel label1=new JLabel(playingMusic);
+                    JLabel label1=new JLabel(getPlayingMusic());
+                    label.setFont(new Font("Arial", Font.BOLD, 15));
+                    label.setForeground(Color.white);
+                    label1.setFont(new Font("Arial", Font.BOLD, 10));
+                    label1.setForeground(Color.white);
+                    System.out.println(getPlayingMusic()+"***");
                     label.setForeground(Color.BLACK);
+                    button.setLayout(new BoxLayout(button,BoxLayout.Y_AXIS));
                     button.add(label);
-                    button.add(label);
+                    button.add(label1);
+
 
                 }
 

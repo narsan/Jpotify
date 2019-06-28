@@ -64,7 +64,6 @@ public class MainFrame {
         leftPanel.add(showSongs);
         leftPanel.add(createPlayList.getNewPlayList());
 
-
         JLabel playLists = new JLabel();
         playLists.setPreferredSize(new Dimension(30, 30));
         playLists.setText("Your Playlists");
