@@ -66,7 +66,7 @@ public class DownPanel {
         ImageIcon nextSong = new ImageIcon(new ImageIcon("src\\icons\\nextSong.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
         ImageIcon play = new ImageIcon(new ImageIcon("src\\icons\\play.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
         ImageIcon previous1 = new ImageIcon(new ImageIcon("src\\icons\\previousSong.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
-        ImageIcon sound1 = new ImageIcon(new ImageIcon("src\\icons\\sound.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+        ImageIcon sound1 = new ImageIcon(new ImageIcon("src\\icons\\sound.png").getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH));
         shuffle = new ImageIcon(new ImageIcon("src\\icons\\shuffle.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
         repeat = new ImageIcon(new ImageIcon("src\\icons\\repeat.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
         playIcons.setLayout(new GridLayout(1, 5));

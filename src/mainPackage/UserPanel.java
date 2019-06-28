@@ -19,7 +19,11 @@ public class UserPanel extends JPanel {
     private JLabel userAccount = new JLabel();
     protected static String name ;
     private String search;
-    private JButton shareBtn = new JButton();
+    static JButton shareBtn = new JButton();
+
+    public static JButton getShareBtn() {
+        return shareBtn;
+    }
 
     @Override
     public void setName(String name) {

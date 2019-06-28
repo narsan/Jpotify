@@ -25,8 +25,13 @@ public class RightPanel extends JPanel implements Scrollable {
     static ArrayList<String> friendsName=new ArrayList<>();
     static String playingMusic;
 
-    public static void setPlayingMusic(String playingMusic) {
-        RightPanel.playingMusic = playingMusic;
+    public static String getPlayingMusic() {
+        return playingMusic;
+    }
+
+
+    public static void setPlayingMusic(String playing) {
+        playingMusic = playing;
     }
 
     @Override
@@ -131,7 +136,25 @@ public class RightPanel extends JPanel implements Scrollable {
                 activityPanel.setLayout(new GridLayout(RightPanel.friendsName.size(),1));
                 ArrayList<File> songsInShare=new ArrayList<>();
                 for (String str:RightPanel.friendsName) {
+                    //JButton button = new JButton();
+
                     JButton button = new JButton();
+                    button.setBorder(null);
+                    activityPanel.add(button);
+                    button.setBackground(Color.black);
+                    JLabel label=new JLabel(str);
+                    JLabel label1=new JLabel(getPlayingMusic());
+                    label.setFont(new Font("Arial", Font.BOLD, 15));
+                    label.setForeground(Color.white);
+                    label1.setFont(new Font("Arial", Font.BOLD, 10));
+                    label1.setForeground(Color.white);
+                    System.out.println(getPlayingMusic()+"***");
+                    label.setForeground(Color.BLACK);
+                    button.setLayout(new BoxLayout(button,BoxLayout.Y_AXIS));
+                    button.add(label);
+                    button.add(label1);
+
+
                     button.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -395,13 +418,14 @@ public class RightPanel extends JPanel implements Scrollable {
 
                         }
                     });
-                    activityPanel.add(button);
+                   /* activityPanel.add(button);
                     button.setBackground(Color.cyan);
                     JLabel label=new JLabel(str);
                     JLabel label1=new JLabel(playingMusic);
+                    System.out.println(playingMusic+"***");
                     label.setForeground(Color.BLACK);
                     button.add(label);
-                    button.add(label);
+                    button.add(label1);*/
 
                 }
 

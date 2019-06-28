@@ -6,6 +6,9 @@ import mainPackage.Playing;
 import mainPackage.SharedPlayList;
 import mainPackage.UserPanel;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -86,7 +89,45 @@ public class Client {
 
         sendName(UserPanel.geName1());
 
-        while (true) {
+        UserPanel.getShareBtn().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                JFrame frame=new JFrame();
+               String option= JOptionPane.showInputDialog(frame,"to share playlist:1 , to share playing song:2");
+               int n=Integer.parseInt(option);
+               if (n==1){
+
+                         /*for (int i = 0; i <friends.size() ; i++) {
+
+
+                        for (int j = 0; j < SharedPlayList.getPlayListSongs().size(); j++) {
+
+                            sendFile(friends.get(i), SharedPlayList.getPlayListSongs().get(j).getPath());
+
+
+                        }
+
+                    }*/
+
+
+
+               }
+
+               else if (n==2){
+
+                   for (int i = 0; i <friends.size() ; i++) {
+
+                       sendSingleCht(friends.get(i), Playing.getTitle());
+                   }
+
+                   System.out.println(Playing.getTitle());
+
+               }
+            }
+        });
+
+       /* while (true) {
             System.out.println("-----------");
             System.out.println("Enter Command number(ex:3):\n"
                     + "6)send file\n"
@@ -118,14 +159,14 @@ public class Client {
                     }
 
                     System.out.println(Playing.getTitle());
-                    break;
+                   // break;
             /*    case 5:
                     System.out.println("Enter your message");
                     text = sc.nextLine();
 
                     sendGroupCht(text);
                     break;*/
-                case 6:
+                //case 6:
                     Scanner scanner1=new Scanner(System.in);
 
                   /*  System.out.println("Enter your friend number");
@@ -142,15 +183,14 @@ public class Client {
 
                         }
 
-                    }*/
+                    }
 
                     /*System.out.println("Enter receiver name");
                     to = sc.nextLine();
 
                     System.out.println("Enter file name(Full Path)");
-                    String fileName = sc.nextLine();*/
+                    String fileName = sc.nextLine();
 
-                    break;
                 case 7:
 
                     bye();
@@ -158,7 +198,7 @@ public class Client {
                     return;
 
             }
-        }
+        }*/
     }
 
     private void sendName(String name) {
