@@ -49,5 +49,6 @@ public class VolumeContoroller extends JSlider {
             }
         });
         this.setFocusable(false);
+
     }
 }
