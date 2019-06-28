@@ -102,14 +102,19 @@ public class Client {
 
                     break;
                 case 4:
-                    Scanner scanner=new Scanner(System.in);
+
+                    /*Scanner scanner=new Scanner(System.in);
                     System.out.println("Enter receiver name");
-                    String to = scanner.nextLine();
+                    String to = scanner.nextLine();*/
 
                     //System.out.println("Enter your message");
                     //String text=scanner.next();
 
-                    sendSingleCht(to, Playing.getTitle());
+                    for (int i = 0; i <friends.size() ; i++) {
+
+                        sendSingleCht(friends.get(i), Playing.getTitle());
+                    }
+
                     System.out.println(Playing.getTitle());
                     break;
             /*    case 5:

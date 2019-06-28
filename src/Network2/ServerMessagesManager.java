@@ -1,5 +1,7 @@
 package Network2;
 
+import mainPackage.RightPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.DataInputStream;
@@ -23,8 +25,8 @@ public class ServerMessagesManager implements Runnable {
                 if (command.equals("CHT")) {
                     String from = readerHolder.readLine();
                     String text = readerHolder.readLine();
-
                     System.out.println(from + " : [" + text + "]");
+                    RightPanel.setPlayingMusic(text);
                 } else if (command.equals("RESULT")) {
                     String result = readerHolder.readLine();
                     System.out.println("ans :" + result);

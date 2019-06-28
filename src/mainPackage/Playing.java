@@ -24,6 +24,7 @@ public class Playing {
     static HashMap<File, LocalDateTime> sortByTime = new HashMap<>();
 
     static UpdateWorker updateWorker = null;
+    static boolean isPlayed=false;
 
     private static ObjectOutputStream out;
 
@@ -59,6 +60,7 @@ public class Playing {
     public static void Play() throws JavaLayerException, InvalidDataException, IOException, UnsupportedTagException, ParseException {
         if (updateWorker!=null)
             updateWorker.cancel(true);
+        isPlayed=true;
 
         Mp3File mp3File = new Mp3File(file);
         updateWorker = new UpdateWorker((int) mp3File.getLengthInSeconds());
@@ -162,6 +164,8 @@ public class Playing {
 
               updateWorker.execute();
             }
+
+          setTitle(file.getName());
         }
     }
 

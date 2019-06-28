@@ -57,6 +57,8 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
             public void stateChanged(ChangeEvent e) {
                 if(slider.getValue()==slider.getMaximum())
                 {
+
+                    Playing.isPlayed=false;
                     slider.setValue(0);
                     new PlayingActionListener();
                 }

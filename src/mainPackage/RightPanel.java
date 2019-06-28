@@ -17,6 +17,12 @@ public class RightPanel extends JPanel implements Scrollable {
     private static final int PREF_H = 800;
     private static final int VP_WIDTH = 200;
     private static final int VP_HEIGHT = 448;
+    static ArrayList<String> friendsName=new ArrayList<>();
+    static String playingMusic;
+
+    public static void setPlayingMusic(String playingMusic) {
+        RightPanel.playingMusic = playingMusic;
+    }
 
     @Override
     public Dimension getPreferredScrollableViewportSize() {
@@ -70,10 +76,9 @@ public class RightPanel extends JPanel implements Scrollable {
         JLabel friends = new JLabel();
         JPanel panel = new JPanel();
         JPanel activityPanel = new JPanel();
-        activityPanel.setLayout(new GridLayout(10,1));
-        activityPanel.setBackground(Color.MAGENTA);
+        activityPanel.setBackground(Color.BLACK);
         panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
-        panel.setBackground(Color.yellow);
+        panel.setBackground(Color.black);
       //  panel.setPreferredSize(new Dimension(210,40));
 
         this.setBorder(border);
@@ -85,6 +90,8 @@ public class RightPanel extends JPanel implements Scrollable {
         friends.setFont(new Font("Arial", Font.BOLD, 15));
         friends.setBackground(Color.black);
         friends.setForeground(Color.white);
+
+
 
 
         friendsbtn.addActionListener(new ActionListener() {
@@ -99,23 +106,45 @@ public class RightPanel extends JPanel implements Scrollable {
                 myPanel.setLayout(new BoxLayout(myPanel,BoxLayout.Y_AXIS));
 
 
+
                 String friendsNumber1=JOptionPane.showInputDialog(friendsNumber,"Enter number of your friends..");
                 int number=Integer.parseInt(friendsNumber1);
                 for (int i = 0; i <number ; i++) {
                     JTextField Field = new JTextField(5);
                     myPanel.add(new JLabel("your friends name"));
                     myPanel.add(Field);
-                    JOptionPane.showConfirmDialog(null, myPanel,
+                    int result=JOptionPane.showConfirmDialog(null, myPanel,
                             "Please Enter X and Y Values", JOptionPane.OK_CANCEL_OPTION);
                     String Text=Field.getText();
                     System.out.println(Text);
                     Client.addFriends(Text);
-
+                    RightPanel.friendsName.add(Text);
 
                 }
 
+
+                activityPanel.setLayout(new GridLayout(RightPanel.friendsName.size(),1));
+                for (String str:RightPanel.friendsName) {
+                    JButton button = new JButton();
+                    activityPanel.add(button);
+                    button.setBackground(Color.cyan);
+                    JLabel label=new JLabel(str);
+                    JLabel label1=new JLabel(playingMusic);
+                    label.setForeground(Color.BLACK);
+                    button.add(label);
+                    button.add(label);
+
+                }
+
+
+
             }
         });
+
+        this.revalidate();
+
+
+
 
 
         panel.add(friendsbtn);
