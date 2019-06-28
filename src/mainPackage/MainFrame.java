@@ -163,21 +163,21 @@ public class MainFrame {
                 }
 
                 else if (name.equals("Shared playlist")){
-                    SharedPlayList sharedPlayList1=new SharedPlayList();
+                    //SharedPlayList sharedPlayList1=new SharedPlayList();
 
                     try {
                         while (true) {
                             System.out.println("-");
-                            sharedPlayList1.addSongToPlayList((File) in.readObject());
+                            sharedPlayList.addSongToPlayList((File) in.readObject());
                         }
                     } catch (ClassNotFoundException e) {
                         e.printStackTrace();
                     } catch (EOFException e) {
-                        System.out.println(sharedPlayList1.getPlayListSongs());
+                        System.out.println(sharedPlayList.getPlayListSongs());
                         in.close();
                     }
                     ShowSongsToCreatePlayList showSongsToCreatePlayList = new ShowSongsToCreatePlayList();
-                    showSongsToCreatePlayList.setPlayList(sharedPlayList1);
+                    showSongsToCreatePlayList.setPlayList(sharedPlayList);
                     Library.addNewPlayList(showSongsToCreatePlayList.getPlayList());
 
                     playlistPanel.add(showSongsToCreatePlayList.playList.getPlayList());
