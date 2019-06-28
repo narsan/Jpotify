@@ -46,7 +46,7 @@ public class Client  {
 
         try {
            // for (String str : ips) {
-                socket = new Socket("localhost", 3504);
+                socket = new Socket("", 3504);
                 sockets.add(socket);
 
                 reader = new ObjectInputStream(socket.getInputStream());

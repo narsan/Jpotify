@@ -43,6 +43,7 @@ public class RightPanel extends JPanel implements Scrollable {
     public Dimension getPreferredSize() {
         return new Dimension(PREF_W, PREF_H);
     }
+       private JButton friendsbtn = new JButton();
 
     public RightPanel() {
 
@@ -56,23 +57,32 @@ public class RightPanel extends JPanel implements Scrollable {
         this.setPreferredSize(new Dimension(210, 40));
         this.setVisible(true);
         this.setBackground(Color.BLACK);
-        this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+        this.setLayout( new BorderLayout());
 
 
 
+        EmptyBorder border = new EmptyBorder(5, 30, 5, 5);
         JLabel friends = new JLabel();
-        EmptyBorder border = new EmptyBorder(5, 50, 5, 5);
+        JPanel panel = new JPanel();
+        panel.setBackground(Color.BLACK);
+        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+        panel.setPreferredSize(new Dimension(210,40));
+
         this.setBorder(border);
-
-
+        ImageIcon friendIcon = new ImageIcon(new ImageIcon("src\\icons\\friend.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+        friendsbtn.setIcon(friendIcon);
+        friendsbtn.setBackground(Color.BLACK);
+        friendsbtn.setBorder(null);
         friends.setText("Friends activity");
         friends.setFont(new Font("Arial", Font.BOLD, 15));
         friends.setBackground(Color.black);
         friends.setForeground(Color.white);
-        friends.setBorder(null);
-        friends.setVisible(true);
 
-        this.add(friends);
+        //friends.setVisible(true);
+        //friends.setBorder(null);
+        panel.add(friendsbtn);
+        panel.add(friends);
+        this.add(panel,BorderLayout.NORTH);
     }
 
     public JScrollPane getJScrollPane() {

@@ -20,7 +20,7 @@ import java.util.Scanner;
 public class Client {
     Socket mSocket;
     int port = 9093;
-    String serverAddress = "192.168.43.236";
+    String serverAddress = "172.20.10.10";
 
     InputStream fromServerStream;
     OutputStream toServerStream;
@@ -31,7 +31,7 @@ public class Client {
     public Client() {
         try {
 
-            mSocket = new Socket("localhost", port);
+            mSocket = new Socket(serverAddress, port);
 
             System.out.println("connect to server ....");
 
