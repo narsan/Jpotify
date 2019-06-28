@@ -1,5 +1,6 @@
 package mainPackage;
 
+import Network2.Client;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.UnsupportedTagException;
 
@@ -74,6 +75,7 @@ public class MainFrame {
 
         FavoriteSong favoriteSong = new FavoriteSong();
         SharedPlayList sharedPlayList = new SharedPlayList();
+        Client.setSharedPlayList(sharedPlayList);
         playlistPanel.add(favoriteSong.playList);
         playlistPanel.add(sharedPlayList.playList);
 

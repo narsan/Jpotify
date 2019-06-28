@@ -18,7 +18,7 @@ public class Server {
     HashMap<String, ClientManager> clientsMap = new HashMap<String, ClientManager>();
 
     public Server() throws IOException {
-        System.out.println("hi");
+
         // create server socket!
         try {
             mServer = new ServerSocket(serverPort);

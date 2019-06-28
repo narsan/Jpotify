@@ -27,7 +27,7 @@ import java.util.Scanner;
 public class Client {
     Socket mSocket;
     int port = 9093;
-    String serverAddress = "192.168.43.200";
+    String serverAddress = "localhost";
 
     InputStream fromServerStream;
     OutputStream toServerStream;
@@ -35,10 +35,16 @@ public class Client {
     DataInputStream reader;
     PrintWriter writer;
     static ArrayList<String> friends=new ArrayList<>();
+     static SharedPlayList sharedPlayList=null;
 
 
     public static ArrayList<String> getFriends() {
         return friends;
+    }
+
+    public static void setSharedPlayList(SharedPlayList share){
+
+        sharedPlayList=share;
     }
 
     public static void addFriends(String name){
@@ -50,6 +56,11 @@ public class Client {
 
     public Client() {
         try {
+
+            JFrame frame=new JFrame();
+
+            String IP=JOptionPane.showInputDialog(frame,"Enter IP");
+            serverAddress=IP;
 
             mSocket = new Socket(serverAddress, port);
 
@@ -64,15 +75,15 @@ public class Client {
             reader = new DataInputStream(fromServerStream);
             writer = new PrintWriter(toServerStream, true);
 
+            menu();
             // first : read server message
-            String msg = reader.readLine();
-            System.out.println("Server :" + msg);
+            //String msg = reader.readLine();
+            //System.out.println("Server :" + msg);
 
             // Manage other server message by a Thread
             Thread t = new Thread(new ServerMessagesManager(reader));
             t.start();
 
-            menu();
 
         } catch (UnknownHostException e) {
         } catch (IOException e) {
@@ -83,47 +94,43 @@ public class Client {
 
     public void menu() {
 
-        Scanner sc = new Scanner(System.in);
 
-        String name = sc.nextLine();
+        //Scanner sc = new Scanner(System.in);
+
+        //String name = sc.nextLine();
 
         sendName(UserPanel.geName1());
+        System.out.println(UserPanel.geName1()+",,,,");
 
         UserPanel.getShareBtn().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 JFrame frame=new JFrame();
-               String option= JOptionPane.showInputDialog(frame,"to share playlist:1 , to share playing song:2");
-               int n=Integer.parseInt(option);
-               if (n==1){
+                String option= JOptionPane.showInputDialog(frame,"1: to share playlist , 2: to share playing song");
+                int n=Integer.parseInt(option);
+                if (n==1){
 
-                      /*   for (int i = 0; i <friends.size() ; i++) {
-
-
-                        for (int j = 0; j < ; j++) {
-
-                            sendFile(friends.get(i), SharedPlayList.getPlayListSongs().get(j).getPath());
-
-
+                         for (int i = 0; i <friends.size() ; i++) {
+                        for (int j = 0; j < sharedPlayList.getPlayListSongs().size(); j++) {
+                            sendFile(friends.get(i),sharedPlayList.getPlayListSongs().get(j).getPath());
                         }
-
-                    }*/
-
+                    }
 
 
-               }
 
-               else if (n==2){
+                }
 
-                   for (int i = 0; i <friends.size() ; i++) {
+                else if (n==2){
 
-                       sendSingleCht(friends.get(i), Playing.getTitle());
-                   }
+                    for (int i = 0; i <friends.size() ; i++) {
 
-                   System.out.println(Playing.getTitle());
+                        sendSingleCht(friends.get(i), Playing.getTitle());
+                    }
 
-               }
+                    System.out.println(Playing.getTitle());
+
+                }
             }
         });
 
@@ -132,76 +139,59 @@ public class Client {
             System.out.println("Enter Command number(ex:3):\n"
                     + "6)send file\n"
                     + "7)exit");
-
             int commandNumber = Integer.parseInt(sc.nextLine());
-
             switch (commandNumber) {
-
                 case 3:
                     System.out.println("Enter message");
                     String msg = sc.nextLine();
-
                     echo(msg);
-
                     break;
                 case 4:
-
                     /*Scanner scanner=new Scanner(System.in);
                     System.out.println("Enter receiver name");
                     String to = scanner.nextLine();*/
 
-                    //System.out.println("Enter your message");
-                    //String text=scanner.next();
+        //System.out.println("Enter your message");
+        //String text=scanner.next();
 
-                    for (int i = 0; i <friends.size() ; i++) {
+        for (int i = 0; i <friends.size() ; i++) {
 
-                        sendSingleCht(friends.get(i), Playing.getTitle());
-                    }
+            sendSingleCht(friends.get(i), Playing.getTitle());
+        }
 
-                    System.out.println(Playing.getTitle());
-                   // break;
+        System.out.println(Playing.getTitle());
+        // break;
             /*    case 5:
                     System.out.println("Enter your message");
                     text = sc.nextLine();
-
                     sendGroupCht(text);
                     break;*/
-                //case 6:
-                    Scanner scanner1=new Scanner(System.in);
+        //case 6:
+        Scanner scanner1=new Scanner(System.in);
 
                   /*  System.out.println("Enter your friend number");
                     int number=scanner1.nextInt();
                     String name1="";*/
 
                    /* for (int i = 0; i <friends.size() ; i++) {
-
-
                         for (int j = 0; j < SharedPlayList.getPlayListSongs().size(); j++) {
-
                             sendFile(friends.get(i), SharedPlayList.getPlayListSongs().get(j).getPath());
-
-
                         }
-
                     }
-
                     /*System.out.println("Enter receiver name");
                     to = sc.nextLine();
-
                     System.out.println("Enter file name(Full Path)");
                     String fileName = sc.nextLine();
-
                 case 7:
-
                     bye();
-
                     return;
-
             }
         }*/
-    }
+
+            }
 
     private void sendName(String name) {
+
         writer.println(name);
     }
 
@@ -254,7 +244,6 @@ public class Client {
     }
 
    /* public static void main(String[] args) {
-
         new Client();
     }*/
 }

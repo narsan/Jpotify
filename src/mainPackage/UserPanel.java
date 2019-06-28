@@ -34,6 +34,8 @@ public class UserPanel extends JPanel {
    public static String geName1(){
         return name;
    }
+
+
     class CustomeBorder extends AbstractBorder {
         @Override
         public void paintBorder(Component c, Graphics g, int x, int y,

@@ -149,7 +149,10 @@ public class RightPanel extends JPanel implements Scrollable {
                     label1.setFont(new Font("Arial", Font.BOLD, 10));
                     label1.setForeground(Color.white);
                     System.out.println(getPlayingMusic()+"***");
-                    label.setForeground(Color.WHITE);
+
+
+                    label.setForeground(Color.white);
+
                     button.setLayout(new BoxLayout(button,BoxLayout.Y_AXIS));
                     button.add(label);
                     button.add(label1);
