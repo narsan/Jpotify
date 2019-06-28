@@ -330,11 +330,7 @@ public class PlayList implements ActionListener {
         option.add(modify.getModify());
         modify.getModify().addActionListener(this);
         songsPanel.add(option);
-        /*songsPanel.add(delete);
-        songsPanel.add(setNewName);
-        songsPanel.add(addNewSongToPlayList.getAddNewSong());
-        songsPanel.add(deleteSongFromPlayList.getDeleteSong());
-      //  songsPanel.add(modify.getModify());*/
+
         PlayList thisPlayList = this;
         delete.addActionListener(new ActionListener() {
             @Override
@@ -365,6 +361,7 @@ public class PlayList implements ActionListener {
     }
     public void addSongToPlayList2(File file) throws IOException {
         File path=new File("./src/playlists/"+playListName+".bin");
+        System.out.println(playListName+"???");
         playListSongs.add(file);
         path.delete();
         writeSongs();

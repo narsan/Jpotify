@@ -26,7 +26,7 @@ public class ServerMessagesManager implements Runnable {
                     String from = readerHolder.readLine();
                     String text = readerHolder.readLine();
                     System.out.println(from + " : [" + text + "]");
-                    RightPanel.setPlayingMusic(text);
+                    RightPanel.setPlayingMusic(text,from);
                 } else if (command.equals("RESULT")) {
                     String result = readerHolder.readLine();
                     System.out.println("ans :" + result);

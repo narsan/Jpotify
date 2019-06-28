@@ -24,14 +24,16 @@ public class RightPanel extends JPanel implements Scrollable {
     private static final int VP_HEIGHT = 448;
     static ArrayList<String> friendsName=new ArrayList<>();
     static String playingMusic;
+    static String from;
 
     public static String getPlayingMusic() {
         return playingMusic;
     }
 
 
-    public static void setPlayingMusic(String playing) {
+    public static void setPlayingMusic(String playing,String str) {
         playingMusic = playing;
+        from=str;
     }
 
     @Override
@@ -107,6 +109,7 @@ public class RightPanel extends JPanel implements Scrollable {
         friendsbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                ArrayList<JButton> buttons=new ArrayList<>();
 
 
 
@@ -139,6 +142,7 @@ public class RightPanel extends JPanel implements Scrollable {
                     //JButton button = new JButton();
 
                     JButton button = new JButton();
+                    buttons.add(button);
                     button.setBorder(null);
                     activityPanel.add(button);
                     button.setBackground(Color.black);
@@ -431,6 +435,13 @@ public class RightPanel extends JPanel implements Scrollable {
                     button.add(label1);*/
 
                 }
+
+
+              /*  JLabel label1=new JLabel(playingMusic);
+                int index=RightPanel.friendsName.indexOf(from);
+                JButton button=buttons.get(index);
+                button.add(label1);*/
+
 
 
 

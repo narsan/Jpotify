@@ -26,7 +26,6 @@ public class AddNewSongToPlayList {
     public AddNewSongToPlayList(PlayList playList) {
 
         this.playList = playList;
-
         ArrayList<String> songsName=new ArrayList<>();
 
 

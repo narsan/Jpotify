@@ -102,31 +102,95 @@ public class MainFrame {
                 ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
 
                 String name = file.getName().replace(".bin", "");
-                PlayList playList = new PlayList(name);
-                try {
-                    while (true) {
-                        System.out.println("-");
-                        playList.addSongToPlayList((File) in.readObject());
+                System.out.println(name+"   name");
+                if (!name .equals("Favorite songs") ) {
+
+                    PlayList playList = new PlayList(name);
+                    try {
+                        while (true) {
+                            System.out.println("-");
+                            playList.addSongToPlayList((File) in.readObject());
+                        }
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (EOFException e) {
+                        System.out.println(playList.getPlayListSongs());
+                        in.close();
                     }
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                } catch (EOFException e) {
-                    System.out.println(playList.getPlayListSongs());
-                    in.close();
+                    ShowSongsToCreatePlayList showSongsToCreatePlayList = new ShowSongsToCreatePlayList();
+                    showSongsToCreatePlayList.setPlayList(playList);
+                    Library.addNewPlayList(showSongsToCreatePlayList.getPlayList());
+
+                    playlistPanel.add(showSongsToCreatePlayList.playList.getPlayList());
+
+                    showSongsToCreatePlayList.getPlayList().getPlayList().addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+
+                            refresh(showSongsToCreatePlayList.getPlayList().showSongsInPlayList());
+                        }
+                    });
                 }
-                ShowSongsToCreatePlayList showSongsToCreatePlayList = new ShowSongsToCreatePlayList();
-                showSongsToCreatePlayList.setPlayList(playList);
-                Library.addNewPlayList(showSongsToCreatePlayList.getPlayList());
 
-                playlistPanel.add(showSongsToCreatePlayList.playList.getPlayList());
+                else if (name.equals("Favorite songs")){
 
-                showSongsToCreatePlayList.getPlayList().getPlayList().addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
+                    //FavoriteSong favoriteSong1=new FavoriteSong();
 
-                        refresh(showSongsToCreatePlayList.getPlayList().showSongsInPlayList());
+                    try {
+                        while (true) {
+                            System.out.println("-");
+                            favoriteSong.addSongToPlayList((File) in.readObject());
+                        }
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (EOFException e) {
+                        System.out.println(favoriteSong.getPlayListSongs());
+                        in.close();
                     }
-                });
+                    ShowSongsToCreatePlayList showSongsToCreatePlayList = new ShowSongsToCreatePlayList();
+                    showSongsToCreatePlayList.setPlayList(favoriteSong);
+                    Library.addNewPlayList(showSongsToCreatePlayList.getPlayList());
+
+                    playlistPanel.add(showSongsToCreatePlayList.playList.getPlayList());
+
+                    showSongsToCreatePlayList.getPlayList().getPlayList().addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+
+                            refresh(showSongsToCreatePlayList.getPlayList().showSongsInPlayList());
+                        }
+                    });
+                }
+
+                else if (name.equals("Shared playlist")){
+                    SharedPlayList sharedPlayList1=new SharedPlayList();
+
+                    try {
+                        while (true) {
+                            System.out.println("-");
+                            sharedPlayList1.addSongToPlayList((File) in.readObject());
+                        }
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (EOFException e) {
+                        System.out.println(sharedPlayList1.getPlayListSongs());
+                        in.close();
+                    }
+                    ShowSongsToCreatePlayList showSongsToCreatePlayList = new ShowSongsToCreatePlayList();
+                    showSongsToCreatePlayList.setPlayList(sharedPlayList1);
+                    Library.addNewPlayList(showSongsToCreatePlayList.getPlayList());
+
+                    playlistPanel.add(showSongsToCreatePlayList.playList.getPlayList());
+
+                    showSongsToCreatePlayList.getPlayList().getPlayList().addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+
+                            refresh(showSongsToCreatePlayList.getPlayList().showSongsInPlayList());
+                        }
+                    });
+
+                }
             }
 
         }

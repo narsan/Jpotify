@@ -4,7 +4,6 @@ import java.io.IOException;
 
 public class SharedPlayList extends PlayList {
 
-
     public SharedPlayList() throws IOException {
 
 
