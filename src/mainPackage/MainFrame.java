@@ -103,7 +103,7 @@ public class MainFrame {
 
                 String name = file.getName().replace(".bin", "");
                 System.out.println(name+"   name");
-                if (!name .equals("Favorite songs") ) {
+                if (!name .equals("Favorite songs") &&!name .equals("Shared playlist")) {
 
                     PlayList playList = new PlayList(name);
                     try {
@@ -134,6 +134,8 @@ public class MainFrame {
 
                 else if (name.equals("Favorite songs")){
 
+                    System.out.println("lll");
+
                     //FavoriteSong favoriteSong1=new FavoriteSong();
 
                     try {
@@ -163,6 +165,8 @@ public class MainFrame {
                 }
 
                 else if (name.equals("Shared playlist")){
+
+                    System.out.println("hiii");
                     //SharedPlayList sharedPlayList1=new SharedPlayList();
 
                     try {
@@ -260,7 +264,7 @@ public class MainFrame {
         sharedPlayList.playList.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                refresh(favoriteSong.showSongsInPlayList());
+                refresh(sharedPlayList.showSongsInPlayList());
             }
         });
 
