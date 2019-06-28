@@ -64,17 +64,16 @@ public class UserPanel extends JPanel {
             //TODO
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                search = field.getText();
+                GridBagConstraints gbc = new GridBagConstraints();
                 JButton songImage = null;
                 JLabel Title = null;
-                search = field.getText();
                 CenterPanelScroller centerPanel = new CenterPanelScroller();
                 centerPanel.setVisible(true);
 
-                GridBagLayout gridBagLayout = new GridBagLayout();
-                // gridBagLayout.layoutContainer(songsPanel);
                 centerPanel.setLayout(new FlowLayout());
                 centerPanel.setPreferredSize(new Dimension(300, 100));
-                GridBagConstraints gbc = new GridBagConstraints();
                 centerPanel.setBackground(new Color(58, 58, 58));
 
                 for (int i = 0; i < Library.getSongs().size(); i++) {
@@ -272,33 +271,6 @@ public class UserPanel extends JPanel {
                                 }
 
 
-                       /* FileInputStream in= null;
-                        try {
-                            in = new FileInputStream(temp);
-                        } catch (FileNotFoundException e1) {
-                            e1.printStackTrace();
-                        }
-                        mainPackage.PausablePlayer player= null;
-                        try {
-                            player = new mainPackage.PausablePlayer(in);
-                        } catch (JavaLayerException e1) {
-                            e1.printStackTrace();
-                        }
-                        try {
-                            if (playedSongs.size()!=0){
-                                playedSongs.get(playedSongs.size()-1).close();
-                                mainPackage.PlayMusic playMusic = new mainPackage.PlayMusic(temp,player);
-                                mainPackage.DownPanel.addPlayingSongInfo(showPlayingSong);
-                                mainPackage.DownPanel.downPanel.revalidate();
-                            }
-                            mainPackage.PlayMusic playMusic = new mainPackage.PlayMusic(temp,player);
-                            mainPackage.DownPanel.addPlayingSongInfo(showPlayingSong);
-                            player.play();
-                            playedSongs.add(player);
-                        } catch (JavaLayerException e1) {
-                            e1.printStackTrace();
-                        }
-                        // playMusic.playThread.start();*/
 
 
                             }

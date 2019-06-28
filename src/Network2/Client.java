@@ -132,7 +132,7 @@ public class Client {
                     int number=scanner1.nextInt();
                     String name1="";*/
 
-                    for (int i = 0; i <friends.size() ; i++) {
+                   /* for (int i = 0; i <friends.size() ; i++) {
 
 
                         for (int j = 0; j < SharedPlayList.getPlayListSongs().size(); j++) {
@@ -142,7 +142,7 @@ public class Client {
 
                         }
 
-                    }
+                    }*/
 
                     /*System.out.println("Enter receiver name");
                     to = sc.nextLine();

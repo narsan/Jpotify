@@ -62,40 +62,41 @@ public class ShowSongsToCreatePlayList implements ItemListener   {
 
         JFrame setName = new JFrame();
         String name1 = JOptionPane.showInputDialog(setName, "Enter your playList name");
-        try {
-            playList = new PlayList(name1);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if (flag==true){
-
-            showSongs.removeAll();
-            System.out.println();
-        }
-
-
-
-        for (int i = 0; i < songs.size(); i++) {
-
-
-            JCheckBox checkBox = new JCheckBox();
-            checkBox.setBorder(null);
-            checkBox.setBackground(Color.BLACK);
-            checkBox.setForeground(Color.WHITE);
-            checkBox.setLayout(new GridLayout(songs.size(), songs.size()));
+        if (name1!=null&&name1.length()>0) {
             try {
-                Mp3File mp3File = new Mp3File(songs.get(i));
-                if (mp3File.hasId3v1Tag() && mp3File.getId3v1Tag().getTitle() != null) {
+                playList = new PlayList(name1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-                    checkBox.setText(mp3File.getId3v1Tag().getTitle());
-                    checkBox.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
-                    checkBox.addItemListener(this);
-                } else if (mp3File.hasId3v2Tag() && mp3File.getId3v2Tag().getTitle() != null) {
 
-                    checkBox.setText(mp3File.getId3v2Tag().getTitle());
-                    checkBox.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
-                    checkBox.addItemListener(this);
+            if (flag == true) {
+
+                showSongs.removeAll();
+                System.out.println();
+            }
+
+
+            for (int i = 0; i < songs.size(); i++) {
+
+
+                JCheckBox checkBox = new JCheckBox();
+                checkBox.setBorder(null);
+                checkBox.setBackground(Color.BLACK);
+                checkBox.setForeground(Color.WHITE);
+                checkBox.setLayout(new GridLayout(songs.size(), songs.size()));
+                try {
+                    Mp3File mp3File = new Mp3File(songs.get(i));
+                    if (mp3File.hasId3v1Tag() && mp3File.getId3v1Tag().getTitle() != null) {
+
+                        checkBox.setText(mp3File.getId3v1Tag().getTitle());
+                        checkBox.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+                        checkBox.addItemListener(this);
+                    } else if (mp3File.hasId3v2Tag() && mp3File.getId3v2Tag().getTitle() != null) {
+
+                        checkBox.setText(mp3File.getId3v2Tag().getTitle());
+                        checkBox.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+                        checkBox.addItemListener(this);
 
 
                     /*checkBox.setText(mp3File.getId3v2Tag().getTitle());
@@ -123,24 +124,25 @@ public class ShowSongsToCreatePlayList implements ItemListener   {
 
                     });*/
 
+                    }
+
+
+                    checkBoxes.add(checkBox);
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (UnsupportedTagException e) {
+                    e.printStackTrace();
+                } catch (InvalidDataException e) {
+                    e.printStackTrace();
                 }
 
 
-                checkBoxes.add(checkBox);
+                showSongs.add(checkBox);
 
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (UnsupportedTagException e) {
-                e.printStackTrace();
-            } catch (InvalidDataException e) {
-                e.printStackTrace();
             }
-
-
-            showSongs.add(checkBox);
-
-
         }
 
         flag=true;
@@ -154,7 +156,6 @@ public class ShowSongsToCreatePlayList implements ItemListener   {
     public void itemStateChanged(ItemEvent event) {
 
 
-
         for (int i = 0; i < checkBoxes.size(); i++) {
 
             if (checkBoxes.get(i).isSelected()) {
@@ -163,7 +164,8 @@ public class ShowSongsToCreatePlayList implements ItemListener   {
                 try {
 
                     if (!playList.playListSongs.contains(Library.getSongs().get(i))){
-                    playList.addSongToPlayList(Library.getSongs().get(i));
+                    playList.addSongToPlayList2(Library.getSongs().get(i));
+
 
                     }
                 } catch (IOException e1) {
@@ -180,10 +182,10 @@ public class ShowSongsToCreatePlayList implements ItemListener   {
 
         }
 
-
-
-
     }
+
+
+
 
     public HashSet<File> getSongsInPlaylist() {
         return songsInPlaylist;
@@ -203,3 +205,4 @@ public class ShowSongsToCreatePlayList implements ItemListener   {
 
 
 }
+
