@@ -59,7 +59,7 @@ public class RightPanel extends JPanel implements Scrollable {
         jScrollPane.setBorder(null);
 
 
-        this.setPreferredSize(new Dimension(210, 40));
+        this.setPreferredSize(new Dimension(250, 40));
         this.setVisible(true);
         this.setBackground(Color.BLACK);
         this.setLayout( new BorderLayout());
@@ -69,9 +69,12 @@ public class RightPanel extends JPanel implements Scrollable {
         EmptyBorder border = new EmptyBorder(5, 30, 5, 5);
         JLabel friends = new JLabel();
         JPanel panel = new JPanel();
-        panel.setBackground(Color.BLACK);
+        JPanel activityPanel = new JPanel();
+        activityPanel.setLayout(new GridLayout(10,1));
+        activityPanel.setBackground(Color.MAGENTA);
         panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
-        panel.setPreferredSize(new Dimension(210,40));
+        panel.setBackground(Color.yellow);
+      //  panel.setPreferredSize(new Dimension(210,40));
 
         this.setBorder(border);
         ImageIcon friendIcon = new ImageIcon(new ImageIcon("src\\icons\\friend.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
@@ -114,11 +117,11 @@ public class RightPanel extends JPanel implements Scrollable {
             }
         });
 
-        //friends.setVisible(true);
-        //friends.setBorder(null);
+
         panel.add(friendsbtn);
         panel.add(friends);
         this.add(panel,BorderLayout.NORTH);
+        this.add(activityPanel);
     }
 
     public JScrollPane getJScrollPane() {
