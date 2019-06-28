@@ -166,7 +166,7 @@ public class MainFrame {
 
                 else if (name.equals("Shared playlist")){
 
-                    System.out.println("hiii");
+
                     //SharedPlayList sharedPlayList1=new SharedPlayList();
 
                     try {

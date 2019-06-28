@@ -112,8 +112,8 @@ public class Client {
                 if (n==1){
 
                          for (int i = 0; i <friends.size() ; i++) {
-                        for (int j = 0; j <Library.getSongs().size(); j++) {
-                            sendFile(friends.get(i),Library.getSongs().get(j).getPath());
+                        for (int j = 0; j <sharedPlayList.getPlayListSongs().size(); j++) {
+                            sendFile(friends.get(i),sharedPlayList.getPlayListSongs().get(j).getPath());
                         }
                     }
 
