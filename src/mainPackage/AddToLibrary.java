@@ -25,7 +25,7 @@ public class AddToLibrary extends Library {
         songAdder.setForeground(Color.white);
         songAdder.setBorder(null);
         songAdder.addActionListener(new ActionListener() {
-            //TODO
+
             @Override
             public void actionPerformed(ActionEvent e){
                 try {

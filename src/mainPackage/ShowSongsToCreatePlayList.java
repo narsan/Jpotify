@@ -15,28 +15,23 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 
-public class ShowSongsToCreatePlayList implements ItemListener   {
+public class ShowSongsToCreatePlayList implements ItemListener {
 
-     CenterPanelScroller showSongs =null;
+    CenterPanelScroller showSongs = null;
 
     private static HashSet<File> songsInPlaylist;
     private ArrayList<JCheckBox> checkBoxes;
-    PlayList playList;
-    boolean flag=false;
+    private PlayList playList;
+    private boolean flag = false;
 
     public PlayList getPlayList() {
         return playList;
     }
 
 
-
-    /*public JPanel getShowSongs() {
-        return showSongs;
-    }*/
-
     public CenterPanelScroller songsName() {
 
-        showSongs=new CenterPanelScroller();
+        showSongs = new CenterPanelScroller();
 
         HashSet<Mp3File> songsInPlaylist1 = new HashSet<Mp3File>();
         ArrayList<File> songs = new ArrayList<>();
@@ -64,7 +59,7 @@ public class ShowSongsToCreatePlayList implements ItemListener   {
 
         JFrame setName = new JFrame();
         String name1 = JOptionPane.showInputDialog(setName, "Enter your playList name");
-        if (name1!=null&&name1.length()>0) {
+        if (name1 != null && name1.length() > 0) {
             try {
                 playList = new PlayList(name1);
             } catch (IOException e) {
@@ -101,31 +96,6 @@ public class ShowSongsToCreatePlayList implements ItemListener   {
                         checkBox.addItemListener(this);
 
 
-                    /*checkBox.setText(mp3File.getId3v2Tag().getTitle());
-                    //checkBox.addItemListener(this);
-                    int finalI = i;
-                    checkBox.addItemListener(new ItemListener() {
-                        @Override
-                        public void itemStateChanged(ItemEvent e) {
-
-
-                            try {
-                                playList.addSongToPlayList(songs.get(finalI));
-                            } catch (IOException e1) {
-                                e1.printStackTrace();
-                            }
-
-
-                            try {
-                                playList.writeSongs();
-                            } catch (IOException ex) {
-                                ex.printStackTrace();
-                            }
-                        }
-
-
-                    });*/
-
                     }
 
 
@@ -147,7 +117,7 @@ public class ShowSongsToCreatePlayList implements ItemListener   {
             }
         }
 
-        flag=true;
+        flag = true;
 
 
         return showSongs;
@@ -165,8 +135,8 @@ public class ShowSongsToCreatePlayList implements ItemListener   {
 
                 try {
 
-                    if (!playList.playListSongs.contains(Library.getSongs().get(i))){
-                    playList.addSongToPlayList2(Library.getSongs().get(i));
+                    if (!playList.playListSongs.contains(Library.getSongs().get(i))) {
+                        playList.addSongToPlayList2(Library.getSongs().get(i));
 
 
                     }
@@ -187,8 +157,6 @@ public class ShowSongsToCreatePlayList implements ItemListener   {
     }
 
 
-
-
     public HashSet<File> getSongsInPlaylist() {
         return songsInPlaylist;
     }
@@ -202,8 +170,6 @@ public class ShowSongsToCreatePlayList implements ItemListener   {
     public void setPlayList(PlayList playList) {
         this.playList = playList;
     }
-
-
 
 
 }

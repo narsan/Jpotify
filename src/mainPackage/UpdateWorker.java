@@ -10,16 +10,18 @@ import java.util.List;
 
 public class UpdateWorker  extends SwingWorker<Void, Integer>  {
 
+    private int duration;
+    private static JLabel time=new JLabel();
+    private JLabel totalTime=new JLabel();
+    private boolean ispaused=false;
     JSlider slider =null;
 
-    private int duration;
+
+
 
     public JLabel getTime() {
         return time;
     }
-
-    private static JLabel time=new JLabel();
-    private JLabel totalTime=new JLabel();
 
     public void TotalTime(){
 
@@ -37,8 +39,6 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
     public void setIspaused(boolean ispaused) {
         this.ispaused = ispaused;
     }
-
-    private boolean ispaused=false;
 
 
     public UpdateWorker(int duration) {
@@ -65,36 +65,6 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
             }
         });
     }
-    public void AddMouslistener(){
-        slider.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
-    }
-
-
 
     public void setDuration(int duration) {
         this.duration = duration;

@@ -14,22 +14,13 @@ import java.io.*;
 
 public class MainFrame {
     static JFrame frame = new JFrame();
-    private CenterPanelScroller songsPanel = null;
     static CenterPanelScroller currentPanel;
-    PlaylistPanel playlistPanel = new PlaylistPanel();
+    private CenterPanelScroller songsPanel = null;
+    private PlaylistPanel playlistPanel = new PlaylistPanel();
 
-
- /*   public void setCurrentPanel(JPanel currentPanel) {
-        this.currentPanel = currentPanel;
-    }
-    public JPanel getCurrentPanel() {
-        return currentPanel;
-    }*/
-
-    //private static JPanel currentPanel;
 
     public MainFrame() throws IOException {
-//        currentPanel = new CurrentPanel();
+
         frame.setLocation(100, 100);
         frame.setTitle("Jpotify");
         frame.setLayout(new BorderLayout());
@@ -38,14 +29,6 @@ public class MainFrame {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(Color.BLACK);
 
-
-//        JTextField searchBar=new JTextField("search...");
-//        searchBar.setBackground(Color.white);
-//        searchBar.setForeground(Color.pink);
-//        searchBar.setColumns(10);
-//        searchBar.setBorder(BorderFactory.createCompoundBorder(
-//                new CustomeBorder(),
-//                new EmptyBorder(new Insets(15, 25, 15, 25))));
         UserPanel userPanel = new UserPanel();
         JFrame Uframe = new JFrame();
         String newName = JOptionPane.showInputDialog(Uframe, "enter new name");
@@ -102,8 +85,8 @@ public class MainFrame {
                 ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
 
                 String name = file.getName().replace(".bin", "");
-                System.out.println(name+"   name");
-                if (!name .equals("Favorite songs") &&!name .equals("Shared playlist")) {
+                System.out.println(name + "   name");
+                if (!name.equals("Favorite songs") && !name.equals("Shared playlist")) {
 
                     PlayList playList = new PlayList(name);
                     try {
@@ -130,9 +113,7 @@ public class MainFrame {
                             refresh(showSongsToCreatePlayList.getPlayList().showSongsInPlayList());
                         }
                     });
-                }
-
-                else if (name.equals("Favorite songs")){
+                } else if (name.equals("Favorite songs")) {
 
                     System.out.println("lll");
 
@@ -162,9 +143,7 @@ public class MainFrame {
                             refresh(showSongsToCreatePlayList.getPlayList().showSongsInPlayList());
                         }
                     });
-                }
-
-                else if (name.equals("Shared playlist")){
+                } else if (name.equals("Shared playlist")) {
 
 
                     //SharedPlayList sharedPlayList1=new SharedPlayList();
@@ -281,7 +260,7 @@ public class MainFrame {
             currentPanel.setVisible(false);
             frame.remove(currentPanel.getjScrollPane());
         }
-        currentPanel=(jPanel);
+        currentPanel = (jPanel);
         frame.add(jPanel.getjScrollPane(), BorderLayout.CENTER);
         frame.revalidate();
     }

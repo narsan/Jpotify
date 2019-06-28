@@ -8,13 +8,10 @@ import java.util.HashSet;
 
 public class CreatePlayList {
 
-    JButton newPlayList=new JButton();
+    private JButton newPlayList = new JButton();
 
-    private HashSet<Mp3File> playList =new HashSet<>();
+    private HashSet<Mp3File> playList = new HashSet<>();
     private String name;
-
-
-
 
     public String getName() {
         return name;
@@ -37,15 +34,14 @@ public class CreatePlayList {
         return newPlayList;
     }
 
-    public CreatePlayList(){
+    public CreatePlayList() {
 
         newPlayList.setText("Create playlist");
-        newPlayList.setFont(new Font("Arial",Font.BOLD,16));
+        newPlayList.setFont(new Font("Arial", Font.BOLD, 16));
         newPlayList.setBackground(Color.BLACK);
         newPlayList.setForeground(Color.white);
         newPlayList.setBorder(null);
     }
-
 
 
 }

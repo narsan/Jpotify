@@ -122,7 +122,7 @@ public class UserPanel extends JPanel {
                         }
 
 
-                        // if (mp3File.hasId3v2Tag()) {
+
 
 
                         ID3v2 id3v2 = mp3File.getId3v2Tag();
@@ -248,12 +248,10 @@ public class UserPanel extends JPanel {
                                 } catch (UnsupportedTagException e1) {
                                     e1.printStackTrace();
                                 }
-                                // mainPackage.PlayMusic playMusic1 = new mainPackage.PlayMusic(temp, player);
 
 
                                 try {
                                     Playing.Play();
-                                    // System.out.println("title"+Playing.getTitle());
 
                                 } catch (Exception e1) {
                                     e1.printStackTrace();

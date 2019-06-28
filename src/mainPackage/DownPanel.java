@@ -20,8 +20,12 @@ import java.util.Collections;
 public class DownPanel {
 
     static JPanel downPanel = new JPanel();
-    JPanel volume = new JPanel();
-    JPanel emptyPanel = new JPanel();
+    static Playing playing = null;
+    static boolean shufflesongs = false;
+    static JPanel downCenterPanel = new JPanel();
+    static PausablePlayer pausablePlayer;
+    static JSlider currentSlider = null;
+    static File musicToPlay = null;
     private JButton pause = new JButton();
     private JButton resume = new JButton();
     private JButton nextSong1 = new JButton();
@@ -30,21 +34,14 @@ public class DownPanel {
     private JButton repeat1 = new JButton();
     private JButton reset = new JButton();
     private JButton soundBtn = new JButton();
-    JPanel playIcons = new JPanel();
-    static JPanel downCenterPanel = new JPanel();
-    static PausablePlayer pausablePlayer;
     private BufferedInputStream bufferedInputStream;
-    FileInputStream fileInputStream;
-
-
-    static JSlider currentSlider = null;
-
-    static File musicToPlay = null;
-    int index;
     private ImageIcon shuffle;
     private ImageIcon repeat;
-    static Playing playing = null;
-    static boolean shufflesongs = false;
+    private JPanel playIcons = new JPanel();
+    private JPanel volume = new JPanel();
+    private JPanel emptyPanel = new JPanel();
+    private FileInputStream fileInputStream;
+    private int index;
 
 
     public static void setPlaying(Playing playing1) {
@@ -72,7 +69,7 @@ public class DownPanel {
         playIcons.setLayout(new GridLayout(1, 5));
         playIcons.setBackground(new Color(58, 58, 58));
         soundBtn.setIcon(sound1);
-        soundBtn.setBackground(new Color(58,58,58));
+        soundBtn.setBackground(new Color(58, 58, 58));
         soundBtn.setBorder(null);
         reset.setText("reset");
         reset.setFont(new Font("Arial", Font.PLAIN, 10));
@@ -151,86 +148,6 @@ public class DownPanel {
             }
         });
 
-
-//        nextSong1.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//
-//                for (int i = 0; i < Library.getSongs().size(); i++) {
-//
-//                    if (Library.getSongs().get(i).equals(musicToPlay)) {
-//
-//                        int temp = i += 1;
-//                        File file = Library.getSongs().get(temp);
-//                        Mp3File mp3File = null;
-//                        try {
-//                            mp3File = new Mp3File(file);
-//                        } catch (IOException e1) {
-//                            e1.printStackTrace();
-//                        } catch (UnsupportedTagException e1) {
-//                            e1.printStackTrace();
-//                        } catch (InvalidDataException e1) {
-//                            e1.printStackTrace();
-//                        }
-//                        try {
-//                            fileInputStream = new FileInputStream(file);
-//                        } catch (FileNotFoundException e1) {
-//                            e1.printStackTrace();
-//                        }
-//
-//                        try {
-//                            PausablePlayer player = new PausablePlayer(fileInputStream);
-//
-//
-//                            try {
-//                                Playing.setFile(file);
-//                            } catch (InvalidDataException e1) {
-//                                e1.printStackTrace();
-//                            } catch (IOException e1) {
-//                                e1.printStackTrace();
-//                            } catch (UnsupportedTagException e1) {
-//                                e1.printStackTrace();
-//                            }
-//                            Playing.setPlayer(player);
-//                            Playing.plaiyingSongs.add(player);
-//
-//                            try {
-//                                try {
-//                                    Playing.Play();
-//                                } catch (ParseException ex) {
-//                                    ex.printStackTrace();
-//                                }
-//                            } catch (InvalidDataException ex) {
-//                                ex.printStackTrace();
-//                            } catch (IOException ex) {
-//                                ex.printStackTrace();
-//                            } catch (UnsupportedTagException ex) {
-//                                ex.printStackTrace();
-//                            }
-//
-//                            DownPanel.addPlayingSongInfo(showSongs(mp3File));
-//                            try {
-//                                setPausablePlayer(player, file);
-//                            } catch (InvalidDataException e1) {
-//                                e1.printStackTrace();
-//                            } catch (IOException e1) {
-//                                e1.printStackTrace();
-//                            } catch (UnsupportedTagException e1) {
-//                                e1.printStackTrace();
-//                            }
-//                        } catch (JavaLayerException e1) {
-//                            e1.printStackTrace();
-//                        }
-//                    }
-//
-//
-//                }
-//
-//
-//            }
-//
-//
-//        });
         System.out.println("here");
 
         nextSong1.addActionListener(new ActionListener() {
@@ -302,7 +219,7 @@ public class DownPanel {
 
             }
         });
-        VolumeContoroller volumeContoroller= new VolumeContoroller();
+        VolumeContoroller volumeContoroller = new VolumeContoroller();
 
 
         downPanel.setVisible(true);
@@ -313,18 +230,18 @@ public class DownPanel {
         downPanel.add(emptyPanel, BorderLayout.WEST);
         volume.setBackground(new Color(58, 58, 58));
         volume.setPreferredSize(new Dimension(200, 0));
-        volume.setLayout(new BoxLayout(volume,BoxLayout.X_AXIS));
+        volume.setLayout(new BoxLayout(volume, BoxLayout.X_AXIS));
         downPanel.setPreferredSize(new Dimension(200, 85));
         JSlider jSlider = new JSlider();
         jSlider.setPreferredSize(new Dimension(100, 50));
         jSlider.setBackground(new Color(58, 58, 58));
         volume.add(soundBtn);
-        EmptyBorder b = new EmptyBorder(0,0,0,5);
+        EmptyBorder b = new EmptyBorder(0, 0, 0, 5);
         volume.setBorder(b);
         volume.add(volumeContoroller);
         downPanel.add(downCenterPanel, BorderLayout.CENTER);
         downPanel.add(volume, BorderLayout.EAST);
-        //downPanel.add(volumeContoroller, BorderLayout.EAST);
+
 
     }
 
@@ -336,14 +253,14 @@ public class DownPanel {
 
         downPanel.add(jPanel, BorderLayout.WEST);
         downPanel.revalidate();
-        //downPanel.repaint();
+
     }
 
     public void addPauseAndResume(JPanel jPanel) {
 
         downPanel.add(jPanel, BorderLayout.CENTER);
         downPanel.revalidate();
-        //downPanel.repaint();
+
     }
 
 

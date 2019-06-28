@@ -22,10 +22,8 @@ import java.util.List;
 public class Playing {
 
     static HashMap<File, LocalDateTime> sortByTime = new HashMap<>();
-
     static UpdateWorker updateWorker = null;
     static boolean isPlayed = false;
-
     private static ObjectOutputStream out;
 
     public static UpdateWorker getUpdateWorker() {
@@ -33,9 +31,10 @@ public class Playing {
     }
 
     static ArrayList<PausablePlayer> plaiyingSongs = new ArrayList<>();
-
     static PausablePlayer player;
     static String title = "";
+    static File file;
+
 
     public static String getTitle() {
         return title;
@@ -50,8 +49,6 @@ public class Playing {
     public static void setFile(File file) throws InvalidDataException, IOException, UnsupportedTagException {
         Playing.file = file;
     }
-
-    static File file;
 
     public static void setTitle(String title) {
         Playing.title = title;
@@ -70,14 +67,6 @@ public class Playing {
 
             player.play();
 
-
-            //SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-
-
-            /*Date date = (Date) sdf.parse(LocalDate.now());
-            long millis = date.getTime();
-            sortByTime.put(file,millis);
-            System.out.println(millis);*/
 
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
             LocalDateTime now = LocalDateTime.now();
@@ -114,7 +103,6 @@ public class Playing {
 
 
         DownPanel.downCenterPanel.add(updateWorker.slider, BorderLayout.PAGE_END);
-        // mainPackage.DownPanel.addNewSlider(updateWorker.slider);
         DownPanel.downCenterPanel.add(updateWorker.getTime(), BorderLayout.EAST);
         DownPanel.downCenterPanel.add(updateWorker.getTotalTime(), BorderLayout.WEST);
         updateWorker.execute();

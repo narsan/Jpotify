@@ -32,13 +32,12 @@ public class ShowSongs extends JButton {
         centerPanel.setVisible(true);
 
         GridBagLayout gridBagLayout=new GridBagLayout();
-        // gridBagLayout.layoutContainer(songsPanel);
+
         centerPanel.setLayout(new FlowLayout());
         centerPanel.setPreferredSize(new Dimension(200,100));
         GridBagConstraints gbc = new GridBagConstraints();
         ArrayList<PausablePlayer> playedSongs=new ArrayList<PausablePlayer>();
 
-        // songsPanel.setLayout(new FlowLayout());
         centerPanel.setBackground(new Color(58,58,58));
         JLabel Title = null;
         JButton songImage = null;
@@ -48,7 +47,6 @@ public class ShowSongs extends JButton {
 
 
 
-//            Iterator iterator=mainPackage.Library.getSongs().iterator();
         for (int i = 0; i < Library.getSongs().size(); i++) {
             File temp = Library.getSongs().get(i);
             Mp3File mp3File = new Mp3File(temp);
@@ -81,7 +79,7 @@ public class ShowSongs extends JButton {
 
 
 
-           // if (mp3File.hasId3v2Tag()) {
+
 
 
                 ID3v2 id3v2 = mp3File.getId3v2Tag();
@@ -212,12 +210,12 @@ public class ShowSongs extends JButton {
                         } catch (UnsupportedTagException e1) {
                             e1.printStackTrace();
                         }
-                        // mainPackage.PlayMusic playMusic1 = new mainPackage.PlayMusic(temp, player);
+
 
 
                                 try {
                                     Playing.Play();
-                                   // System.out.println("title"+Playing.getTitle());
+
 
                                 } catch (Exception e1) {
                                     e1.printStackTrace();
@@ -260,7 +258,6 @@ public class ShowSongs extends JButton {
                     Title.setText(id3v1.getTitle());
                 }
 
-        //    }
 
 
             JPanel songData = new JPanel();
@@ -278,7 +275,7 @@ public class ShowSongs extends JButton {
         centerPanel.setBackground(Color.BLACK);
 
         return centerPanel;
-        // return mainPackage.test;
+
 
     }
 

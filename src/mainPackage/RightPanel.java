@@ -91,7 +91,6 @@ public class RightPanel extends JPanel implements Scrollable {
         activityPanel.setBackground(Color.BLACK);
         panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
         panel.setBackground(Color.black);
-      //  panel.setPreferredSize(new Dimension(210,40));
 
         this.setBorder(border);
         ImageIcon friendIcon = new ImageIcon(new ImageIcon("src\\icons\\friend.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
@@ -223,7 +222,7 @@ public class RightPanel extends JPanel implements Scrollable {
                                 }
 
 
-                                // if (mp3File.hasId3v2Tag()) {
+
 
 
                                 ID3v2 id3v2 = mp3File.getId3v2Tag();
@@ -350,13 +349,10 @@ public class RightPanel extends JPanel implements Scrollable {
                                         } catch (UnsupportedTagException e1) {
                                             e1.printStackTrace();
                                         }
-                                        // mainPackage.PlayMusic playMusic1 = new mainPackage.PlayMusic(temp, player);
 
 
                                         try {
                                             Playing.Play();
-                                            // System.out.println("title"+Playing.getTitle());
-
                                         } catch (Exception e1) {
                                             e1.printStackTrace();
                                         }
@@ -403,7 +399,6 @@ public class RightPanel extends JPanel implements Scrollable {
                                     Title.setText(id3v1.getTitle());
                                 }
 
-                                //    }
 
 
                                 JPanel songData = new JPanel();
@@ -425,22 +420,10 @@ public class RightPanel extends JPanel implements Scrollable {
 
                         }
                     });
-                   /* activityPanel.add(button);
-                    button.setBackground(Color.cyan);
-                    JLabel label=new JLabel(str);
-                    JLabel label1=new JLabel(playingMusic);
-                    System.out.println(playingMusic+"***");
-                    label.setForeground(Color.BLACK);
-                    button.add(label);
-                    button.add(label1);*/
+
 
                 }
 
-
-              /*  JLabel label1=new JLabel(playingMusic);
-                int index=RightPanel.friendsName.indexOf(from);
-                JButton button=buttons.get(index);
-                button.add(label1);*/
 
 
 

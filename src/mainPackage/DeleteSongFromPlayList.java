@@ -16,6 +16,10 @@ public class DeleteSongFromPlayList {
     private JButton deleteSong = new JButton();
     private PlayList playList;
 
+    public JButton getDeleteSong() {
+        return deleteSong;
+    }
+
     public DeleteSongFromPlayList(PlayList playList) {
         this.playList = playList;
         ArrayList<String> songsName=new ArrayList<>();
@@ -118,7 +122,5 @@ public class DeleteSongFromPlayList {
         });
     }
 
-    public JButton getDeleteSong() {
-        return deleteSong;
-    }
+
 }
