@@ -1,5 +1,7 @@
 package Network2;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -13,6 +15,7 @@ public class ServerMessagesManager implements Runnable {
     }
 
     public void run() {
+
 
         while (true) {
             try {

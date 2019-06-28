@@ -1,6 +1,7 @@
 package Network2;
 
 import Network2.ServerMessagesManager;
+import mainPackage.Library;
 import mainPackage.Playing;
 
 import java.io.DataInputStream;
@@ -13,6 +14,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 //import com.sun.corba.se.impl.ior.WireObjectKeyTemplate;
@@ -27,6 +29,19 @@ public class Client {
 
     DataInputStream reader;
     PrintWriter writer;
+    static ArrayList<String> friends=new ArrayList<>();
+
+
+    public static ArrayList<String> getFriends() {
+        return friends;
+    }
+
+    public static void addFriends(String name){
+
+        friends.add(name);
+
+
+    }
 
     public Client() {
         try {
@@ -104,13 +119,32 @@ public class Client {
                     sendGroupCht(text);
                     break;*/
                 case 6:
-                    System.out.println("Enter receiver name");
+                    Scanner scanner1=new Scanner(System.in);
+
+                    System.out.println("Enter your friend number");
+                    int number=scanner1.nextInt();
+                    String name1="";
+
+                    for (int i = 0; i <number ; i++) {
+
+                        System.out.println("Enter your friend name");
+                        name1=scanner1.next();
+
+                        for (int j = 0; j < Library.getSongs().size(); j++) {
+
+                            sendFile(name1, Library.getSongs().get(i).getPath());
+
+
+                        }
+
+                    }
+
+                    /*System.out.println("Enter receiver name");
                     to = sc.nextLine();
 
                     System.out.println("Enter file name(Full Path)");
-                    String fileName = sc.nextLine();
+                    String fileName = sc.nextLine();*/
 
-                    sendFile(to, fileName);
                     break;
                 case 7:
 

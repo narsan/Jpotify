@@ -34,7 +34,7 @@ public class ShowSongs extends JButton {
         GridBagLayout gridBagLayout=new GridBagLayout();
         // gridBagLayout.layoutContainer(songsPanel);
         centerPanel.setLayout(new FlowLayout());
-        centerPanel.setPreferredSize(new Dimension(300,100));
+        centerPanel.setPreferredSize(new Dimension(200,100));
         GridBagConstraints gbc = new GridBagConstraints();
         ArrayList<PausablePlayer> playedSongs=new ArrayList<PausablePlayer>();
 

@@ -1,8 +1,13 @@
 package mainPackage;
 
+import Network2.Client;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class RightPanel extends JPanel implements Scrollable {
 
@@ -77,6 +82,37 @@ public class RightPanel extends JPanel implements Scrollable {
         friends.setFont(new Font("Arial", Font.BOLD, 15));
         friends.setBackground(Color.black);
         friends.setForeground(Color.white);
+
+
+        friendsbtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+
+
+                JFrame friendsNumber=new JFrame();
+                JFrame friendsName=new JFrame();
+                JPanel myPanel = new JPanel();
+                myPanel.setLayout(new BoxLayout(myPanel,BoxLayout.Y_AXIS));
+
+
+                String friendsNumber1=JOptionPane.showInputDialog(friendsNumber,"Enter number of your friends..");
+                int number=Integer.parseInt(friendsNumber1);
+                for (int i = 0; i <number ; i++) {
+                    JTextField Field = new JTextField(5);
+                    myPanel.add(new JLabel("your friends name"));
+                    myPanel.add(Field);
+                    JOptionPane.showConfirmDialog(null, myPanel,
+                            "Please Enter X and Y Values", JOptionPane.OK_CANCEL_OPTION);
+                    String Text=Field.getText();
+                    System.out.println(Text);
+                    Client.addFriends(Text);
+
+
+                }
+
+            }
+        });
 
         //friends.setVisible(true);
         //friends.setBorder(null);

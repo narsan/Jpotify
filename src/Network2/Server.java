@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class Server {
     ServerSocket mServer;
-    int serverPort = 9092;
+    int serverPort = 9093;
     ArrayList<Thread> threads = new ArrayList<Thread>();
     int limit = 100;
     HashMap<String, ClientManager> clientsMap = new HashMap<String, ClientManager>();
