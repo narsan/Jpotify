@@ -98,10 +98,10 @@ public class Client {
                int n=Integer.parseInt(option);
                if (n==1){
 
-                         /*for (int i = 0; i <friends.size() ; i++) {
+                      /*   for (int i = 0; i <friends.size() ; i++) {
 
 
-                        for (int j = 0; j < SharedPlayList.getPlayListSongs().size(); j++) {
+                        for (int j = 0; j < ; j++) {
 
                             sendFile(friends.get(i), SharedPlayList.getPlayListSongs().get(j).getPath());
 

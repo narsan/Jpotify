@@ -69,7 +69,7 @@ public class RightPanel extends JPanel implements Scrollable {
     public RightPanel() {
 
         jScrollPane = new JScrollPane(this);
-        jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         jScrollPane.setBounds(50, 30, 300, 50);
         jScrollPane.setBorder(null);
@@ -149,7 +149,7 @@ public class RightPanel extends JPanel implements Scrollable {
                     label1.setFont(new Font("Arial", Font.BOLD, 10));
                     label1.setForeground(Color.white);
                     System.out.println(getPlayingMusic()+"***");
-                    label.setForeground(Color.BLACK);
+                    label.setForeground(Color.WHITE);
                     button.setLayout(new BoxLayout(button,BoxLayout.Y_AXIS));
                     button.add(label);
                     button.add(label1);
