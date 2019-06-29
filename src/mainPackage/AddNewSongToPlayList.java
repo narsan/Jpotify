@@ -11,6 +11,11 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * @author shakiba ,narges
+ * this class implmented to add new song to specific playlist
+ */
+
 public class AddNewSongToPlayList {
     public JButton getAddNewSong() {
         return addNewSong;

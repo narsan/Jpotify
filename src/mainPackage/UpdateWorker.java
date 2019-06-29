@@ -8,6 +8,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
 
+/**
+ * @author shakiba ,narges
+ * this class is for handling slider to match with music
+ */
+
 public class UpdateWorker  extends SwingWorker<Void, Integer>  {
 
     private int duration;
@@ -46,6 +51,7 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
     public UpdateWorker(int duration) {
 
         this.duration = duration;
+        totalTime.setText((String.valueOf(duration)));
         slider=new JSlider();
         slider.setValue(0);
         slider.setBackground(new Color(58,58,58));
@@ -79,8 +85,6 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
         time.setForeground(Color.pink);
 
         time.setFont(new Font("Arial",Font.PLAIN,13));
-
-
         for (int i = 1; i <= duration; i++) {
 
             if (ispaused==false){

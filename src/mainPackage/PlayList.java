@@ -20,6 +20,11 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 
+/**
+ * @author shakiab , narges
+ * this class implmented to handle all about playlists and its featurs
+ */
+
 public class PlayList implements ActionListener {
     protected JButton playList;
     protected String playListName;

@@ -1,9 +1,9 @@
 package mainPackage;
 
-import javax.media.Manager;
+/*import javax.media.Manager;
 import javax.media.MediaLocator;
 import javax.media.NoPlayerException;
-import javax.media.Player;
+import javax.media.Player;*/
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
