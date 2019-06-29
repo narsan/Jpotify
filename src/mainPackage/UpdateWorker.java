@@ -34,6 +34,7 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
         totalTime.setForeground(Color.pink);
         totalTime.setFont(new Font("Arial",Font.PLAIN,13));
 
+
     }
 
     public JLabel getTotalTime() {
