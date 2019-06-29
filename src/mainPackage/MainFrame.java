@@ -30,6 +30,22 @@ public class MainFrame {
         frame.getContentPane().setBackground(Color.BLACK);
 
         UserPanel userPanel = new UserPanel();
+        userPanel.videoBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser jFileChooser = new JFileChooser();
+                jFileChooser.setMultiSelectionEnabled(true);
+                int res = jFileChooser.showOpenDialog(null);
+
+                if (res == JFileChooser.APPROVE_OPTION) {
+                    String path = jFileChooser.getSelectedFile().getAbsolutePath();
+                    VideoPlayer videoPlayer = new VideoPlayer(path);
+                    videoPlayer.playVideo();
+                }
+            }
+        });
+
+
         JFrame Uframe = new JFrame();
         String newName = JOptionPane.showInputDialog(Uframe, "enter new name");
         System.out.println(newName);

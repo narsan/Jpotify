@@ -58,7 +58,7 @@ public class UserPanel extends JPanel {
         ImageIcon videoIcon = new ImageIcon(new ImageIcon("src\\icons\\video.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
         videoBtn.setIcon(videoIcon);
         videoBtn.setBorder(null);
-        videoBtn.setBackground(Color.BLACK);
+        videoBtn.setBackground(Color.black);
         JPanel searchPanel = new JPanel();
         searchPanel.setBackground(Color.BLACK);
         searchPanel.setLayout(new BoxLayout(searchPanel, BoxLayout.X_AXIS));
