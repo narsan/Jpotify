@@ -17,6 +17,11 @@ import java.io.*;
 import java.text.ParseException;
 import java.util.Collections;
 
+/**
+ * @author shakiba ,narges
+ * this class implmented to handle all about right panel and its label and button
+ */
+
 public class DownPanel {
 
     static JPanel downPanel = new JPanel();

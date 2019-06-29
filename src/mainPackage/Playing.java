@@ -19,6 +19,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
 
+/**
+ * @author shakiba , narges
+ * this class is created for handle music thaht is playing
+ * and for example privious music stop when new music is playing
+ */
+
 public class Playing {
 
     static HashMap<File, LocalDateTime> sortByTime = new HashMap<>();
@@ -100,12 +106,12 @@ public class Playing {
 
 
         }
-
-
-        DownPanel.downCenterPanel.add(updateWorker.slider, BorderLayout.PAGE_END);
+       /* DownPanel.downCenterPanel.add(updateWorker.slider, BorderLayout.PAGE_END);
         DownPanel.downCenterPanel.add(updateWorker.getTime(), BorderLayout.EAST);
         DownPanel.downCenterPanel.add(updateWorker.getTotalTime(), BorderLayout.WEST);
-        updateWorker.execute();
+        updateWorker.execute();*/
+
+
         if (plaiyingSongs.size() != 1) {
 
 
@@ -152,6 +158,12 @@ public class Playing {
 
             setTitle(file.getName());
         }
+
+
+        DownPanel.downCenterPanel.add(updateWorker.slider, BorderLayout.PAGE_END);
+        DownPanel.downCenterPanel.add(updateWorker.getTime(), BorderLayout.EAST);
+        DownPanel.downCenterPanel.add(updateWorker.getTotalTime(), BorderLayout.WEST);
+        updateWorker.execute();
     }
 
 

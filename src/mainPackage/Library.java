@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
+/**
+ * @author shakiba, narges
+ * this class is library that have some songs and playlist in it
+ */
+
 public class Library {
     private static ArrayList<File> songs = new ArrayList<>();
     private static ArrayList<File> shuffleArrey = new ArrayList<>();

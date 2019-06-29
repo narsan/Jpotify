@@ -3,6 +3,11 @@ package mainPackage;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * @author narges
+ * this class implemented to add scroll to a panel
+ */
+
 public class CenterPanelScroller extends JPanel implements Scrollable {
     private JScrollPane jScrollPane ;
     private static final int PREF_W = 900;
