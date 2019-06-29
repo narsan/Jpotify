@@ -46,6 +46,8 @@ public class MainFrame {
         });
 
 
+
+
         JFrame Uframe = new JFrame();
         String newName = JOptionPane.showInputDialog(Uframe, "enter new name");
         System.out.println(newName);
