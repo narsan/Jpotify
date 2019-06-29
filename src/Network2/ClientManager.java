@@ -11,7 +11,6 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
-//import com.sun.corba.se.impl.ior.WireObjectKeyTemplate;
 
 public class ClientManager implements Runnable {
     Socket clientHolder;
@@ -40,10 +39,6 @@ public class ClientManager implements Runnable {
             reader = new DataInputStream(fromClientStream);
             writer = new PrintWriter(toClientStream, true);
 
-            // send message to client
-            writer.println("What is your name?");
-            System.out.println("Server :What is your name?");
-
             // Receive client response (javab=name:D)
             name = reader.readLine();
 
@@ -55,55 +50,13 @@ public class ClientManager implements Runnable {
                 String command = reader.readLine();
 
                 // now decide by command ;-)
-                if (command.equals("BYE")) {
-
-                    System.out.println("Good Bye " + name);
-                    break;
-
-                } else if (command.equals("ADD")) {
-
-                    // read operands a,b from client
-                    String a = reader.readLine();
-                    String b = reader.readLine();
-
-                    System.out.println(name + " :[ADD " + a + "," + b + "]");
-                    // calculate (a+b) then send it to client
-                    writer.println("RESULT");
-                    writer.println(add(a, b));
-
-                }  else if (command.equals("EVAL")) {
-                    // read expression
-                    String expression = reader.readLine();
-                    // evaluate the expression
-                    String ans = eval(expression);
-                    System.out.println(name + " EVAL [" + expression + "]=" + ans);
-
-                    // send result to client
-                    writer.println("RESULT");
-                    writer.println(ans);
-
-                }
-                else if (command.equals("ECHO")) {
-                    // read message from client
-                    String msg = reader.readLine();
-
-                    System.out.println(name + "ECHO [" + msg + "]");
-
-                    // echo message !
-                    writer.println("RESULT");
-                    writer.println("[" + msg + "]");
-
-                } else if (command.equals("SCHT")) {
+                if (command.equals("SCHT")) {
 
 
                     String to = reader.readLine();
                     String text = reader.readLine();
 
                     sendTextToAnotherClient(to, text);
-                } else if (command.equals("GCHT")) {
-                    String text = reader.readLine();
-
-                    sendTextToAllClients(text);
                 } else if (command.equals("SFILE")) {
                     String fileName = reader.readLine();
                     String to = reader.readLine();
@@ -121,22 +74,6 @@ public class ClientManager implements Runnable {
         }
     }
 
-    private String add(String a, String b) {
-        return "" + (Integer.parseInt(a) + Integer.parseInt(b));
-    }
-
-    private String eval(String expression) {
-        // evaluate mathematical expression by java script ;-)
-
-        ScriptEngineManager mgr = new ScriptEngineManager();
-        ScriptEngine engine = mgr.getEngineByName("JavaScript");
-        String result = "";
-        try {
-            result = engine.eval(expression).toString();
-        } catch (ScriptException e) {
-        }
-        return result;
-    }
 
     private void sendTextToAnotherClient(String to, String text) {
 
@@ -156,13 +93,6 @@ public class ClientManager implements Runnable {
         writer.println(text);
     }
 
-    private void sendTextToAllClients(String text) {
-        // find all client managers
-        // and for each of them use sendText method to send message
-        for (ClientManager cm : serverHolder.findAllClientManagers()) {
-            cm.sendText(name, text);
-        }
-    }
 
     private void sendFileToAnotherClient(String fileName, String to, byte[] fileData) {
 

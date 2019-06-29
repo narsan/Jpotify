@@ -22,7 +22,6 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-//import com.sun.corba.se.impl.ior.WireObjectKeyTemplate;
 
 public class Client {
     Socket mSocket;
@@ -76,11 +75,7 @@ public class Client {
             writer = new PrintWriter(toServerStream, true);
 
             menu();
-            // first : read server message
-            //String msg = reader.readLine();
-            //System.out.println("Server :" + msg);
 
-            // Manage other server message by a Thread
             Thread t = new Thread(new ServerMessagesManager(reader));
             t.start();
 
@@ -94,10 +89,6 @@ public class Client {
 
     public void menu() {
 
-
-        //Scanner sc = new Scanner(System.in);
-
-        //String name = sc.nextLine();
 
         sendName(UserPanel.geName1());
         System.out.println(UserPanel.geName1()+",,,,");
@@ -134,59 +125,6 @@ public class Client {
             }
         });
 
-       /* while (true) {
-            System.out.println("-----------");
-            System.out.println("Enter Command number(ex:3):\n"
-                    + "6)send file\n"
-                    + "7)exit");
-            int commandNumber = Integer.parseInt(sc.nextLine());
-            switch (commandNumber) {
-                case 3:
-                    System.out.println("Enter message");
-                    String msg = sc.nextLine();
-                    echo(msg);
-                    break;
-                case 4:
-                    /*Scanner scanner=new Scanner(System.in);
-                    System.out.println("Enter receiver name");
-                    String to = scanner.nextLine();*/
-
-        //System.out.println("Enter your message");
-        //String text=scanner.next();
-
-        for (int i = 0; i <friends.size() ; i++) {
-
-            sendSingleCht(friends.get(i), Playing.getTitle());
-        }
-
-        System.out.println(Playing.getTitle());
-        // break;
-            /*    case 5:
-                    System.out.println("Enter your message");
-                    text = sc.nextLine();
-                    sendGroupCht(text);
-                    break;*/
-        //case 6:
-        Scanner scanner1=new Scanner(System.in);
-
-                  /*  System.out.println("Enter your friend number");
-                    int number=scanner1.nextInt();
-                    String name1="";*/
-
-                   /* for (int i = 0; i <friends.size() ; i++) {
-                        for (int j = 0; j < SharedPlayList.getPlayListSongs().size(); j++) {
-                            sendFile(friends.get(i), SharedPlayList.getPlayListSongs().get(j).getPath());
-                        }
-                    }
-                    /*System.out.println("Enter receiver name");
-                    to = sc.nextLine();
-                    System.out.println("Enter file name(Full Path)");
-                    String fileName = sc.nextLine();
-                case 7:
-                    bye();
-                    return;
-            }
-        }*/
 
             }
 
@@ -196,20 +134,10 @@ public class Client {
     }
 
 
-    private void echo(String msg) {
-        writer.println("ECHO");
-        writer.println(msg);
-    }
-
     private void sendSingleCht(String to, String text) {
 
         writer.println("SCHT");
         writer.println(to);
-        writer.println(text);
-    }
-
-    private void sendGroupCht(String text) {
-        writer.println("GCHT");
         writer.println(text);
     }
 
@@ -233,17 +161,12 @@ public class Client {
             toServerStream.write(fileData);
 
         } catch (FileNotFoundException e) {
+
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
-    private void bye() {
-        writer.println("BYE");
-    }
 
-   /* public static void main(String[] args) {
-        new Client();
-    }*/
 }
