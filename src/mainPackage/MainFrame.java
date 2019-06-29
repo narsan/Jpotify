@@ -64,7 +64,6 @@ public class MainFrame {
 
         try {
             File file = new File("src\\sorted.bin");
-            //File file=new File("src\\sorted.bin");
 
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("src\\sorted.bin"));
             while (true) {
@@ -77,7 +76,6 @@ public class MainFrame {
             e.printStackTrace();
         }
 
-        System.out.println(Library.getSongs().size() + "  size");
         File temp = new File("src\\playlists");
         if (temp.exists()) {
             for (File file : temp.listFiles()) {

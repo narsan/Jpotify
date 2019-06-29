@@ -21,8 +21,8 @@ public class ShowSongsToCreatePlayList implements ItemListener {
 
     private static HashSet<File> songsInPlaylist;
     private ArrayList<JCheckBox> checkBoxes;
-    private PlayList playList;
     private boolean flag = false;
+    PlayList playList;
 
     public PlayList getPlayList() {
         return playList;
