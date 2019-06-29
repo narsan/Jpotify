@@ -11,6 +11,11 @@ import java.net.MalformedURLException;
 
 public class VideoPlayer{
     public void playVideo(){
+
+    }
+
+    public static void main(String[] args) {
+
         try {
             Desktop.getDesktop().open(new File("src\\video_2019-06-28_19-25-00.mp4"));
         } catch (IOException e) {

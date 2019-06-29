@@ -12,7 +12,7 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
 
     private int duration;
     private static JLabel time=new JLabel();
-    private JLabel totalTime=new JLabel();
+    private static JLabel totalTime=new JLabel();
     private boolean ispaused=false;
     JSlider slider =null;
 
@@ -23,9 +23,10 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
         return time;
     }
 
-    public void TotalTime(){
+    public  void TotalTime(){
 
-        totalTime.setText(String.valueOf(duration));
+        totalTime.setText("Total : "+ String.valueOf(duration));
+        totalTime.setForeground(Color.pink);
         totalTime.setFont(new Font("Arial",Font.PLAIN,13));
 
     }
@@ -51,6 +52,7 @@ public class UpdateWorker  extends SwingWorker<Void, Integer>  {
         slider.setBackground(new Color(58,58,58));
         slider.setMinimum(0);
         slider.setMaximum(duration);
+        TotalTime();
         addchangelistener();
     }
     public void addchangelistener() {
