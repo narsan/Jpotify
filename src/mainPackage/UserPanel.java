@@ -20,6 +20,8 @@ public class UserPanel extends JPanel {
     protected static String name ;
     private String search;
     static JButton shareBtn = new JButton();
+    JButton videoBtn = new JButton();
+
 
     public static JButton getShareBtn() {
         return shareBtn;
@@ -53,6 +55,10 @@ public class UserPanel extends JPanel {
         JPanel namePanel = new JPanel();
         namePanel.setBackground(Color.BLACK);
         namePanel.setLayout(new BoxLayout(namePanel, BoxLayout.X_AXIS));
+        ImageIcon videoIcon = new ImageIcon(new ImageIcon("src\\icons\\video.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+        videoBtn.setIcon(videoIcon);
+        videoBtn.setBorder(null);
+        videoBtn.setBackground(Color.BLACK);
         JPanel searchPanel = new JPanel();
         searchPanel.setBackground(Color.BLACK);
         searchPanel.setLayout(new BoxLayout(searchPanel, BoxLayout.X_AXIS));
@@ -60,6 +66,7 @@ public class UserPanel extends JPanel {
         this.setLayout(new BorderLayout());
         this.setBackground(Color.BLACK);
         this.setPreferredSize(new Dimension(200, 40));
+
         JTextField field = new RoundJTextField(15);
         JButton searchBtn = new JButton();
         ImageIcon searchIcon = new ImageIcon(new ImageIcon("src\\icons\\search.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
@@ -337,8 +344,11 @@ public class UserPanel extends JPanel {
         namePanel.add(userAccount);
         namePanel.add(shareBtn);
         EmptyBorder border = new EmptyBorder(5, 250, 5, 250);
+        EmptyBorder border1 = new EmptyBorder(0, 0, 0, 250);
         searchPanel.add(field);
         searchPanel.add(searchBtn);
+        this.add(videoBtn,BorderLayout.CENTER);
+        this.setBorder(border1);
         this.add(searchPanel,BorderLayout.WEST);
         this.setBorder(border);
         this.add(namePanel, BorderLayout.EAST);
